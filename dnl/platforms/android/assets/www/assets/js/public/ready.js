@@ -711,7 +711,7 @@ function updateLocationData(data){
 function getCurrentPositionAddress() {
     if($.os.android)
     {
-        window.LocationPlugin.getLocation(getCurrentPositionAddressSuccess, null);
+        window.locationService.getCurrentPosition(getCurrentPositionAddressSuccess, null);
     }else
     {
         navigator.geolocation.getCurrentPosition(getCurrentPositionAddressSuccess, null);
@@ -720,14 +720,16 @@ function getCurrentPositionAddress() {
 function getCurrentPositionAddressSuccess(position) {
     $.ui.unblockUI();
     $.ui.showMask("我们正在定位...");
-    var url = baseUrl + "register/query_address_info.action";
+    var url = baseUrl + "base/query_address_info.action";
+//    errorPopup(position);
+//    errorPopup(position.coords.latitude);
     var option = {};
     if($.os.android)
     {
         option =
         {
-            latitude: position.latitude,
-            longitude: position.longitude
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
         };
     }else
     {
@@ -737,16 +739,21 @@ function getCurrentPositionAddressSuccess(position) {
             longitude: position.coords.longitude
         };
     }
-
+    console.info('option '+option.latitude+''+option.longitude);
     $("#" + lOCATIONID).attr('latitude',option.latitude);
     $("#" + lOCATIONID).attr('longitude',option.longitude);
-    //alert(position.coords.latitude);
+    console.info('URL '+url);
     getAjax(url, option, 'getCurrentPositionAddressSuccessSucc(data)'
         , 'getCurrentPositionAddressSuccessError()');
 }
 function getCurrentPositionAddressSuccessSucc(data) {
-    setCacheData('location', data.obj.address, 1);
-    $("#" + lOCATIONID).val(data.obj.address);
+    if(data.isSucc){
+        setCacheData('location', data.obj.address, 1);
+        console.info(data.obj.address);
+        $("#" + lOCATIONID).val(data.obj.address);
+    }else{
+        console.info(data.msg);
+    }
     $.ui.hideMask();
 }
 function getCurrentPositionAddressSuccessError() {

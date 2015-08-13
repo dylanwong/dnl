@@ -552,18 +552,20 @@ data-defer:加载一个html进来
 
 <div class="panel "
      title="签收订单明细列表" id="signorderslist" data-defer="assets/panel/driver/signorderlist.html"
-     data-header="signorderslistHeader"
+
      data-load=""
      data-unload=""
+     data-header="allHeader"
      data-footer="none">
 </div>
 
 <div class="panel "
      title="签收订单明细" id="signorderdetail" data-defer="assets/panel/driver/signdetail.html"
-     data-header="signorderdetailHeader"
+
      data-load=""
      data-unload=""
-     data-footer="none">
+     data-header="allHeader"
+     data-footer="signorderdetailfooter">
 </div>
 
 
@@ -579,7 +581,7 @@ data-defer:加载一个html进来
 
 
 
-<header id="homeHeader" style="background-color:#ef8305;">
+<header id="homeHeader" style="background-color:#06ABD4;">
     <div style="width:100%;height:100%;" align="center">
         <img src="assets/img/home/home-header-logo.png"
                 style="position:absolute;top: 50%;
@@ -587,7 +589,7 @@ data-defer:加载一个html进来
   transform: translate(-50%, -50%);"/>
     </div>
 </header>
-<header id="orderBoardHeader" style="background-color:#ef8305;">
+<header id="orderBoardHeader" style="background-color:#06ABD4;">
     <a class="headerBack" href="javascript:;"
        onclick="$.ui.loadContent('#home2', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
@@ -600,21 +602,21 @@ data-defer:加载一个html进来
     </div>
 </header>
 
-<header id="home2Header" style="background-color:#ef8305;">
+<header id="home2Header" style="background-color:#06ABD4;">
     <a class="headerBack"  onclick="$.ui.loadContent('#home2', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
     </a>
     <h1 id="home2Title" class="">订单列表</h1>
     <div></div>
 </header>
-<header id="loginHeader" style="background-color:#ef8305;">
+<header id="loginHeader" style="background-color:#06ABD4;">
     <a class="headerBack"  onclick="$.ui.loadContent('#home2', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
     </a>
     <h1 id="loginTitle" class="">登陆</h1>
     <div></div>
 </header>
-<header id="addOrderHeader" style="background-color:#ef8305;">
+<header id="addOrderHeader" style="background-color:#06ABD4;">
     <a class="headerBack"
        onclick="$.ui.loadContent('#home2', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
@@ -623,7 +625,7 @@ data-defer:加载一个html进来
     <div></div>
 </header>
 
-<header id="orderlistHeader" style="background-color:#ef8305;">
+<header id="orderlistHeader" style="background-color:#06ABD4;">
     <a class="headerBack" id="orderlistHeaderId" onclick="$.ui.loadContent('#orderBoard', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
     </a>
@@ -632,7 +634,7 @@ data-defer:加载一个html进来
 </header>
 
 
-<header id="orderdetailHeader" style="background-color:#ef8305;">
+<header id="orderdetailHeader" style="background-color:#06ABD4;">
     <a class="headerBack" id="orderdetailBackId" onclick="$.ui.loadContent('#orderBoard', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
     </a>
@@ -641,7 +643,7 @@ data-defer:加载一个html进来
 </header>
 
 
-<header id="mineHeader" style="background-color:#ef8305;">
+<header id="mineHeader" style="background-color:#06ABD4;">
     <div class="homeLeftButton">
         <span id="mineTitle" class="" style=""><a  class="backButton button" >我</a></span>
     </div>
@@ -650,7 +652,7 @@ data-defer:加载一个html进来
 
 </header>
 
-<header id="allHeader" style="background-color:#ef8305;">
+<header id="allHeader" style="background-color:#06ABD4;">
     <!--<div class="homeLeftButton">
         <span id="allTitle" class="" style="">-->
             <a class="headerBack" onclick="$.ui.goBack()">
@@ -698,7 +700,7 @@ data-defer:加载一个html进来
     <div></div>
 </header>
 <header id="detailgobackHeader">
-    <a  class="headerBack" id=""  onclick="" >
+    <a  class="headerBack"  onclick="" >
         <img src="assets/img/backPage.png" height="32" />
     </a>
     <h1 id="detailgobackTitle" class="">订单详情</h1>
@@ -712,61 +714,78 @@ data-defer:加载一个html进来
     <div></div>
 </header>
 <header id="operateguideHeader">
-    <a class="backButton button"  onclick="$.ui.loadContent('#driverboard', false, false, 'slide')" >
-
+    <a class="headerBack"   onclick="$.ui.loadContent('#driverboard', false, false, 'slide')" >
+        <img src="assets/img/backPage.png" height="32" />
     </a>
     <h1 id="operateguideTitle" class="">任务操作</h1>
     <div></div>
 </header>
 
 <header id="chocieordersHeader">
-    <a class="backButton button"  onclick="$.ui.loadContent('#operateguide', false, false, 'slide')">返回</a>
+    <a class="headerBack"   onclick="$.ui.loadContent('#operateguide', false, false, 'slide')">
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="orderTitle" class="">订单选择</h1>
-    <div><a style="margin-right: 0px;" class="searchButton"  id='chocieordersTelButton' href="tel:" >联系客服</a></div>
+    <div><a style="margin-right: 0px;" class="searchButton"
+            id='chocieordersTelButton' href="tel:" >联系客服</a></div>
 </header>
 
 <header id="todoInfoHeader">
-    <a class="backButton button" >任务</a>
+    <a  class="headerBack" onclick="$.ui.goBack()"  >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="odoInfoTitle" class="">任务详情</h1>
     <div><a style="margin-right: 0px;" class="searchButton" id='odoInfoTelButton' href="tel:" >联系客服</a></div>
 </header>
 
 <header id="deliverordersHeader">
-    <a class="backButton button" onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >返回</a>
+    <a class="headerBack"  onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="deliverordersTitle" class="">提取订单</h1>
     <div><a class="searchButton" style="margin-right: 0px;" id='deliverordersTelButton' href="tel:" >联系客服</a></div>
 
 </header>
 
 <header id="followorderHeader">
-    <a class="backButton button" onclick="$.ui.loadContent('#operateguide', false, false, 'slide')">返回</a>
+    <a class="headerBack" onclick="$.ui.loadContent('#operateguide', false, false, 'slide')">
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="followorderTitle" class="">在途跟踪</h1>
     <div><a class="searchButton" style="margin-right: 0px;" id='followorderTelButton' href="tel:" >联系客服</a></div>
 
 </header>
 
 <header id="handoverordersHeader">
-    <a class="backButton button" onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >返回</a>
+    <a class="headerBack"  onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="handoverordersTitle" class="">交接订单</h1>
     <div><a class="searchButton" style="margin-right: 0px;" id='handoverordersTelButton' href="tel:" >联系客服</a></div>
 
 </header>
 
 <header id="signordersHeader">
-    <a class="backButton button" onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >返回</a>
+    <a class="headerBack"  onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="signordersHeaderordersTitle" class="">签收订单</h1>
     <div><a class="searchButton" style="margin-right: 0px;" id='signordersHeaderordersTelButton' href="tel:" >联系客服</a></div>
 
 </header>
 <header id="signorderdetailHeader">
-    <a class="backButton button" onclick="$.ui.loadContent('#signorders', false, false, 'slide')" >返回</a>
+    <a class="headerBack"  onclick="$.ui.loadContent('#signorders', false, false, 'slide')" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="signorderdetailTitle" class="">明细</h1>
     <div><a class="searchButton" style="margin-right: 0px;" id='signorderdetailTelButton' href="tel:" >联系客服</a></div>
 
 </header>
 
 <header id="signorderlistHeader">
-    <a class="backButton button" onclick="$.ui.loadContent('#signorderdetail', false, false, 'slide')" >返回</a>
+    <a class="headerBack"  onclick="$.ui.loadContent('#signorderdetail', false, false, 'slide')" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
     <h1 id="signorderlistTitle" class="">选择订单</h1>
     <div><a class="searchButton" style="margin-right: 0px;" id='signorderlistTelButton' href="tel:" >联系客服</a></div>
 
@@ -784,7 +803,7 @@ data-defer:加载一个html进来
   font-size: 16px;
   border: 1px solid #f2f2f2;
   background-color: #fff;
-  color: #EF8305;
+  color: #06ABD4;
   height: 30px;
   width: 60px;
   text-align: left;
@@ -804,7 +823,7 @@ data-defer:加载一个html进来
   font-size: 16px;
   border: 1px solid #f2f2f2;
   background-color: #fff;
-  color: #EF8305;
+  color: #06ABD4;
   height: 30px;
   width: 60px;
   text-align: left;
@@ -824,7 +843,7 @@ data-defer:加载一个html进来
   font-size: 16px;
   border: 1px solid #f2f2f2;
   background-color: #fff;
-  color: #EF8305;
+  color: #06ABD4;
   height: 30px;
   width: 60px;
   text-align: left;
@@ -860,41 +879,52 @@ data-defer:加载一个html进来
 
 <footer id="addDetailFooter" align="center" style="  padding-left: 15%;background: white;">
     <button role="button" id="loginButton"
-            style="width:80%;background:#ef8305;font-size:x-large;color:#fff;" onclick="saveOrUpdate()"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff;" onclick="saveOrUpdate()"
             class="btn  btn-block">提交订单</button>
 </footer>
 <footer id="confirmGoodFooter" align="center" style="  padding-left: 15%;background: white;">
-    <button role="button" id=""
-            style="width:80%;background:#ef8305;font-size:x-large;"
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;"
             onclick="backToGoodOrderPage()"
             class="btn  btn-block">确认返回</button>
 </footer>
 
 <footer id="confirmOwnerFooter" align="center" style="  padding-left: 15%;background: white;">
     <button role="button" id="comfirmOwnerFooterBtn"
-            style="width:80%;background:#ef8305;font-size:x-large;"
+            style="width:80%;background:#06ABD4;font-size:x-large;"
             onclick="backToOwnerAddOrderPage()"
             class="btn  btn-block">确认返回</button>
 </footer>
 
 <footer id="confirmCustFooter" align="center" style="  padding-left: 15%;background: white;">
     <button role="button" id="confirmCustFooterBtn"
-            style="width:80%;background:#ef8305;font-size:x-large;"
+            style="width:80%;background:#06ABD4;font-size:x-large;"
             onclick="backToCustAddOrderPage()"
             class="btn  btn-block">确认返回</button>
 </footer>
 <footer id="updtPwdFooter" align="center" style="  padding-left: 15%;background: white;">
     <button role="button" id=""
-            style="width:80%;background:#ef8305;font-size:x-large;color:#fff"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
             onclick="updatePwd()"
             class="btn  btn-block">确认修改</button>
 </footer>
 <footer id="selfInfoFooter" align="center" style="  padding-left: 15%;background: white;">
     <button role="button"
-            style="width:80%;background:#ef8305;font-size:x-large;color:#fff"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
             onclick="updateSelfInfo()"
             class="btn  btn-block">确认修改</button>
 </footer>
+
+<footer align="center" id="signorderdetailfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="saveGoodQty();"
+            class="btn  btn-block">保存</button>
+</footer>
+
+
+
+
 </div>
 
 <div style="display: none">

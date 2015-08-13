@@ -2,7 +2,7 @@
     margin-top: 20px;
 }
 .bbc{
-    border-bottom: 1px solid #ef8305;
+    border-bottom: 1px solid #06ABD4;/*#ef8305*/;
 }
 .input-top input,.input-mid input,.input-bot input{-webkit-appearance:none;-webkit-tap-highlight-color: rgba(255,255,255,0);width: 100%;padding-left:38px;-webkit-box-sizing: border-box;text-indent: 0;}
 .input-top input{
@@ -101,7 +101,7 @@ li{ position:relative; }
    /* padding-top:25px;*/
 }
 .fontCb{
-    color:#ef8305
+    color:#06ABD4;/*#ef8305*/
 }
 
 .star1 {padding-top:-1px;margin-top:-2px;list-style:none; float:left;}
@@ -177,7 +177,7 @@ li{ position:relative; }
 .order-detail-text-time{color: #AAAAAA;font-size: 12px !important;}
 .text-center{text-align: center}
 .text-right{text-align: right}
-.order-btn{background: #ef8305;border-radius: 2px;color:ghostwhite;border: 1px #ef8305 solid}
+.order-btn{background: #06ABD4;/*#ef8305*/border-radius: 2px;color:ghostwhite;border: 1px #06ABD4;/*#ef8305*/ solid}
 
 .p0{padding: 0px !important;}
 .p2{padding: 2px}
@@ -270,7 +270,7 @@ li{ position:relative; }
     z-index: 2;
     float: left;
     padding-left: 20px;
-    color:#EF8305;
+    color:#06ABD4;/*#ef8305*/;
     font-size: 20px;
     font-weight: bold;
 }
@@ -285,7 +285,7 @@ li{ position:relative; }
     float: right;
     padding-left: 20px;
     margin-right: 20px;
-    color:#EF8305;
+    color:#06ABD4;/*#ef8305*/;
     font-size: 18px;
     font-weight:inherit;
 }
@@ -372,7 +372,7 @@ a:focus,input:focus{
 .poupSelProvinceCodeA
 {
     font-size:16px;
-    font-weight:blod;
+   /* font-weight:blod;*/
     color:#333333;
     display: block;
     z-index: 3;
@@ -445,7 +445,7 @@ a:focus,input:focus{
 }
 .tabOrderSelNo
 {
-    background-color: #ef8305;
+    background-color: #06ABD4;/*#ef8305*/;
     color:#FFFFFF;
 }
 
@@ -456,7 +456,7 @@ a:focus,input:focus{
 }
 .tabTaskN
 {
-    background-color:#ef8305;
+    background-color:#06ABD4;/*#ef8305*/;
     color:#FFFFFF;
 }
 
@@ -468,7 +468,7 @@ a:focus,input:focus{
 }
 .bg_blue
 {
-    background-color:#ef8305;
+    background-color:#06ABD4;/*#ef8305*/;
 }
 .bg_black
 {
@@ -477,7 +477,7 @@ a:focus,input:focus{
 
 .yellowColor
 {
-    color: #ef8305;
+    color: #06ABD4;/*#ef8305*/;
 }
 .blackColor
 {
@@ -569,7 +569,7 @@ li {list-style-type:none;}
     border-bottom: 1px solid #CECECE;
     line-height: 30px;
     padding-left: 10px;
-    color: #ef8305;
+    color: #06ABD4;/*#ef8305*/;
 }
 #logicTable{
     text-align:center;
@@ -582,14 +582,14 @@ li {list-style-type:none;}
 #logicTable tr td b{
     font-size:32px;
     font-weight:bold;
-    color:#ef8305;
+    color:#06ABD4;/*#ef8305*/;
 }
 #logicTable tr td p{
     font-size:16px;
     font-weight:bold;
     color:#383838;
 }
-.selectTotalDay{background-color: #ef8305;color:#fff;font-size:18px;}
+.selectTotalDay{background-color: #06ABD4;/*#ef8305*/;color:#fff;font-size:18px;}
 .tabTaskY
 {
     width:30%;
@@ -600,12 +600,12 @@ li {list-style-type:none;}
 .tabTaskN
 {
     width:30%;
-    /*background-color:#ef8305;*/
+    /*background-color:#06ABD4;/*#ef8305*/
     /*color:#FFFFFF;*/
     font-size:18px;
 }
 #searchHref a{
-    color: #ef8305;
+    color: #06ABD4;/*#ef8305*/
 }
 
 /**订单详情**/

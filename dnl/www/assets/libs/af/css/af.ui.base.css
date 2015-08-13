@@ -680,10 +680,10 @@ body {
 }
 
 #afui .header{
-    background:#ef8305;
+    background:#06ABD4;/*#06ABD4;*/
     border:none;
 
-    border-bottom:1px solid #ef8305;
+    border-bottom:1px solid #06ABD4;
     color:white;
 }
 
@@ -762,7 +762,7 @@ body {
 
 #afui footer>a.pressed:not(.button) {
     border-radius:0;
-    background:#ef8305;
+    background:#06ABD4;
 }
 
 #afui footer>a.icon.pressed:not(.button):before {
@@ -1692,14 +1692,14 @@ body {
 }
 
 .afPopup>FOOTER>A#action{
-    background: #ef8305;
+    background: #06ABD4;
     width: 50%;
     padding: 15px 0;
     float:right;
 }
 
 .afPopup>FOOTER>A.center{
-    background: #ef8305 !important;
+    background: #06ABD4 !important;
     float:right !important;
     width:100% !important;
     padding: 15px 0 !important;

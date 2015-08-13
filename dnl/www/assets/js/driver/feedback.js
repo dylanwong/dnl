@@ -262,8 +262,8 @@ function queryDetailList(){
            '<span class="fontCb f1 f14  p0-6 fd" >'+data.subOrderNo+'</span>'+
            '</div><div style="clear:both;"></div></div>'+
            '<div align=""><hr style="margin-left:5px;width:85%;margin-top:0px;margin-bottom:5px;border: 0;border-top:1px solid #BFBFBF;">'+
-           '</div><div><span class="ownerName f12 fco p0-6"  >货主单号:</span>'+
-           '<span class="ownerName f12 fco p0-6" style="position: absolute;">'+data.orderNo+'</span><br>'+
+           '</div><div><span class="ownerName f14 fco p0-6"  >货主单号:</span>'+
+           '<span class="ownerName f14 fco p0-6" style="position: absolute;">'+data.orderNo+'</span><br>'+
            '</div></div><div style="float:right;">'+
            '<div class="" style="right: 20px;position:absolute;padding-top:35px;width:10%;">'+
            '<div align="center" style="">'+
@@ -285,8 +285,8 @@ function queryDetailList(){
                '<span class="fontCb f1 f14  p0-6 fd" >'+data.subOrderNo+'</span>'+
                '</div><div style="clear:both;"></div></div>'+
                '<div align=""><hr style="margin-left:5px;width:94%;margin-top:0px;margin-bottom:5px;border: 0;border-top:1px solid #BFBFBF;">'+
-               '</div><div><span class="ownerName f12 fco p0-6"  >货主单号:</span>'+
-               '<span class="ownerName f12 fco p0-6" style="position: absolute;">'+data.orderNo+'</span><br>'+
+               '</div><div><span class="ownerName f14 fco p0-6"  >货主单号:</span>'+
+               '<span class="ownerName f14 fco p0-6" style="position: absolute;">'+data.orderNo+'</span><br>'+
                '</div></div><div style="float:right;">'+
                '<div class="" style="right: 20px;position:absolute;padding-top:37px;width:10%;">'+
                '<div align="center" style="">'+
@@ -307,8 +307,8 @@ function querygoodlist2(elm){
     var detail_list = '';
     var gooddetail = '';
     $('#s_orderNo').html(orderNo);
-    $('#signorderlist').empty();
-    getAjax(goodSearchUrl, {'enterpriseNo':enterpriseNo,'dispatchNo':dispatchNo},
+  //  $('#signorderlist').empty();
+    getAjax(goodSearchUrl, {'orderEnterpriseNo':enterpriseNo,'dispatchNo':dispatchNo},
         "updategoodlistPanel(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
 
@@ -319,7 +319,7 @@ function querygoodlist(){
     var detail_list = '';
     var gooddetail = '';
     $('#s_orderNo').html(datas[0].orderNo);
-    $('#signorderlist').empty();
+
 //    if(datas.length>1){
 //        $(datas).each(function (index,data) {
 //
@@ -345,14 +345,14 @@ function updategoodlistPanel(datas){
             '<div style="margin-top:5px;"><hr style="margin-left:5px;width:90%;' +
             'margin-top:0px;margin-bottom:5px;border: 0;border-top:1px solid #06ABD4;">'+
             '</div> <div><div style="float:left;width:100%;height:45px;">'+
-            '<span class="f12 fco  p0-6" >产品名称:</span>'+
-            '<span class=" f12 fco" >'+data.articleName+'</span><br>'+
+            '<span class="f14 fco  p0-6" >产品名称:</span>'+
+            '<span class=" f14 fco" >'+data.articleName+'</span><br>'+
             '<div><div style="float:left;width:50%;">'+
-            '<span class="f12 fco  p0-6">产品条码:</span>'+
-            '<span class=" f12 fco" >'+data.articleBarcode+'</span>'+
+            '<span class="f14 fco  p0-6">产品条码:</span>'+
+            '<span class=" f14 fco" >'+data.articleBarcode+'</span>'+
             '</div><div style="float:right;width:50%;">'+
-            '<span class="f12 fco  ">签收数量:</span>'+
-            '<span class=" f12 fco" ><div style="line-height:0px;display:inline-block;" > ' +
+            '<span class="f14 fco  ">签收数量:</span>'+
+            '<span class=" f14 fco" ><div style="line-height:0px;display:inline-block;" > ' +
             '<input style="width:50px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
             ' orderNo="'+data.orderNo+'" ' +
             'articleNo="'+data.articleNo+'" articleBarcode="'+data.articleBarcode+'" ' +
@@ -362,6 +362,7 @@ function updategoodlistPanel(datas){
         // $('#signorderlist').empty();
         $('#goodscontent').append(gooddetail);
         $.ui.loadContent("#signorderdetail", false, false, "slide");
+        $('#signorderlist').empty();
     } else {
         errorPopup( '无商品明细!' );
     }

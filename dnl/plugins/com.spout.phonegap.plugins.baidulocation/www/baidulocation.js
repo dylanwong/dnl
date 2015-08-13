@@ -1,6 +1,6 @@
 window.locationService = {
 	execute: function(action, successCallback, errorCallback) {
-		cordova.exec(    
+		cordova.exec(
 			function(pos) {
 				var errcode = pos.code;
 				if (errcode == 61 || errcode == 65 || errcode == 161) {
@@ -13,7 +13,7 @@ window.locationService = {
 						errorCallback(pos)
 					};
 				}
-			}, 
+			},
 			function(err){},
 			"BaiduLocation",
 			action,
