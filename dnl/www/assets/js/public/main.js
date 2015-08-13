@@ -205,10 +205,10 @@ function driverboard_panel(){
             "<div style='float:left;width:75%;text-align:center;margin:5px auto;' " +
             " ><div class='btn-group' role='group'><button" +
             " style='width:70px;' onclick='toggleTaskTabs(this)' status='0' type='button' " +
-            "class='btn btn-default tabTaskN'>当前任务</button>" +
+            "class='btn btn-default tabTaskN'>当前</button>" +
             " <button style='width:70px;' onclick='toggleTaskTabs(this)' status='1'  type='button' " +
             "class='btn btn-default tabTaskY'  >" +
-            "历史任务</button></div></div>" +
+            "历史</button></div></div>" +
             "<div style='clear:both;width:10%'></div>");
         taskTabStatus = 0;
         taskPanelLoad();

@@ -378,7 +378,7 @@ $.ui.ready(function(){
 
 
 
-    mainScroller = $("#driverboard").scroller(); //Fetch the scroller from cache
+   /* mainScroller = $("#driverboard").scroller(); //Fetch the scroller from cache
     //Since this is a App Framework UI scroller, we could also do
     // mainScroller=$.ui.scrollingDivs['webslider'];
     mainScroller.addInfinite();
@@ -451,7 +451,7 @@ $.ui.ready(function(){
             $(self.el).find("#infinite").remove();
             self.clearInfinite();
         }
-    });
+    });*/
 
 
    

@@ -10,9 +10,17 @@ function toggleTaskTabs(elm) {
     $(elm).removeClass('tabTaskY');
     $(elm).addClass('tabTaskN');
     $("#taskList").empty();
-    taskTabStatus = $(elm).attr('status')
+    taskTabStatus = $(elm).attr('status');
     taskPanelLoad(taskTabStatus);
-
+//    if(scrollFlag == 0){
+//        taskScroll.scrollTo(0,0,1000);
+//    }
+    //scrollFlag =1;
+    //taskPullUpEl['class'] = taskPullDownEl.attr('class');
+    //taskPullUpEl.attr('class','').hide();
+    //taskPullDownEl.attr('class','').hide();
+   // taskScroll.refresh();
+    //taskLoadingStep = 0;
 }
 
 function taskPanelLoad(taskStatus) {
@@ -27,6 +35,7 @@ function taskPanelLoad(taskStatus) {
         {'start': '0', 'length':'10', 'queryDate': '', 'status': tdStatus,'phone':phone}, true);
     getAjax(taskqueryUrl, JSON.parse(localStorage.getItem("taskFilter")),
         "updateTaskPanel(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
+
 }
 
 
@@ -138,7 +147,7 @@ function updateTaskPanel(data, prepend) {
 
         taskTabStatus == 0 ? todoTriFuc = 'taskInfo(this);' : todoTriFuc = 'biddingsignorder(this);';
         taskTabStatus == 0 ? buttonHtml = '任务反馈' : buttonHtml = '补录';
-        $(obj).each(function (index,data) {
+       /* $(obj).each(function (index,data) {
             var statusSelStyle10 = "";
             var statusSelCss10 = "bg_black";
             var statusSelStyle70 = "";
@@ -169,10 +178,10 @@ function updateTaskPanel(data, prepend) {
                     'class="">—</div></div><div class="fl">' +
                     '<p class="f10" style="'+statusSelStyle70+'">完成</p>' +
                     '<div style="margin: -5px auto;" class="circle '+statusSelCss70+'"></div></div>' +
-                    /*'<div class="fl"><p></p><div style="margin: 10px auto; height:10px;">—</div>' +
+                    *//*'<div class="fl"><p></p><div style="margin: 10px auto; height:10px;">—</div>' +
                     '</div><div class="fl">' +
                     '<p class="f10" style="'+statusSelStyle99+'">交接</p><div style="margin: -5px auto;" ' +
-                    'class="circle '+statusSelCss99+'"></div></div>*/'<div style="clear:both;"></div></div>';
+                    'class="circle '+statusSelCss99+'"></div></div>*//*'<div style="clear:both;"></div></div>';
             }else
             {
                 timeline = '<div class="fr f10 yellowColor"> '+data.deliveryDate+'</div>';
@@ -180,7 +189,7 @@ function updateTaskPanel(data, prepend) {
 
 
             liNode = $('<li id="task_' + data.sendNo + '"  onclick="'+todoTriFuc+'"  ' +
-                'data-task-detail=\'' + JSON.stringify(data) + '\'><div  class="lh4 f16 f2 p0-6">' +
+                'data-task-detail=\'' + JSON.stringify(data) + '\' style="width:100%;" ><div  class="lh4 f16 f2 p0-6">' +
                 '<div class="fl f18">运输单号<span' +
                 ' class=""></span>' + data.sendNo + '</div>' +
                 timeline+'</div>' +
@@ -205,6 +214,22 @@ function updateTaskPanel(data, prepend) {
             $("#taskList").prepend(containNode);
             //$(containNode).appendTo("#taskList");
         }
+*/
+        var html = template('taskListTemp', data);
+       $('#tasklist_ul').html(html) ;
+        initTaskScroll();
+
+        if(scrollFlag == 0){
+           taskScroll.scrollTo(0,0,1000);
+        }
+        scrollFlag =1;
+
+        taskPullUpEl['class'] = taskPullDownEl.attr('class');
+        taskPullUpEl.attr('class','').hide();
+        taskPullDownEl.attr('class','').hide();
+        taskScroll.refresh();
+        taskLoadingStep = 0;
+
 
     }
 
@@ -218,7 +243,6 @@ function taskInfo(elm)
 //    $("#ImageFileRow").remove();
 //    $("#followImageFileRow").remove();
 //    $("#handoverImageFileRow").remove();
-
     TDID = $(elm).attr('id');
     var data = eval('(' +$(elm).attr('data-task-detail')+ ')');
     $.ui.loadContent("#operateguide", false, false, "slide");
@@ -226,18 +250,38 @@ function taskInfo(elm)
     $('#endplace').text(data.endAdr);
     $('#o_sendNo').text(data.sendNo);
     $('#o_licensePlate').text(data.licensePlate);
-
-
-
     localStorage.setItem("currenttask",$(elm).attr('data-task-detail'));
-
     $('#chocieordersTelButton').attr('href','tel:'+data.custphone);
     $('#operateguideTelButton').attr('href','tel:'+data.custphone);
     $('#deliverordersTelButton').attr('href','tel:'+data.custphone);
     $('#followorderTelButton').attr('href','tel:'+data.custphone);
     $('#handoverordersTelButton').attr('href','tel:'+data.custphone);
+}
 
-
+function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate)
+{
+//    $("#ImageFileRow").remove();
+//    $("#followImageFileRow").remove();
+//    $("#handoverImageFileRow").remove();
+    $.ui.loadContent("#operateguide", false, false, "slide");
+    $('#startplace').text(fromAdr);
+    $('#endplace').text(endAdr);
+    $('#o_sendNo').text(sendNo);
+    $('#o_licensePlate').text(licensePlate);
+    $('#chocieordersTelButton').attr('href','tel:'+custphone);
+    $('#operateguideTelButton').attr('href','tel:'+custphone);
+    $('#deliverordersTelButton').attr('href','tel:'+custphone);
+    $('#followorderTelButton').attr('href','tel:'+custphone);
+    $('#handoverordersTelButton').attr('href','tel:'+custphone);
+    var str={
+        fromAdr:fromAdr,
+        endAdr:endAdr,
+        sendNo:sendNo,
+        licensePlate:licensePlate,
+        custphone:custphone,
+        licensePlate:licensePlate
+    };
+    localStorage.setItem("currenttask",JSON.stringify(str));
 }
 
 
