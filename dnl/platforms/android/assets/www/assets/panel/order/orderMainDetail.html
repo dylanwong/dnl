@@ -1,0 +1,174 @@
+<div id="orderMainDetailInfo">
+    <div style="border-bottom:1px solid #ededed;
+            border-top: 10px solid #EFEFEF;">
+        <div>
+            <div class="clearfix" style="font-size:16px;padding:1px;border-bottom:1px solid #ededed" onclick="queryOrderDoc();">
+
+                <div class="fl" style="padding: 10px;text-align: right;font-size: 16px;
+                color:#5b5b5b;width: 60%;">
+                    <div class="fl"  style="text-align: left;color:#5b5b5b;width: 60%;">
+                        <i class="iconfont icon-dingdan"
+                           style="color:#333;;font-size:20px;line-height:30px"></i>
+                        单据信息
+                    </div>
+
+                </div>
+                <div class="fl" style="padding: 10px;text-align: right;font-size: 16px;color:#5b5b5b;width: 40%;">
+                    <div class="fl" id="status_d" style="
+                        color:#ef8305;width: 80%;line-height:30px;">
+                    </div>
+                    <div class="fr" style="line-height:30px;" >
+                        <img src="assets/img/detail-icon.png" style="padding: 0px;" />
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix" style="font-size:16px;padding:1px;">
+                <div class="fl" style="padding-top:10px;text-align: right;font-size: 16px;color:#5b5b5b;width: 34%;">
+                    物流商单号
+                </div>
+                <div class="fl" id="transNo_d" style="text-align: left;padding-top:10px;padding-left: 10px;color:#b2b2b2;width: 60%;">
+
+                </div>
+            </div>
+            <div class="clearfix" style="font-size:16px;padding:1px;">
+                <div class="fl" style="text-align: right;font-size: 16px;color:#5b5b5b;width: 34%;">
+                    货主单号
+                </div>
+                <div class="fl" id="ownerNo_d" style="text-align: left;padding-left: 10px;color:#b2b2b2;width: 60%;">
+
+                </div>
+            </div>
+            <div class="clearfix" style="padding-bottom:10px;font-size:16px;padding:1px;">
+                <div class="fl" style="text-align: right;font-size: 16px;color:#5b5b5b;width: 34%;">
+                    货主客户单号
+                </div>
+                <div class="fl" id="custNo_d" style="text-align: left;padding-left: 10px;color:#b2b2b2;width: 60%;">
+
+                </div>
+            </div>
+            <div class="clearfix" style="font-size:16px;padding:1px;">
+                <div class="fl" style="text-align: right;font-size: 16px;color:#5b5b5b;width:34%;">
+                    下单时间
+                </div>
+                <div class="fl" id="orderDate_d" style="text-align: left;padding-left: 10px;color:#b2b2b2;width: 60%;">
+
+                </div>
+            </div>
+            <!--<li>
+                <div class="fl width30" align="right" style="color:#7C7B78;">物流商单号</div>
+                <div class="fl" style="margin-left: 10px;color: #000;" id="transNo_d"></div>
+            </li>
+            <li>
+                <div class="fl width30" align="right" style="color:#7C7B78;">货主单号</div>
+                <div class="fl" style="margin-left: 10px;color: #000;" id="ownerNo_d">AF2015012365410</div>
+            </li>
+            <li>
+                <div class="fl width30" align="right" style="color:#7C7B78;">货主客户单号</div>
+                <div class="fl" style="margin-left: 10px;color: #000;" id="custNo_d"></div>
+            </li>
+            <li>
+                <div class="fl width30" align="right" style="color:#7C7B78;">下单时间</div>
+                <div class="fl" style="margin-left: 10px;color: #000;" id="orderDate_d"></div>
+            </li>-->
+        </div>
+    </div>
+    <div class="clearfix" style="padding:10px;border-bottom:1px solid #ededed" id="productPanelBtn">
+               <div class="fl "  style="font-size: 16px;color:#5b5b5b;width: 40%;">
+                    <i class="iconfont icon-quanbushangpin"
+                       style="color:#333;;font-size:20px;line-height:30px"></i>
+                    商品</div>
+                <div class="fr" style="" >
+                    <span id="good_ifNull" style='color: #ef8305;'></span><img src="assets/img/detail-icon.png" style="" />
+                </div>
+
+    </div>
+    <div class="clearfix" style="padding:10px;border-bottom:1px solid #ededed"
+         id="evalutePanelBtn" ><!--onclick="evalutePanel();"-->
+                <div class="fl " style="font-size: 16px;color:#5b5b5b;width: 40%;">
+                    <i class="iconfont icon-pingjia"
+                    style="color:#333;;font-size:20px;line-height:30px"></i>
+                    评价</div>
+                <div class="fr" style="font-size: 16px;line-height: 30px;" id = "evalutePanelId"  >
+                    <span id="evalute_ifNull" style='color: #ef8305;'></span><img src="assets/img/detail-icon.png" style="" />
+                </div>
+    </div>
+    <div class="gray10"></div>
+    <div  id="detailTraceList" style="padding: 10px;">
+        <div style="border-bottom:1px solid #ededed;font-size: 16px;">
+                <i class="iconfont icon-genzong"
+                   style="color:#333;;font-size:20px;line-height:30px"></i>
+                物流轨迹
+        </div>
+        <div  id="detailTraceListContent"></div>
+       <script id="traceListTemp" type="text/html">
+
+            {{each obj as obj i}}
+
+            <div class="clearfix"
+                 style="width: 100%;border-bottom:1px solid #ededed" >
+
+            <div class="fl" style="width: 100%;">
+                <div class="fl " style="width:40%;padding-top: 10px;padding-left: 10px;">
+                    <p>司机：{{obj.opaName}}</p>
+                </div>
+                <div class="fr " style="width:60%;padding-top: 10px;padding-left: 10px;">
+                    <p>电话：<a href="tel:'{{obj.tel}}'">{{obj.tel}}</a></p>
+                </div>
+                <div></div>
+            </div>
+            <div  onclick="querySingleTraceInfo('{{obj.deliveryNo}}','{{obj.sendNo}}','{{obj.status}}')">
+            <div class="fl" style="width: 100%;">
+                <div class="fl" style="width: 90%;">
+                <div class="clearfix" style="padding-left: 10px;">
+                    <p class="fl" style="width:10px;height:10px;border-radius:10px;
+                        background-color: #089c2e;
+                        margin-right: 10px; margin-top: 10px;"></p>
+                    <p style="font-size: 16px;color: #383838">
+                        {{obj.sendNo}}<span style="padding-left: 10px;">{{obj.changeTimeDescri}}</span>
+                </div>
+            </div>
+            <div class="fr" style="text-align: right;width:10%;">
+                <span style="">
+                    <img src="assets/img/detail-icon.png" style="padding-top:5px;" />
+                </span>
+            </div>
+            </div>
+            </div>
+            <div class="fl" onclick="querySingleTraceInfo('{{obj.deliveryNo}}','{{obj.sendNo}}','{{obj.status}}')"
+                 style="width: 100%;">
+               <div class="clearfix" style="font-size:16px;padding:5px;">
+                    <div class="fl" style="text-align: left;color:#b2b2b2;width: 100%;">
+                    {{obj.statusDesc}}
+                    </div>
+                </div>
+            </div>
+            </div>
+           </div>
+
+
+          {{/each}}
+
+        </script>
+
+        <script id="traceListTemp2" type="text/html">
+
+            {{each obj as obj i}}
+
+            <div class="gj">
+                <div class="gj_cn">
+                    <div >{{ obj.changeTimeDescri }}</div>
+                    <span >{{ obj.statusDesc }}
+                    </span>
+                    <div width="100%" border="0" >
+                        <div id="{{ obj.fileNo }}">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+
+        </script>
+
+</div>
+</div>
