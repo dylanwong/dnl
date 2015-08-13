@@ -1,4 +1,70 @@
-<ul class="list item_li" id="taskList" style="padding: 0px 10px;" >
+<div style="height:100%;">
+    <div class="gray10"></div>
+    <div id="taskWrapper" class="wrapperContent">
+       <div id="scroller">
+            <div id="taskPullDown" align="center" class="pullDown">
+                <span class="taskPullDownLabel">下拉刷新...</span>
+            </div>
 
-</ul>
+        <!--<ul class="list item_li" id="taskList" style="padding: 0px 0px;" >
+        </ul>-->
+            <div id="tasklist-content">
+                <div id="tasklist_ul"></div>
+                <script id="taskListTemp" type="text/html">
+                    {{each obj.data as obj i}}
+                    {{if obj.status<=70}}
+                    <div id="task_{{obj.sendNo}}"  onclick="taskInfo('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}')">
+                    {{/if}}
+                    {{if obj.status>70}}
+                        <div id="task_{{obj.sendNo}}"  onclick="biddingsignorder('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}')">
+                     {{/if}}
+                        <div  class="lh4 f16 f2 p0-6">
+                        <div class="fl f18">运输单号<span class=""></span> {{obj.sendNo}}</div>
+                        {{if obj.status<=70}}
+                        <div class="fr f10"><div class="fl">
+                            <p class="f10 " style="color:#00B2EE">未完成</p><div style="margin: -5px auto;"
+                            class="circle bg_blue">
+                        </div></div><div class="fl"><p></p><div style="margin: 10px auto; height:10px;"
+                        class="">—</div></div><div class="fl">
+                        <p class="f10" style="">完成</p>
+                        <div style="margin: -5px auto;" class="circle bg_black"></div></div>
+                        <div style="clear:both; "></div></div>
+                        {{/if}}
+                        {{if obj.status>70}}
+                        <div class="fr f10"><div class="fl">
+                            <p class="f10 " style="color:#00B2EE">未完成</p><div style="margin: -5px auto;"
+                                                                              class="circle bg_blue">
+                        </div></div><div class="fl"><p></p><div style="margin: 10px auto; height:10px;"
+                                                                class="">—</div></div><div class="fl">
+                            <p class="f10" style="color:#00B2EE;">完成</p>
+                            <div style="margin: -5px auto;" class="circle bg_blue"></div></div>
+                            <div style="clear:both; "></div></div>
+                        {{/if}}
+                    </div>
+                    <div class="lh7 p0-6"><div class="fl width5 lh4"><div>
+                        <p class="lh2 order-detail-text mt0">车牌号:{{obj.licensePlate}}</p>
+                        <p class="lh2 order-detail-text mt0">{{obj.fromAdr}} ->{{obj.endAdr}}</p>
+                        <p class="lh2 order-detail-text">发车时间：{{obj.deliveryDate}}</p></div></div>
+                        <div class="fr width3 lh7 text-right get-order">  <p class="lh2 mb10 order-detail-text">
+                            <span class="f16"></span>'</span> </p>
+                        <p class="lh5"><a class="p6 f18 order-btn" style="padding: 5px 5px">
+                            {{if obj.status<=70}}
+                            任务反馈
+                            {{/if}}
+                            {{if obj.status>70}}
+                            补录
+                            {{/if}}
+                        </a></p></div></div>
+                    </div>
+                    {{/each}}
+                </script>
+                </div>
+
+           <div id="taskPullUp" align="center" class="pullUp">
+                <span class="taskPullUpLabel">上拉加载更多...</span>
+            </div>
+
+       </div>
+    </div>
+</div>
 

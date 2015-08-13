@@ -449,6 +449,7 @@ a:focus,input:focus{
     color:#FFFFFF;
 }
 
+<<<<<<< HEAD
 .tabTaskY
 {
     background-color:#8A8A8A;
@@ -459,6 +460,9 @@ a:focus,input:focus{
     background-color:#06ABD4;/*#ef8305*/;
     color:#FFFFFF;
 }
+=======
+
+>>>>>>> 6af0e80c0f91c1f43824de6b07e6259cb3bcefeb
 
 .circle {
     border-radius: 50%;
@@ -593,15 +597,21 @@ li {list-style-type:none;}
 .tabTaskY
 {
     width:30%;
-    background-color:#8A8A8A;
-    color: #FFFFFF;
+    background-color:#ef8305;
+    color:#FFFFFF;
     font-size:18px;
 }
 .tabTaskN
 {
     width:30%;
+<<<<<<< HEAD
     /*background-color:#06ABD4;/*#ef8305*/
     /*color:#FFFFFF;*/
+=======
+
+    background-color:#FFFFFF;
+    color: #ef8305;
+>>>>>>> 6af0e80c0f91c1f43824de6b07e6259cb3bcefeb
     font-size:18px;
 }
 #searchHref a{

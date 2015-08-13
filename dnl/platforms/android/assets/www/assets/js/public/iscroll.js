@@ -2,10 +2,10 @@
  * Created by 翔 on 2015/6/28.
  */
 
-var mainScroll,historyScroll,custboardScroll;
-var mainPullDownEl, mainPullDownL,historyPullDownEl, historyPullDownL,custPullDownL,custPullDownEl;
-var mainPullUpEl, mainPullUpL,historyPullUpEl, historyPullUpL,custPullUpEl, custPullUpL;
-var mainLoadingStep,historyLoadingStep,custLoadingStep = 0;//加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新
+var mainScroll,historyScroll,custboardScroll,taskScroll;
+var mainPullDownEl, mainPullDownL,historyPullDownEl, historyPullDownL,custPullDownL,custPullDownEl,taskPullDownEl,taskPullDownL;
+var mainPullUpEl, mainPullUpL,historyPullUpEl, historyPullUpL,custPullUpEl, custPullUpL, taskPullUpL,taskPullUpEl;
+var mainLoadingStep,historyLoadingStep,custLoadingStep = 0,taskLoadingStep = 0;//加载状态0默认，1显示加载状态，2执行加载数据，只有当为0时才能再次加载，这是防止过快拉动刷新
 
 function custLoaded(){
    //
@@ -266,5 +266,72 @@ function inittraceScroll(){
         });
     }
 }
+
+
+
+
+function initTaskScroll(){
+    if(taskScroll==undefined || taskScroll == null)
+    {
+        taskPullDownEl = $('#taskPullDown');
+        taskPullDownL = taskPullDownEl.find('.taskPullDownLabel');
+        taskPullDownEl['class'] = taskPullDownEl.attr('class');
+        taskPullDownEl.attr('class','').hide();
+
+        taskPullUpEl = $('#taskPullUp');
+        taskPullUpL = taskPullUpEl.find('.taskPullUpLabel');
+        taskPullUpEl['class'] = taskPullUpEl.attr('class');
+        taskPullUpEl.attr('class','').hide();
+
+        taskScroll = new IScroll('#taskWrapper', {
+            probeType: 2,//probeType：1对性能没有影响。在滚动事件被触发时，滚动轴是不是忙着做它的东西。
+            // probeType：2总执行滚动，除了势头，反弹过程中的事件。这类似于原生的onscroll事件。
+            // probeType：3发出的滚动事件与到的像素精度。
+            // 注意，滚动被迫requestAnimationFrame（即：useTransition：假）。
+            scrollbars: true,//有滚动条
+            mouseWheel: true,//允许滑轮滚动
+            fadeScrollbars: true,//滚动时显示滚动条，默认影藏，并且是淡出淡入效果
+            bounce:true,//边界反弹
+            interactiveScrollbars:true,//滚动条可以拖动
+            shrinkScrollbars:'scale',// 当滚动边界之外的滚动条是由少量的收缩。'clip' or 'scale'.
+            click: true ,// 允许点击事件
+            keyBindings:true,//允许使用按键控制
+            momentum:true// 允许有惯性滑动
+        });
+        //滚动时
+        taskScroll.on('scroll', function(){
+            if(taskLoadingStep == 0 && !taskPullDownEl.attr('class').match('flip|loading') &&
+                !taskPullUpEl.attr('class').match('flip|loading')){
+                if (this.y > 5) {
+                    //下拉刷新效果
+
+                }else if (this.y < (this.maxScrollY - 5)) {
+                    //上拉刷新效果
+                    taskPullUpEl.attr('class',taskPullUpEl['class'])
+                    taskPullUpEl.show();
+                    taskScroll.refresh();
+                    taskPullUpEl.addClass('flip');
+                    taskPullUpL.html('准备刷新...');
+                    taskLoadingStep = 1;
+                }
+            }
+        });
+        //滚动完毕
+        taskScroll.on('scrollEnd',function(){
+            if(taskLoadingStep == 1){
+                if (taskPullUpEl.attr('class').match('flip|loading')) {
+                    taskPullUpEl.removeClass('flip').addClass('loading');
+                    taskPullUpL.html('<img src="assets/img/preloader.gif" ' +
+                        'style="padding-right: 10px" />努力加载数据中...');
+                    taskLoadingStep = 2;
+                   // getRequestFromOrderListinite();
+                }else if(taskPullDownEl.attr('class').match('flip|loading')){
+
+                }
+            }
+        });
+    }
+}
+
 
 
