@@ -177,7 +177,7 @@ li{ position:relative; }
 .order-detail-text-time{color: #AAAAAA;font-size: 12px !important;}
 .text-center{text-align: center}
 .text-right{text-align: right}
-.order-btn{background: #06ABD4;/*#ef8305*/border-radius: 2px;color:ghostwhite;border: 1px #06ABD4;/*#ef8305*/ solid}
+.order-btn{background: #06ABD4;/*#ef8305*/border-radius: 2px;color:ghostwhite;border: 1px #06ABD4  solid}
 
 .p0{padding: 0px !important;}
 .p2{padding: 2px}
@@ -449,10 +449,9 @@ a:focus,input:focus{
     color:#FFFFFF;
 }
 
-<<<<<<< HEAD
 .tabTaskY
 {
-    background-color:#8A8A8A;
+    background-color:#06ABD4;
     color: #FFFFFF
 }
 .tabTaskN
@@ -460,9 +459,6 @@ a:focus,input:focus{
     background-color:#06ABD4;/*#ef8305*/;
     color:#FFFFFF;
 }
-=======
-
->>>>>>> 6af0e80c0f91c1f43824de6b07e6259cb3bcefeb
 
 .circle {
     border-radius: 50%;
@@ -597,21 +593,17 @@ li {list-style-type:none;}
 .tabTaskY
 {
     width:30%;
-    background-color:#ef8305;
+    background-color:#06ABD4;
     color:#FFFFFF;
     font-size:18px;
 }
 .tabTaskN
 {
     width:30%;
-<<<<<<< HEAD
-    /*background-color:#06ABD4;/*#ef8305*/
-    /*color:#FFFFFF;*/
-=======
+
 
     background-color:#FFFFFF;
-    color: #ef8305;
->>>>>>> 6af0e80c0f91c1f43824de6b07e6259cb3bcefeb
+    color: #06ABD4;
     font-size:18px;
 }
 #searchHref a{
