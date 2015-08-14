@@ -62,7 +62,7 @@ function biddingaddInfoorder(elm){
     $("#c_custcity").text(data.endAdr);
     $('#c_sendNo').text(data.sendNo);
     $('#c_licensePlate').text(data.licensePlate);
-    $("#nextstup").attr("onclick","nextstup(3);");
+    $("#nextstup").attr("onclick","nextstup(4);");
     queryallchioceorderlist();
 }
 
@@ -322,7 +322,15 @@ function nextstup(nexttype){
             $("#signconsignno").text(data.sendNo);
             imgLocation='3';
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
-        }else{
+        }else if(nexttype=='4'){
+            $.ui.loadContent("#addInfo", false, false, "slide");
+            $("#signownercity").text(data.fromAdr);
+            $("#signcustcity").text(data.endAdr);
+            $("#signconsignno").text(data.sendNo);
+            imgLocation='4';
+            //$("#handoverarticlename").text(localStorage.getItem("articlename"));
+        }
+        else{
             errorPopup('next stup dismiss parm ;error');
         }
 

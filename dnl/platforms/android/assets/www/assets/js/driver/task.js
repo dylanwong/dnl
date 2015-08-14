@@ -145,7 +145,7 @@ function updateTaskPanel(data, prepend) {
         var timeline = '';
         var buttonHtml = "";
 
-        taskTabStatus == 0 ? todoTriFuc = 'taskInfo(this);' : todoTriFuc = 'biddingsignorder(this);';
+        taskTabStatus == 0 ? todoTriFuc = 'taskInfo(this);' : todoTriFuc = 'biddinghandoverorder(this);';
         taskTabStatus == 0 ? buttonHtml = '任务反馈' : buttonHtml = '补录';
        /* $(obj).each(function (index,data) {
             var statusSelStyle10 = "";
