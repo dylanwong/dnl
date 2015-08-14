@@ -514,7 +514,7 @@ data-defer:加载一个html进来
      data-header="chocieordersHeader"
      data-load=""
      data-unload=""
-     data-footer="none">
+     data-footer="chocieordersfooter">
 </div>
 
 <div class="panel "
@@ -522,7 +522,7 @@ data-defer:加载一个html进来
      data-header="deliverordersHeader"
      data-load=""
      data-unload=""
-     data-footer="none">
+     data-footer="deliveryfooter">
 </div>
 
 
@@ -531,7 +531,7 @@ data-defer:加载一个html进来
      data-header="followorderHeader"
      data-load=""
      data-unload=""
-     data-footer="none">
+     data-footer="followerfooter">
 </div>
 
 
@@ -540,14 +540,14 @@ data-defer:加载一个html进来
      data-header="handoverordersHeader"
      data-load=""
      data-unload=""
-     data-footer="none">
+     data-footer="handoverfooter">
 </div>
 <div class="panel "
      title="签收订单" id="signorders" data-defer="assets/panel/driver/signorders.html"
      data-header="signordersHeader"
      data-load=""
      data-unload=""
-     data-footer="none">
+     data-footer="signfooter">
 </div>
 
 <div class="panel "
@@ -571,11 +571,10 @@ data-defer:加载一个html进来
 
 <div class="panel "
      title="补录" id="addInfo" data-defer="assets/panel/driver/addInfo.html"
-
      data-load=""
      data-unload=""
      data-header="allHeader"
-     data-footer="">
+     data-footer="addInfofooter">
 </div>
 
 
@@ -936,6 +935,50 @@ data-defer:加载一个html进来
             onclick="saveGoodQty();"
             class="btn  btn-block">保存</button>
 </footer>
+
+<footer align="center" id="addInfofooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="addInfororder();"
+            class="btn  btn-block">补录确认</button>
+</footer>
+
+<footer align="center" id="deliveryfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="deliveryorder();"
+            class="btn  btn-block">提货确认</button>
+</footer>
+
+<footer align="center" id="followerfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="confirmfolloworder();"
+            class="btn  btn-block">反馈确认</button>
+</footer>
+
+<footer align="center" id="handoverfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="confirmhandoverorder();"
+            class="btn  btn-block">交接确认</button>
+</footer>
+
+<footer align="center" id="signfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="confirmsignorder();"
+            class="btn  btn-block">签收确认</button>
+</footer>
+
+<footer align="center" id="chocieordersfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            id="nextstup"
+            class="btn  btn-block">下一步</button>
+</footer>
+
+
 
 
 

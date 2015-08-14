@@ -270,15 +270,19 @@ function changestatus(status){
         return status;
     }
 }
-function biddingcheckbox(){
-$("#selectAllBtn").click(function() {
-    if (this.checked) {
-        $("input[name='checkbox']").attr('checked', true);
+
+function biddingcheckbox() {
+    //  $(this).click(function () {
+    if ($("input[id=selectAllBtn]").is(':checked') == true) {
+        $("input[name=checkbox]").prop('checked', false);
+        $("input[id=selectAllBtn]").prop('checked', false);
     } else {
-        $("input[name='checkbox']").attr('checked', false);
+        $("input[id=selectAllBtn]").prop('checked', true);
+        $("input[name=checkbox]").prop('checked', true);
+        //  $("input[name=checkbox]").checked = true;
     }
-});
 }
+
 /**跳转到confirm订单页面**/
 function nextstup(nexttype){
     $("input[name=feedback]").each(function() {
@@ -319,6 +323,8 @@ function nextstup(nexttype){
             $("#deliverownercity").text(data.fromAdr);
             $("#delivercustcity").text(data.endAdr);
             $("#deliverconsignno").text(data.sendNo);
+            lOCATIONID = 'currentlocation';
+            getCurrentPositionAddress();
             imgLocation='0';
      //       $("#deliverarticlename").text(localStorage.getItem("articlename"));
         }else if(nexttype=='1'){
@@ -335,6 +341,8 @@ function nextstup(nexttype){
             $("#handoverownercity").text(data.fromAdr);
             $("#handovercustcity").text(data.endAdr);
             $("#handoverconsignno").text(data.sendNo);
+            lOCATIONID = 'currentlocation';
+            getCurrentPositionAddress();
             imgLocation='2';
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }else if(nexttype=='3'){
@@ -342,13 +350,15 @@ function nextstup(nexttype){
             $("#signownercity").text(data.fromAdr);
             $("#signcustcity").text(data.endAdr);
             $("#signconsignno").text(data.sendNo);
+            lOCATIONID = 'currentlocation';
+            getCurrentPositionAddress();
             imgLocation='3';
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }else if(nexttype=='4'){
             $.ui.loadContent("#addInfo", false, false, "slide");
-            $("#signownercity").text(data.fromAdr);
-            $("#signcustcity").text(data.endAdr);
-            $("#signconsignno").text(data.sendNo);
+            $("#addInfoownercity").text(data.fromAdr);
+            $("#addInfocustcity").text(data.endAdr);
+            $("#addInfoconsignno").text(data.sendNo);
             imgLocation='4';
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }

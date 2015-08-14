@@ -36,7 +36,7 @@ function deliveryorder() {
                 orders: localStorage.getItem("chocieorders"),
                 imgurls: fileList,
                 substatus: '',
-                location: '',
+                location: $('#currentlocation').val() ,
                 remarks: $("#deliverremarks").val(),
                 type: '0',
                 plateno: user.obj.plateNo,
@@ -133,7 +133,7 @@ function confirmhandoverorder(){
         orders: localStorage.getItem("chocieorders"),
         imgurls:fileList,
         substatus:'',
-        location:'',
+        location:$('#currentlocation').val(),
         remarks:$('#handoverremarks').val(),
         type:'2',
         tel:user.obj.phone,
@@ -172,7 +172,7 @@ function confirmsignorder(){
             orders: localStorage.getItem("chocieorders"),
             imgurls:fileList,
             substatus:'',
-            location:'',
+            location:$('#currentlocation').val(),
             remarks:$('#handoverremarks').val(),
             type:'4',
             tel:user.obj.phone,
@@ -196,27 +196,89 @@ function confirmsignorder(){
 }
 
 
+/**签收货物确认**/
+function addInfororder(){
+    if($("#addInfooperater").val()==''||$("#addInfooperater")==undefined){
+        errorPopup('请输入补录人');
+    }else if($("#addInforemarks").val() == '' || $("#addInforemarks") == undefined){
+        errorPopup('请输入备注');
+    }else{
+        var chk_value = [];
+        $("img[name=picture]").each(function() {
+            var newfileName=$(this).attr("fileName");
+            //var strings = newfileName.replace("/uploadFiles/temp/", "");
+            chk_value.push(newfileName);
+        });
+
+        var fileList=JSON.stringify(chk_value);
+        var data = JSON.parse(localStorage.getItem("currenttask"));
+        //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
+        var url = baseUrl+"driver/sign_order_status.action";
+        var user = JSON.parse( localStorage.getItem('e_user') );
+        var option = {
+            operator:$('#addInfooperater').val(),
+            enterpriseNo:data.enterpriseNo,
+            deliveryNo:data.deliveryNo,
+            orders: localStorage.getItem("chocieorders"),
+            imgurls:fileList,
+            substatus:'',
+            location:'',
+            remarks:$('#addInforemarks').val(),
+            type:'4',
+            tel:user.obj.phone,
+            status:'90',
+            userName:user.obj.userName,
+            userNo:user.obj.userNo
+        };
+
+        getAjax(url,option,'addorderstatus_result_succ(data)');
+        var signQtyurl = baseUrl+"driver/signQty.action";
+        var goodslist = localStorage.getItem("signQtyItem");
+
+        if (JSON.parse(goodslist).length>0 ){
+            var qtyOptions = {
+                goodslist:goodslist
+            };
+            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
+        }
+        localStorage.removeItem("chocieorders");
+    }
+}
+
 function saveGoodQty(){
 
     var goodslist = new Array();
     var qtyOption;
+    var flag = true;
     $("input[name='signQty']").each(function (){
-        if( $(this).attr('signQty')!=$(this).val() ){
-            qtyOption = {
-                enterpriseNo:$(this).attr('enterpriseNo'),
-                orderNo:$(this).attr('orderNo'),
-                dispatchNo:$(this).attr('dispatchNo'),
-                articleNo:$(this).attr('articleNo'),
-                articleBarcode:$(this).attr('articlebarcode'),
-                signQty:$(this).val()
-            };
-            goodslist.push(qtyOption);
+        if( $(this).attr('signQty')!=$(this).val() ) {
+            if( $(this).val() >= 0){
+                qtyOption = {
+                    enterpriseNo: $(this).attr('enterpriseNo'),
+                    orderNo: $(this).attr('orderNo'),
+                    dispatchNo: $(this).attr('dispatchNo'),
+                    articleNo: $(this).attr('articleNo'),
+                    articleBarcode: $(this).attr('articlebarcode'),
+                    signQty: $(this).val()
+                };
+                goodslist.push(qtyOption);
+            }else{
+                errorPopup('数量应该为正数！');
+                flag = false;
+            }
+        }else {
+
         }
+
     });
     if(goodslist.length>0){
-    localStorage.setItem("signQtyItem",JSON.stringify(goodslist ));
+        localStorage.setItem("signQtyItem",JSON.stringify(goodslist ));
     }
-    $.ui.loadContent('#signorders', false, false, 'slide')
+    if(flag == false){
+        ;
+    }else{
+        $.ui.loadContent('#signorders', false, false, 'slide');
+    }
 }
 function saveGoodQty_result_succ(data){
     localStorage.removeItem("signQty");
@@ -344,20 +406,20 @@ function updategoodlistPanel(datas){
             gooddetail +=
             '<div style="margin-top:5px;"><hr style="margin-left:5px;width:90%;' +
             'margin-top:0px;margin-bottom:5px;border: 0;border-top:1px solid #06ABD4;">'+
-            '</div> <div><div style="float:left;width:100%;height:45px;">'+
+            '</div> <div><div style="float:left;width:100%;height:70px;">'+
             '<span class="f14 fco  p0-6" >产品名称:</span>'+
             '<span class=" f14 fco" >'+data.articleName+'</span><br>'+
-            '<div><div style="float:left;width:50%;">'+
+            '<div style="float:left;width:100%;">'+
             '<span class="f14 fco  p0-6">产品条码:</span>'+
             '<span class=" f14 fco" >'+data.articleBarcode+'</span>'+
-            '</div><div style="float:right;width:50%;">'+
-            '<span class="f14 fco  ">签收数量:</span>'+
+            '</div><br><div style="float:right;width:100%;">'+
+            '<span class="f14 fco  p0-6 ">签收数量:</span>'+
             '<span class=" f14 fco" ><div style="line-height:0px;display:inline-block;" > ' +
-            '<input style="width:50px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
+            '<input style="width:100px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
             ' orderNo="'+data.orderNo+'" ' +
             'articleNo="'+data.articleNo+'" articleBarcode="'+data.articleBarcode+'" ' +
             'dispatchNo="'+data.dispatchNo+'" signQtybak="'+data.signQty+'" name="signQty" value="'+data.signQty+'"></div>'+
-            '</span></div><div style="clear:both;"></div></div></div> </div>';
+            '</span></div><div style="clear:both;"></div></div> </div>';
         });
         // $('#signorderlist').empty();
         $('#goodscontent').append(gooddetail);

@@ -104,8 +104,13 @@ function win_oms(r) {
         }else if(imgLocation=='2'){
             $("#handoverImageFileRow").append(resultimg);
             $("#handoverImageFile").show();
-        }else{
+        }else if(imgLocation=='3'){
+            $("#signImageFileRow").append(resultimg);
+            $("#signImageFile").show();
+        }else if(imgLocation=='4'){
 
+            $("#addImageFileRow").append(resultimg);
+            $("#addImageFile").show();
         }
         errorPopup("上传成功");
      //   $('.thumbs a').touchTouch();
