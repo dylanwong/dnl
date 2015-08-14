@@ -569,6 +569,16 @@ data-defer:加载一个html进来
 </div>
 
 
+<div class="panel "
+     title="补录" id="addInfo" data-defer="assets/panel/driver/addInfo.html"
+
+     data-load=""
+     data-unload=""
+     data-header="allHeader"
+     data-footer="">
+</div>
+
+
 
 
 <!--<div title='首页' id="main" class="panel"  data-defer="http://fatcoder.com/weixin.html"-->
@@ -577,7 +587,7 @@ data-defer:加载一个html进来
 <!--</div>-->
 
 
-</div>
+
 
 
 
@@ -722,7 +732,8 @@ data-defer:加载一个html进来
 </header>
 
 <header id="chocieordersHeader">
-    <a class="headerBack"   onclick="$.ui.loadContent('#operateguide', false, false, 'slide')">
+    <a class="headerBack"  id="optguideHeader"
+      >
         <img src="assets/img/backPage.png" height="32" />
     </a>
     <h1 id="orderTitle" class="">订单选择</h1>
@@ -865,6 +876,10 @@ data-defer:加载一个html进来
 <header id="noneHeader">
 </header>
 
+
+</div>
+
+
 <div id="navbar">
     <a href="#home2" id='nabar_welcome' class='icon icon-home'
        style="height:100%;">首页</a>
@@ -996,19 +1011,6 @@ data-defer:加载一个html进来
         <option value="车辆故障">车辆故障</option>
         <option value="车辆事故">车辆事故</option>
     </select>
-
- <!--   <select id="signremark_select" data-role="none">
-        &lt;!&ndash;<option value="在途正常">在途正常</option>&ndash;&gt;
-        <option value="货物丢失">货物丢失</option>
-        <option value="货物损坏">货物损坏</option>
-        <option value="天气恶劣">天气恶劣</option>
-        <option value="交通堵塞">交通堵塞</option>
-        <option value="车辆故障">车辆故障</option>
-        <option value="车辆事故">车辆事故</option>
-    </select>-->
-    <!--  在途正常,货物丢失,货物损坏,天气恶劣,交通堵塞,车辆故障,车辆事故
-
-    交接正常,货物短少,货物损坏,客户拒收,客户强退,窜货,压车不卸货-->
 
     <select id="signremark_select" data-role="none">
         <option value="正常签收">正常签收</option>

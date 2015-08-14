@@ -134,6 +134,7 @@ function updateTaskPanel(data, flag) {
         if(flag){
             $("#tasklist_ul").empty();
         }
+
         if (data.obj.recordsTotal >= 1 ){
                 var result = template('taskListTemp',data);
                 $("#tasklist_ul").append(result);
@@ -206,43 +207,15 @@ function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,ente
     $('#deliverordersTelButton').attr('href','tel:'+custphone);
     $('#followorderTelButton').attr('href','tel:'+custphone);
     $('#handoverordersTelButton').attr('href','tel:'+custphone);
-    jQuery.ajax({
-        url: taskDeatilqueryUrl,
-        timeout: 20000, //超时X秒
-        dataType: 'jsonp',
-        data:{
-            enterpriseNo : enterpriseno,
-            deliveryNo : deliveryNo
-        }
-    }).done(
-        function (data) {
-            if(data!=null)
-            {
-                if (data.isSucc === false && data.msg !=null && data.msg.indexOf('E0000') != -1 ) {
-                    errorSessionPopup();
-                }
-                else if(data.isSucc === false && data.msg !=null){
-                    var msgText=data.msg.split("-")
-                    errorPopup(msgText[1])
-                }else if(data.isSucc === true){
-                    localStorage.setItem("currenttask",JSON.stringify(data.obj));
-                }
-            }
-        }).fail(function () {
-        }).always(function () {
-            ajaxFlag=true;
-        });
-//    var str={
-//        fromAdr:fromAdr,
-//        endAdr:endAdr,
-//        sendNo:sendNo,
-//        licensePlate:licensePlate,
-//        custphone:custphone,
-//        licensePlate:licensePlate
-//    };
-//    localStorage.setItem("currenttask",JSON.stringify(str));
+    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+        , "setTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
 
+function setTaskCache(data){
+    if(data.isSucc){
+        localStorage.setItem("currenttask",JSON.stringify(data.obj));
+    }
+}
 
 
 //任务
