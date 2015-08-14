@@ -136,8 +136,6 @@ function updateOrderlistPanel(data,flag){
             //result = nullTrace;
         }
         if(flag){
-
-
             $("#orderlist_ul").append(result);
         }else {
             if (data.obj.data.length < (oldmyFilter.length -= 0)) {

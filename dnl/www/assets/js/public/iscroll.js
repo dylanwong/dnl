@@ -304,7 +304,12 @@ function initTaskScroll(){
                 !taskPullUpEl.attr('class').match('flip|loading')){
                 if (this.y > 5) {
                     //下拉刷新效果
-
+                    taskPullDownEl.attr('class',taskPullUpEl['class'])
+                    taskPullDownEl.show();
+                    taskScroll.refresh();
+                    taskPullDownEl.addClass('flip');
+                    taskPullDownL.html('准备刷新...');
+                    taskLoadingStep = 1;
                 }else if (this.y < (this.maxScrollY - 5)) {
                     //上拉刷新效果
                     taskPullUpEl.attr('class',taskPullUpEl['class'])
@@ -324,9 +329,14 @@ function initTaskScroll(){
                     taskPullUpL.html('<img src="assets/img/preloader.gif" ' +
                         'style="padding-right: 10px" />努力加载数据中...');
                     taskLoadingStep = 2;
-                   // getRequestFromOrderListinite();
-                }else if(taskPullDownEl.attr('class').match('flip|loading')){
 
+                    getRequestFromTaskListInit();
+                }else if(taskPullDownEl.attr('class').match('flip|loading')){
+                    taskPullDownEl.removeClass('flip').addClass('loading');
+                    taskPullDownL.html('<img src="assets/img/preloader.gif" style="padding-right: 10px" />努力加载数据中...');
+                    taskLoadingStep = 2;
+
+                    getTaskListPullToRefresh();
                 }
             }
         });
