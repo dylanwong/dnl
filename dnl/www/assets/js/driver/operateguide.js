@@ -21,7 +21,11 @@
 function biddingdeliveryorder(){
 
     $('#chocieordertable').html('');
-    $.ui.loadContent("#chocieorders", false, false, "slide");
+    $('#optguideHeader').unbind('click');
+    $('#optguideHeader').bind('click',function(){
+        $.ui.loadContent("#operateguide", false, false, "slide");
+    });
+   // $.ui.loadContent("#chocieorders", false, false, "slide");
     var data = JSON.parse(localStorage.getItem("currenttask"));
     $("#c_ownercity").text(data.fromAdr);
     $("#c_custcity").text(data.endAdr);
@@ -32,7 +36,11 @@ function biddingdeliveryorder(){
 }
 function biddingfolloworder(){
     $('#chocieordertable').html('');
-    $.ui.loadContent("#chocieorders", false, false, "slide");
+    $('#optguideHeader').unbind('click');
+    $('#optguideHeader').bind('click',function(){
+        $.ui.loadContent("#operateguide", false, false, "slide");
+    });
+   // $.ui.loadContent("#chocieorders", false, false, "slide");
     var data = JSON.parse(localStorage.getItem("currenttask"));
     $("#c_ownercity").text(data.fromAdr);
     $("#c_custcity").text(data.endAdr);
@@ -43,7 +51,11 @@ function biddingfolloworder(){
 }
 function biddinghandoverorder(){
     $('#chocieordertable').html('');
-    $.ui.loadContent("#chocieorders", false, false, "slide");
+    $('#optguideHeader').unbind('click');
+    $('#optguideHeader').bind('click',function(){
+        $.ui.loadContent("#operateguide", false, false, "slide");
+    });
+    //$.ui.loadContent("#chocieorders", false, false, "slide");
     var data = JSON.parse(localStorage.getItem("currenttask"));
     $("#c_ownercity").text(data.fromAdr);
     $("#c_custcity").text(data.endAdr);
@@ -53,23 +65,40 @@ function biddinghandoverorder(){
     queryhandoverchioceorderlist();
 }
 
-function biddingaddInfoorder(elm){
-    localStorage.setItem("currenttask",$(elm).attr('data-task-detail'));
+function biddingaddInfoorder(enterpriseno,deliveryNo){
+    //localStorage.setItem("currenttask",$(elm).attr('data-task-detail'));
     $('#chocieordertable').html('');
-    $.ui.loadContent("#chocieorders", false, false, "slide");
-    var data = JSON.parse(localStorage.getItem("currenttask"));
-    $("#c_ownercity").text(data.fromAdr);
-    $("#c_custcity").text(data.endAdr);
-    $('#c_sendNo').text(data.sendNo);
-    $('#c_licensePlate').text(data.licensePlate);
+    $('#optguideHeader').unbind('click');
+    $('#optguideHeader').bind('click',function(){
+        $.ui.loadContent("#driverboard", false, false, "slide");
+    });
+
+
+   // var data = JSON.parse(localStorage.getItem("currenttask"));
+
     $("#nextstup").attr("onclick","nextstup(4);");
-    queryallchioceorderlist();
+    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+        , "setHistoryTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
+}
+function setHistoryTaskCache(data){
+    if(data.isSucc){
+        localStorage.setItem("currenttask",JSON.stringify(data.obj));
+        $("#c_ownercity").text(data.obj.fromAdr);
+        $("#c_custcity").text(data.obj.endAdr);
+        $('#c_sendNo').text(data.obj.sendNo);
+        $('#c_licensePlate').text(data.obj.licensePlate);
+        queryallchioceorderlist(data.obj);
+    }
 }
 
 function biddingsignorder(){
   //  localStorage.setItem("currenttask",$(elm).attr('data-task-detail'));
     $('#chocieordertable').html('');
-    $.ui.loadContent("#chocieorders", false, false, "slide");
+    $('#optguideHeader').unbind('click');
+    $('#optguideHeader').bind('click',function(){
+        $.ui.loadContent("#operateguide", false, false, "slide");
+    });
+ //   $.ui.loadContent("#chocieorders", false, false, "slide");
     var data = JSON.parse(localStorage.getItem("currenttask"));
     $("#c_ownercity").text(data.fromAdr);
     $("#c_custcity").text(data.endAdr);
@@ -78,7 +107,7 @@ function biddingsignorder(){
     $("#nextstup").attr("onclick","nextstup(3);");
     querysignchioceorderlist();
 }
-function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate){
+function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,enterpriseno,deliveryNo){
 
     $('#chocieordertable').html('');
     $.ui.loadContent("#chocieorders", false, false, "slide");
@@ -86,16 +115,16 @@ function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePl
     $("#c_custcity").text(endAdr);
     $('#c_sendNo').text(sendNo);
     $('#c_licensePlate').text(licensePlate);
-   var str={
-       fromAdr:fromAdr,
-       endAdr:endAdr,
-       sendNo:sendNo,
-       licensePlate:licensePlate,
-       custphone:custphone,
-       licensePlate:licensePlate
-   };
-    localStorage.setItem("currenttask",JSON.stringify(str));
-    $("#nextstup").attr("onclick","nextstup(3);");
+//   var str={
+//       fromAdr:fromAdr,
+//       endAdr:endAdr,
+//       sendNo:sendNo,
+//       licensePlate:licensePlate,
+//       custphone:custphone,
+//       licensePlate:licensePlate
+//   };
+//    localStorage.setItem("currenttask",JSON.stringify(str));
+//    $("#nextstup").attr("onclick","nextstup(3);");
     querysignchioceorderlist();
 }
 function querydeliverchioceorderlist(){
@@ -161,11 +190,11 @@ function querysignchioceorderlist(){
     };
     getAjax(url,option,'queryorders_result_succ(data,3)');
 }
-function queryallchioceorderlist(){
+function queryallchioceorderlist(data){
     $.ui.unblockUI();
     $.ui.showMask("我们正在拼命的加载数据...");
     var url = baseUrl+"order/query_orderbytraceorder.action";
-    var data = JSON.parse(localStorage.getItem("currenttask"));
+    //var data = JSON.parse(localStorage.getItem("currenttask"));
     var option = {
         enterpriseNo:data.enterpriseNo,
         //  systemNo:data.systemNo,
@@ -174,7 +203,7 @@ function queryallchioceorderlist(){
         status:'',
         type:'4'   //补录订单
     };
-    getAjax(url,option,'queryorders_result_succ(data,3)');
+    getAjax(url,option,'queryorders_result_succ(data,4)');
 }
 function queryorders_result_succ(data,type){
 
@@ -184,15 +213,27 @@ function queryorders_result_succ(data,type){
         var trs ='';
         if(obj.length==0&&type=='0'){
             errorPopup('暂无可提取订单!');//trs = "<tr><font style='text-align: center;' >无数据！</font></tr>"
-            $.ui.loadContent("#operateguide", false, false, "slide");
+           // $.ui.loadContent("#operateguide", false, false, "slide");
+            return;
         }else if(obj.length==0&&type=='1'){
             errorPopup('暂无运输中订单!');//trs = "<tr><font style='text-align: center;' >无数据！</font></tr>"
-            $.ui.loadContent("#operateguide", false, false, "slide");
+           // $.ui.loadContent("#operateguide", false, false, "slide");
+            return;
         }else if(obj.length==0&&type=='2'){
             errorPopup('订单已全部交接!');//trs = "<tr><font style='text-align: center;' >无数据！</font></tr>"
-            $.ui.loadContent("#operateguide", false, false, "slide");
+         //   $.ui.loadContent("#operateguide", false, false, "slide");
+            return;
+        }else if(obj.length==0&&type=='3'){
+            errorPopup('订单已全部签收!');//trs = "<tr><font style='text-align: center;' >无数据！</font></tr>"
+            //   $.ui.loadContent("#operateguide", false, false, "slide");
+            return;
+        }else if(obj.length==0&&type=='4'){
+            errorPopup('无可操作订单!');//trs = "<tr><font style='text-align: center;' >无数据！</font></tr>"
+            //   $.ui.loadContent("#operateguide", false, false, "slide");
+            return;
         }
         else{
+        $.ui.loadContent("#chocieorders", false, false, "slide");
         for(var i=0;i<obj.length;i++)
          trs += "<tr><th width='20%'><input type='checkbox' name='checkbox' checked='true' " +
              " style='display:block;' ownerNo='"+obj[i].ownerNo+"' systemNo='"+obj[i].systemNo+"'dispatchNo='"+obj[i].dispatchNo+"' enterpriseNo='"+obj[i].enterpriseNo+"' suborderNo='"+obj[i].suborderNo+"' " +

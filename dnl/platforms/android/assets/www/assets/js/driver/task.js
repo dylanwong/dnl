@@ -258,7 +258,7 @@ function taskInfo(elm)
     $('#handoverordersTelButton').attr('href','tel:'+data.custphone);
 }
 
-function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate)
+function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,enterpriseno,deliveryNo)
 {
 //    $("#ImageFileRow").remove();
 //    $("#followImageFileRow").remove();
@@ -273,17 +273,15 @@ function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate)
     $('#deliverordersTelButton').attr('href','tel:'+custphone);
     $('#followorderTelButton').attr('href','tel:'+custphone);
     $('#handoverordersTelButton').attr('href','tel:'+custphone);
-    var str={
-        fromAdr:fromAdr,
-        endAdr:endAdr,
-        sendNo:sendNo,
-        licensePlate:licensePlate,
-        custphone:custphone,
-        licensePlate:licensePlate
-    };
-    localStorage.setItem("currenttask",JSON.stringify(str));
+    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+        , "setTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
 
+function setTaskCache(data){
+    if(data.isSucc){
+        localStorage.setItem("currenttask",JSON.stringify(data.obj));
+    }
+}
 
 
 //任务
