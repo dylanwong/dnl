@@ -42,6 +42,7 @@ var querySingleOrderUrl = baseUrl +"order/querySingleorder.action";
 var searchTraceUrl = baseUrl+"order/query_deliverordertrace.action";
 var choicedeliverOrdersUrl = baseUrl+"order/query_deliverorderlist.action";
 var taskqueryUrl = baseUrl+"order/query_deliverorderlistfordirver.action";
+var taskDeatilqueryUrl = baseUrl+"order/query_delivery_deatil.action";
 var queryTaskUrl = baseUrl+"order/query_deliverorderlistfordirver.action";
 var goodSearchUrl = baseUrl+"order/query_goodslist.action";
 var ordercount = baseUrl +"order/order_count.action";
@@ -59,6 +60,7 @@ var updateSelfInfoUrl = baseUrl + "base/updateSelfInfo.action";
 var queryAdList = baseUrl + "base/query_ad_Version.action";
 var choiceOwnerAddrUrl = baseUrl + "order/queryOwnerAddr.action";
 var choiceCustAddrUrl = baseUrl + "order/queryCustAddr.action";
+
 //event target ID
 var ETID = null;
 //选中的任务ID

@@ -258,7 +258,7 @@ function taskInfo(elm)
     $('#handoverordersTelButton').attr('href','tel:'+data.custphone);
 }
 
-function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate)
+function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,enterpriseno,deliveryNo)
 {
 //    $("#ImageFileRow").remove();
 //    $("#followImageFileRow").remove();
@@ -273,15 +273,41 @@ function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate)
     $('#deliverordersTelButton').attr('href','tel:'+custphone);
     $('#followorderTelButton').attr('href','tel:'+custphone);
     $('#handoverordersTelButton').attr('href','tel:'+custphone);
-    var str={
-        fromAdr:fromAdr,
-        endAdr:endAdr,
-        sendNo:sendNo,
-        licensePlate:licensePlate,
-        custphone:custphone,
-        licensePlate:licensePlate
-    };
-    localStorage.setItem("currenttask",JSON.stringify(str));
+    jQuery.ajax({
+        url: taskDeatilqueryUrl,
+        timeout: 20000, //超时X秒
+        dataType: 'jsonp',
+        data:{
+            enterpriseNo : enterpriseno,
+            deliveryNo : deliveryNo
+        }
+    }).done(
+        function (data) {
+            if(data!=null)
+            {
+                if (data.isSucc === false && data.msg !=null && data.msg.indexOf('E0000') != -1 ) {
+                    errorSessionPopup();
+                }
+                else if(data.isSucc === false && data.msg !=null){
+                    var msgText=data.msg.split("-")
+                    errorPopup(msgText[1])
+                }else if(data.isSucc === true){
+                    localStorage.setItem("currenttask",JSON.stringify(data.obj));
+                }
+            }
+        }).fail(function () {
+        }).always(function () {
+            ajaxFlag=true;
+        });
+//    var str={
+//        fromAdr:fromAdr,
+//        endAdr:endAdr,
+//        sendNo:sendNo,
+//        licensePlate:licensePlate,
+//        custphone:custphone,
+//        licensePlate:licensePlate
+//    };
+//    localStorage.setItem("currenttask",JSON.stringify(str));
 }
 
 

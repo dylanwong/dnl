@@ -78,7 +78,7 @@ function biddingsignorder(){
     $("#nextstup").attr("onclick","nextstup(3);");
     querysignchioceorderlist();
 }
-function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate){
+function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,enterpriseno,deliveryNo){
 
     $('#chocieordertable').html('');
     $.ui.loadContent("#chocieorders", false, false, "slide");
@@ -86,16 +86,42 @@ function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePl
     $("#c_custcity").text(endAdr);
     $('#c_sendNo').text(sendNo);
     $('#c_licensePlate').text(licensePlate);
-   var str={
-       fromAdr:fromAdr,
-       endAdr:endAdr,
-       sendNo:sendNo,
-       licensePlate:licensePlate,
-       custphone:custphone,
-       licensePlate:licensePlate
-   };
-    localStorage.setItem("currenttask",JSON.stringify(str));
-    $("#nextstup").attr("onclick","nextstup(3);");
+    jQuery.ajax({
+        url: taskDeatilqueryUrl,
+        timeout: 20000, //超时X秒
+        dataType: 'jsonp',
+        data:{
+            enterpriseNo : enterpriseno,
+            deliveryNo : deliveryNo
+        }
+    }).done(
+        function (data) {
+            if(data!=null)
+            {
+                if (data.isSucc === false && data.msg !=null && data.msg.indexOf('E0000') != -1 ) {
+                    errorSessionPopup();
+                }
+                else if(data.isSucc === false && data.msg !=null){
+                    var msgText=data.msg.split("-")
+                    errorPopup(msgText[1])
+                }else if(data.isSucc === true){
+                    localStorage.setItem("currenttask",JSON.stringify(data.obj));
+                }
+            }
+        }).fail(function () {
+        }).always(function () {
+            ajaxFlag=true;
+        });
+//   var str={
+//       fromAdr:fromAdr,
+//       endAdr:endAdr,
+//       sendNo:sendNo,
+//       licensePlate:licensePlate,
+//       custphone:custphone,
+//       licensePlate:licensePlate
+//   };
+//    localStorage.setItem("currenttask",JSON.stringify(str));
+//    $("#nextstup").attr("onclick","nextstup(3);");
     querysignchioceorderlist();
 }
 function querydeliverchioceorderlist(){
