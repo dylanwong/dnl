@@ -107,26 +107,7 @@ function biddingsignorder(){
     $("#nextstup").attr("onclick","nextstup(3);");
     querysignchioceorderlist();
 }
-function biddingsignorder(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,enterpriseno,deliveryNo){
 
-    $('#chocieordertable').html('');
-    $.ui.loadContent("#chocieorders", false, false, "slide");
-    $("#c_ownercity").text(fromAdr);
-    $("#c_custcity").text(endAdr);
-    $('#c_sendNo').text(sendNo);
-    $('#c_licensePlate').text(licensePlate);
-//   var str={
-//       fromAdr:fromAdr,
-//       endAdr:endAdr,
-//       sendNo:sendNo,
-//       licensePlate:licensePlate,
-//       custphone:custphone,
-//       licensePlate:licensePlate
-//   };
-//    localStorage.setItem("currenttask",JSON.stringify(str));
-//    $("#nextstup").attr("onclick","nextstup(3);");
-    querysignchioceorderlist();
-}
 function querydeliverchioceorderlist(){
     $.ui.unblockUI();
     $.ui.showMask("我们正在拼命的加载数据...");
