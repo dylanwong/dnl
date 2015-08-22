@@ -80,15 +80,17 @@ function initTraceInfo2(){
 
     $('#custAddr_d').html(data.custAddr);
     $('#custName_d').html(data.custName);
-    $('#custContacts_d').html(data.custContacts+'  '+data.custPhone);
+    $('#custContacts_d').html(data.custContacts);
+    $('#custPhone_d').html(data.custPhone.trim());
    // $('#addrName_d').html(data.addrName);
     $('#ownerPhone_d').attr('href',"tel:'"+data.ownerPhone+"'");
     $('#custPhone_d').attr('href',"tel:'"+data.custPhone+"'");
+    $('#shipPhone_d').attr('href',"tel:'"+data.shipperPhone+"'");
    // $('#custPhone_d').html("<a href='tel:"+data.custPhone+"'></a>");
     $('#ownerName_d').html(data.ownerName);
     $('#ownerAddr_d').html(data.ownerAddr);
-    $('#ownerContacts_d').html(data.ownerContacts+'  '+data.ownerPhone);
-
+    $('#ownerContacts_d').html(data.ownerContacts.trim());
+    $('#ownerPhone_d').html(data.ownerPhone.trim());
 
     $('#status_d').html( showstatus(data.status) );
     if( data.status == '90' ){
@@ -533,7 +535,7 @@ function queryEvalute(){
 
 function updateEvalute(datas){
     var evaluteResult = '';
-    var cuser = JSON.parse(localStorage.getItem("e_user"));
+    var cuser = JSON.parse(localStorage.getItem(USER_SESSION));
     $('#reviewsItem1').empty();
     $('#reviewsItem2').empty();
     $('#reviewsItem3').empty();
@@ -706,7 +708,7 @@ function showStar(star){
 
 function saveReply(){
     var data = JSON.parse(localStorage.getItem("currentorder"));
-    var cuser = JSON.parse(localStorage.getItem("e_user"));
+    var cuser = JSON.parse(localStorage.getItem(USER_SESSION));
     var savereplyUrl = baseUrl + 'order/submit_evaluate_reply.action';
     if( $('#reply_Info').val() !='' && $('#reply_Info').val() != undefined ){
         getAjax(savereplyUrl, {'enterpriseNo':data.enterpriseNo, 'systemNo':data.systemNo,
@@ -722,7 +724,7 @@ function saveReply(){
 function saveEvalute(){
     var saveevaluteUrl = baseUrl + 'order/submit_evaluate.action';
     var data = JSON.parse(localStorage.getItem("currentorder"));
-    var cuser = JSON.parse(localStorage.getItem("e_user"));
+    var cuser = JSON.parse(localStorage.getItem(USER_SESSION));
     var savereplyUrl = 'order/submit_evaluate_reply.action';
   /*  enterpriseNo, systemNo,
         dispatchNo, ownerNo, reviewsItem1, reviewsItem2,

@@ -21,7 +21,7 @@ $(document).ready(function(){
     }
 
 
-//    if(localStorage.getItem("e_user")){
+//    if(localStorage.getItem(USER_SESSION)){
 //        setCacheData("myFilter",mergeJson(JSON.parse(localStorage.getItem("myFilter")),{'start':'1'},true),true);
 //        getAjax(queryMyOrderList,JSON.parse(localStorage.getItem("myFilter")),"setCacheData('myList',data,false)");
 //    }else{
@@ -195,14 +195,41 @@ $.ui.ready(function(){
                 //$("#followremark_select option[value='3']").remove();
                 // followremark_select
                 $("#followremark_select1").css('display','none');
-
+                $("#followremark_select2").attr('data-selete',
+                    "");
+                //$("#followremark_select2").unbind("click");
             }else if(v=='异常反馈'){
                 $("#followremarks").val('');
                 $("#followremark_select1").show();
+                $("#followremark_select2").attr('data-selete',
+                    "followremark_select");
+                //initfollowremarkSelect();
             }
 
         }
     });
+    function initfollowremarkSelect(){
+        jQuery('#followremark_select').mobiscroll().select({
+            theme: "android-ics light",     // Specify theme like: theme: 'ios' or omit setting to use default
+            mode: "mixed",       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
+            display: "bottom", // Specify display mode like: display: 'bottom' or omit setting to use default
+            lang: "zh"      ,  // Specify language like: lang: 'pl' or omit setting to use default
+            onBeforeShow: function (html, inst) {
+            },
+            onShow: function () {
+
+            },
+            onClose: function () {
+
+            },
+            onCancel: function () {
+
+            },
+            onSelect: function (v, inst) {
+                $("#followremarks").val(v);
+            }
+        });
+    }
     jQuery('#handoverremark_select').mobiscroll().select({
         theme: "android-ics light",     // Specify theme like: theme: 'ios' or omit setting to use default
         mode: "mixed",       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
@@ -591,7 +618,7 @@ $.ui.ready(function(){
 function getAjax(ajaxURL,option,successFunction,failFunction){
     console.log("getAjax")
 
-    var user = localStorage.getItem('e_user');
+    var user = localStorage.getItem(USER_SESSION);
     var args = option ;
     if(user!=null)
     {
@@ -741,7 +768,10 @@ function getCurrentPositionAddressSuccess(position) {
     }
     console.info('option '+option.latitude+''+option.longitude);
     $("#" + lOCATIONID).attr('latitude',option.latitude);
+
     $("#" + lOCATIONID).attr('longitude',option.longitude);
+    localStorage.setItem('latitude',JSON.stringify(option.latitude));
+    localStorage.setItem('longitude',JSON.stringify(option.longitude));
     console.info('URL '+url);
     getAjax(url, option, 'getCurrentPositionAddressSuccessSucc(data)'
         , 'getCurrentPositionAddressSuccessError()');
@@ -890,13 +920,13 @@ function setCacheData(key,value,ever){
 }
 
 function getUserNo(){
-    return JSON.parse(localStorage.getItem("e_user")).obj.userNo ;
+    return JSON.parse(localStorage.getItem(USER_SESSION)).obj.userNo ;
 }
 function getEnterpriseNo(){
-    return JSON.parse(localStorage.getItem("e_user")).obj.enterpriseNo ;
+    return JSON.parse(localStorage.getItem(USER_SESSION)).obj.enterpriseNo ;
 }
 function getUserTypeFromsession(){
-    return JSON.parse(localStorage.getItem("e_user")).obj.userType ;
+    return JSON.parse(localStorage.getItem(USER_SESSION)).obj.userType ;
 }
 function mergeJson(jsonbject1, jsonbject2,needString)
 {

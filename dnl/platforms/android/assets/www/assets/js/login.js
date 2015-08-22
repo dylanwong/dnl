@@ -49,7 +49,7 @@ function save_login_succ(data)
         setCacheData("myFilter",mergeJson(JSON.parse(localStorage.getItem("myFilter")),filter,true),true);
         setCacheData("locationFilter",mergeJson(JSON.parse(localStorage.getItem("locationFilter")),filter,true),true);
         isLogin = true;
-        setCacheData('e_user',data,1);
+        setCacheData(USER_SESSION,data,1);
         loginStatus = 1;
         roleID = data.obj.userType;
         visitor=false;
@@ -97,7 +97,7 @@ function logoutSucc()
 {
     var url = baseUrl + "account/logout.action";
     loginStatus = 0;
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var userNo = user.obj.userNo;
     var deviceNo = getDeviceNo();
     var os = getOs();
@@ -108,7 +108,7 @@ function logoutSucc()
     };
     getAjax(url,option);
     bing_login_dom_data();
-    localStorage.removeItem('e_user');
+    localStorage.removeItem(USER_SESSION);
     sessionStorage.removeItem("mainList");
     sessionStorage.removeItem("myList");
     localStorage.removeItem("searchFilter");
@@ -229,18 +229,18 @@ function updatePwdsucc(data)
 function updatePwd(){
     var oldPwd = $('#oldPwd').val();
     var newPwd = $('#newPwd').val();
-    if(oldPwd.trim().length<6 || oldPwd.trim().length>15)
+    if(oldPwd.trim().length<1 || oldPwd.trim().length>15)
     {
-        errorPopup('请填写合法的原密码(6-15英文数字)!');
+        errorPopup('请填写合法的原密码(1-15英文数字)!');
         return;
     }
-    if(newPwd.trim().length<6 || newPwd.trim().length>15)
+    if(newPwd.trim().length<1 || newPwd.trim().length>15)
     {
-        errorPopup('请填写合法的原密码(6-15英文数字)!');
+        errorPopup('请填写合法的新密码(6-15英文数字)!');
         return;
     }
     var url = baseUrl + "account/updatePwdLogin.action";
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var option =
     {
         userNo:user.obj.userNo,
@@ -255,7 +255,7 @@ function updatePwdLoginsucc(data){
     if( data.isSucc ){
         if( data.msg.split("-")[0] == 'S0001' ){
             errorPopup(data.msg.split("-")[1]);
-            localStorage.removeItem('e_user');
+            localStorage.removeItem(USER_SESSION);
             login_panel();
             $('#oldPwd').val('');
             $('#newPwd').val('');

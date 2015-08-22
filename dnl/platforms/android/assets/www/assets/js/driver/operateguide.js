@@ -27,6 +27,7 @@ function biddingdeliveryorder(){
     });
    // $.ui.loadContent("#chocieorders", false, false, "slide");
     var data = JSON.parse(localStorage.getItem("currenttask"));
+ //   alert(data.fromAdr);
     $("#c_ownercity").text(data.fromAdr);
     $("#c_custcity").text(data.endAdr);
     $('#c_sendNo').text(data.sendNo);
@@ -113,7 +114,7 @@ function querydeliverchioceorderlist(){
     $.ui.showMask("我们正在拼命的加载数据...");
     var data = JSON.parse(localStorage.getItem("currenttask"));
     var url = baseUrl+"order/query_orderbytraceorder.action";
-    var user = JSON.parse( localStorage.getItem('e_user') );
+    var user = JSON.parse( localStorage.getItem(USER_SESSION) );
     var option = {
         enterpriseNo:data.enterpriseNo,
         /*systemNo:data.systemNo,
@@ -290,7 +291,8 @@ function nextstup(nexttype){
         $(this).text("");
     });
     $("img[ownlocation='feedbackimg']").remove();
-
+    localStorage.removeItem('latitude');
+    localStorage.removeItem('longitude');
     if( $("input[name=checkbox]:checked").length>0)  {
         var ordernos = new Array();
         $("input[name='checkbox']:checkbox:checked")

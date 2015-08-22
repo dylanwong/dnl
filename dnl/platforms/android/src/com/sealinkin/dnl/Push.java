@@ -5,7 +5,7 @@ import android.app.Application;
 import com.avos.avoscloud.AVAnalytics;
 import com.avos.avoscloud.AVOSCloud;
 
-public class Push extends Application {
+public class PUSH extends Application {
 
 	  @Override
 	  public void onCreate() {

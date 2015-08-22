@@ -5,7 +5,7 @@
 //初始化我的界面
 //function init_mine(){
 //
-//    var user = JSON.parse( localStorage.getItem('e_user') );
+//    var user = JSON.parse( localStorage.getItem(USER_SESSION) );
 //    if(user!=null){
 //        $('#user_img').attr('src','assets/img/person.png');
 //        $('#user_img').attr('onclick','');
@@ -34,7 +34,7 @@ function hideQrDiv() {
 
 
 function initselfInfo(){
-    var user = JSON.parse(localStorage.getItem('e_user'))
+    var user = JSON.parse(localStorage.getItem(USER_SESSION))
     if( user == null ){
 
     }else{
@@ -55,6 +55,8 @@ function initselfInfo(){
             $('#s_userType').val('货主');
         } else if ( user.obj.userType == '2') {
             $('#s_userType').val('货主客户');
+        } else if ( user.obj.userType == '3') {
+            $('#s_userType').val('司机');
         }
 
         $('#s_phone').val(user.obj.phone);
@@ -66,7 +68,7 @@ function initselfInfo(){
 
 
 function updateSelfInfo(){
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
 
     if ( $("#s_phone").val()!='' && !$("#s_phone").val().match(/^(((13[0-9]{1})|159|153)+\d{8})$/)) {
         errorPopup("手机号码格式不正确！");
@@ -88,11 +90,11 @@ function updateSelfInfo(){
 function updateSelfInfoSucc(data){
     if ( data.isSucc ){
         toastrTip('','修改个人信息成功！','success');
-        var user = JSON.parse(localStorage.getItem('e_user'));
+        var user = JSON.parse(localStorage.getItem(USER_SESSION));
         user.obj.userCName = $('#s_userCName').val();
         user.obj.phone = $('#s_phone').val();
         user.obj.email = $('#s_email').val();
-        localStorage.setItem('e_user', JSON.stringify(user) );
+        localStorage.setItem(USER_SESSION, JSON.stringify(user) );
         $.ui.goBack();
     }
 }

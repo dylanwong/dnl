@@ -23,11 +23,12 @@ var searchFlag = 0;//0     1为首页查询条件
 //var queryOrderList=baseUrl+"order/query_deliverorderlistfordirver.action";
 var omsUrl="http://192.168.16.98:8080/fileserver/struts_uploadReturnUrl.action";
 
-var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
+var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
+//var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-var baseUrl = "http://192.168.16.96:8080/daonala_mobile/";
-
+//var baseUrl = "http://192.168.16.108:8080/daonala_mobile/";
+var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
 
 
@@ -88,7 +89,7 @@ var scrollFlag =0; //回到最上面
 // 全局变量已经在原生里面就赋值好了———— EX:【window.OSInfo={os:'iOS',push:'xxxx'}】
 var swiper;
 var IMG_COUNT = 0;
-
+var USER_SESSION = "DNL_USER";
 document.addEventListener("deviceready", onDeviceReadySettingEvents, false);
 
 function onDeviceReadySettingEvents() {
@@ -123,7 +124,7 @@ function toTestPage(){
 }
 
 function init_homepage(){
-    var user =  localStorage.getItem('e_user');
+    var user =  localStorage.getItem(USER_SESSION);
     user = JSON.parse(user);
     if(user==null)
     {
@@ -162,13 +163,14 @@ function init_homepage(){
             $('#boardPanel').bind('click',function(){
                 logisticboard_panel(); //绑定物流看板
             });
+            $('#boardPanelText').html('订单');
         }else if(user.obj.userType=='1'){
 
             $('#boardPanel').unbind('click');
             $('#boardPanel').bind('click',function(){
                 ownerboard_panel();
             });
-
+            $('#boardPanelText').html('订单');
 //            $('#myFirstboard').unbind('click');
 //            $('#myFirstboard').bind('click',function(){
 //                addorder_panel();
@@ -179,6 +181,7 @@ function init_homepage(){
             $('#boardPanel').bind('click',function(){
                 custboard_panel();
             });
+            $('#boardPanelText').html('订单');
 //            $('#myboard').attr('statusType','0');
 //            $('#myboardText').html('看板');
 //

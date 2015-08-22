@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>e订单</title>
+    <title>到哪啦</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -76,7 +76,7 @@
     <br>
     <br><br>
     <br>
-    e订单
+    到哪啦
     <br>
     <br>    <span class='ui-icon ui-icon-loading spin'></span>
     <h1>正在加载应用..</h1>
@@ -123,8 +123,8 @@ data-defer:加载一个html进来
 </div>
 
 <div class="panel p0"
-     title="地图" id="map" data-defer="assets/panel/setup/map.html"
-     data-load="init_map"
+     title="" id="map" data-defer="assets/panel/setup/map.html"
+     data-load=""
      data-header=""
      data-unload=""
      data-tab=""
@@ -555,7 +555,7 @@ data-defer:加载一个html进来
 
      data-load=""
      data-unload=""
-     data-header="allHeader"
+     data-header="signorderslistHeader"
      data-footer="none">
 </div>
 
@@ -592,7 +592,8 @@ data-defer:加载一个html进来
 
 <header id="homeHeader" style="background-color:#06ABD4;">
     <div style="width:100%;height:100%;" align="center">
-        <img src="assets/img/home/home-header-logo.png"
+      <!--  <img src="assets/img/home/home-header-logo.png"-->
+        <img src="assets/img/logo.png"
                 style="position:absolute;top: 50%;
   left: 50%; -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);"/>
@@ -748,6 +749,13 @@ data-defer:加载一个html进来
     <div><a style="margin-right: 0px;" class="searchButton" id='odoInfoTelButton' href="tel:" >联系客服</a></div>
 </header>
 
+<header id="signorderslistHeader">
+    <a  class="headerBack" onclick="$.ui.goBack()"  >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>
+    <h1 id="signorderslistTitle" class="">选择订单</h1>
+    <div></div>
+</header>
 <header id="deliverordersHeader">
     <a class="headerBack"  onclick="$.ui.loadContent('#operateguide', false, false, 'slide')" >
         <img src="assets/img/backPage.png" height="32" />
@@ -1054,6 +1062,12 @@ data-defer:加载一个html进来
         <option value="车辆故障">车辆故障</option>
         <option value="车辆事故">车辆事故</option>
     </select>
+
+    <select id="handoverremark_select" data-role="none">
+        <option value="交接顺利">交接顺利</option>
+        <option value="交接异常">交接异常</option>
+    </select>
+
 
     <select id="signremark_select" data-role="none">
         <option value="正常签收">正常签收</option>

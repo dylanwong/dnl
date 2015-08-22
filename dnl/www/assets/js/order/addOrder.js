@@ -7,7 +7,7 @@ function searchOwnerAddr(){
     $('#choiceOwnerOrCust_ul').empty();
     //$.ui.loadContent("#chocieOwner", false, false, "slide");
     var choiceOwnerAddrUrl = baseUrl + "order/queryOwnerAddr.action";
-    var user = JSON.parse(localStorage.getItem("e_user"));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var option ;
     if(user.obj.userType==1){
         option = { start:1,
@@ -34,7 +34,7 @@ function searchCustAddr(){
     $('#choiceCust_ul').empty();
     //$.ui.loadContent("#chocieOwner", false, false, "slide");
     var choiceOwnerAddrUrl = baseUrl + "order/queryCustAddr.action";
-    var user = JSON.parse(localStorage.getItem("e_user"));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var option ;
     if(user.obj.userType==1){
         option = {
@@ -66,7 +66,7 @@ function choiceOwnerAddr(){
     $.ui.loadContent("#chocieOwner", false, false, "slide");
 
     scrollFlag =0;
-    var user = JSON.parse(localStorage.getItem("e_user"));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var option ;
 //    if(user.obj.userType==1){
 //        option = {
@@ -100,7 +100,7 @@ function choiceCustAddr(){
     $('#searchCustAddrText').val('');
     scrollFlag =0;
 
-    var user = JSON.parse(localStorage.getItem("e_user"));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var option ;
     var owners = JSON.parse(localStorage.getItem("ownerInfo"));
     if(user.obj.userType==1){
@@ -384,7 +384,7 @@ function saveOrUpdate() {
     var ownerAlias_Temp = '';
     var custer_Temp = '';
     var custerAlias_Temp = '';
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var owner = JSON.parse(localStorage.getItem('ownerInfo'));
     if( user.obj.userType == '1'){
         ownerNo_Temp = user.obj.ownerNo;
@@ -482,7 +482,7 @@ function saveOrUpdate() {
             transOrderM : JSON.stringify(transOrderM),
             transOrderD : JSON.stringify(transOrderD),
             status : saveOrUpdateFlag,
-            userName :JSON.parse(localStorage.getItem('e_user')).obj.userName
+            userName :JSON.parse(localStorage.getItem(USER_SESSION)).obj.userName
         };
         saveOrder(param);
         // 修改
@@ -616,7 +616,7 @@ function backToOwnerAddOrderPage(){
 
             var ownerAlias_Temp = '';
 
-            var user = JSON.parse(localStorage.getItem('e_user'));
+            var user = JSON.parse(localStorage.getItem(USER_SESSION));
             var owner = JSON.parse(localStorage.getItem('ownerInfo'));
             if( user.obj.userType == '1'){
                 ownerNo_Temp = user.obj.ownerNo;

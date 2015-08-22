@@ -24,15 +24,17 @@ function deliveryorder() {
              ordernos.push(strings);
              });
              var fileList=JSON.stringify(ordernos);*/
-
+            var latitude = JSON.parse(localStorage.getItem('latitude'));
+            var longitude = JSON.parse(localStorage.getItem('longitude'));
 
             var data = JSON.parse(localStorage.getItem("currenttask"));
             var url = baseUrl + "driver/update_trace_status.action";
-            var user = JSON.parse(localStorage.getItem('e_user'));
+            var user = JSON.parse(localStorage.getItem(USER_SESSION));
             var option = {
-                operator: $("#deliveroperater").val(),
+                operater: $("#deliveroperater").val(),
                 enterpriseNo: data.enterpriseNo,
                 deliveryNo: data.deliveryNo,
+                sendNo:data.sendNo,
                 orders: localStorage.getItem("chocieorders"),
                 imgurls: fileList,
                 substatus: '',
@@ -43,7 +45,9 @@ function deliveryorder() {
                 tel: user.obj.phone,
                 status: '40',
                 userNo:user.obj.userNo,
-                userName: user.obj.userName
+                userName: user.obj.userName,
+                latitude:latitude,
+                longitude:longitude
             };
 //        enterpriseNo,
 //            deliverNo, orders, imgurls, remarks, operater, userName,
@@ -84,20 +88,23 @@ function confirmfolloworder(){
 
         var data = JSON.parse(localStorage.getItem("currenttask"));
         var url = baseUrl + "driver/update_trace_status.action";
-        var user = JSON.parse(localStorage.getItem('e_user'));
+        var user = JSON.parse(localStorage.getItem(USER_SESSION));
         var option = {
-            operator: '',
+            operater: '',
             enterpriseno: data.enterpriseNo,
             deliveryNo: data.deliveryNo,
+            sendNo:data.sendNo,
             orders: localStorage.getItem("chocieorders"),
             imgurls: fileList,
-            substatus: substatus,
+            subStatus: substatus,
             location: $('#currentlocation').val(),
             remarks: $('#followremarks').val(),
             type: '1',
             status: '70',
             userName: user.obj.userName,
-            userNo: user.obj.userNo
+            userNo: user.obj.userNo,
+            latitude:$('#currentlocation').attr('latitude'),
+            longitude:$('#currentlocation').attr('longitude')
         };
         getAjax(url, option, 'addorderstatus_result_succ(data)');
         localStorage.removeItem("chocieorders");
@@ -120,16 +127,18 @@ function confirmhandoverorder(){
         //var strings = newfileName.replace("/uploadFiles/temp/", "");
         chk_value.push(newfileName);
     });
-
+    var latitude = JSON.parse(localStorage.getItem('latitude'));
+    var longitude = JSON.parse(localStorage.getItem('longitude'));
     var fileList=JSON.stringify(chk_value);
     var data = JSON.parse(localStorage.getItem("currenttask"));
     //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
     var url = baseUrl+"driver/update_trace_status.action";
-    var user = JSON.parse( localStorage.getItem('e_user') );
+    var user = JSON.parse( localStorage.getItem(USER_SESSION) );
     var option = {
-        operator:$('#handoveroperater').val(),
+        operater:$('#handoveroperater').val(),
         enterpriseNo:data.enterpriseNo,
         deliveryNo:data.deliveryNo,
+        sendNo:data.sendNo,
         orders: localStorage.getItem("chocieorders"),
         imgurls:fileList,
         substatus:'',
@@ -139,7 +148,9 @@ function confirmhandoverorder(){
         tel:user.obj.phone,
         status:'80',
         userName:user.obj.userName,
-        userNo:user.obj.userNo
+        userNo:user.obj.userNo,
+        latitude:latitude,
+        longitude:longitude
     };
     getAjax(url,option,'addorderstatus_result_succ(data)');
    /* localStorage.removeItem("chocieorders");*/
@@ -159,16 +170,18 @@ function confirmsignorder(){
             //var strings = newfileName.replace("/uploadFiles/temp/", "");
             chk_value.push(newfileName);
         });
-
+        var latitude = JSON.parse(localStorage.getItem('latitude'));
+        var longitude = JSON.parse(localStorage.getItem('longitude'));
         var fileList=JSON.stringify(chk_value);
         var data = JSON.parse(localStorage.getItem("currenttask"));
         //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
         var url = baseUrl+"driver/sign_order_status.action";
-        var user = JSON.parse( localStorage.getItem('e_user') );
+        var user = JSON.parse( localStorage.getItem(USER_SESSION) );
         var option = {
-            operator:$('#signoperater').val(),
+            operater:$('#signoperater').val(),
             enterpriseNo:data.enterpriseNo,
             deliveryNo:data.deliveryNo,
+            sendNo:data.sendNo,
             orders: localStorage.getItem("chocieorders"),
             imgurls:fileList,
             substatus:'',
@@ -178,7 +191,9 @@ function confirmsignorder(){
             tel:user.obj.phone,
             status:'90',
             userName:user.obj.userName,
-            userNo:user.obj.userNo
+            userNo:user.obj.userNo,
+            latitude:latitude,
+            longitude:longitude
         };
 
         getAjax(url,option,'addorderstatus_result_succ(data)');
@@ -212,11 +227,13 @@ function addInfororder(){
 
         var fileList=JSON.stringify(chk_value);
         var data = JSON.parse(localStorage.getItem("currenttask"));
+        var latitude = JSON.parse(localStorage.getItem('latitude'));
+        var longitude = JSON.parse(localStorage.getItem('longitude'));
         //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
         var url = baseUrl+"driver/sign_order_status.action";
-        var user = JSON.parse( localStorage.getItem('e_user') );
+        var user = JSON.parse( localStorage.getItem(USER_SESSION) );
         var option = {
-            operator:$('#addInfooperater').val(),
+            operater:$('#addInfooperater').val(),
             enterpriseNo:data.enterpriseNo,
             deliveryNo:data.deliveryNo,
             orders: localStorage.getItem("chocieorders"),
@@ -228,7 +245,9 @@ function addInfororder(){
             tel:user.obj.phone,
             status:'90',
             userName:user.obj.userName,
-            userNo:user.obj.userNo
+            userNo:user.obj.userNo,
+            latitude:'',
+            longitude:''
         };
 
         getAjax(url,option,'addorderstatus_result_succ(data)');
@@ -245,13 +264,38 @@ function addInfororder(){
     }
 }
 
+//< parseInt( $(elm).parent().next().attr('signqtybak'))
+function minusValue(elm) {
+    try{
+
+    if (parseInt( $(elm).parent().next().val() ) > 0 ) {
+        $(elm).parent().next().attr('value',parseInt( $(elm).parent().next().val() )-1) ;
+    } else {
+        $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
+    }
+    }catch(e){
+        $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
+    }
+
+}
+function plusValue(elm) {
+    try{
+        if (parseInt( $(elm).parent().prev().val() ) >= 0 ) {
+            $(elm).parent().prev().attr('value',parseInt($(elm).parent().prev().val()) + 1);
+        } else {
+            $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+        }
+    }catch(e){
+        $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+    }
+}
 function saveGoodQty(){
 
     var goodslist = new Array();
     var qtyOption;
     var flag = true;
     $("input[name='signQty']").each(function (){
-        if( $(this).attr('signQty')!=$(this).val() ) {
+        if( $(this).attr('signqtybak')!=$(this).val() ) {
             if( $(this).val() >= 0){
                 qtyOption = {
                     enterpriseNo: $(this).attr('enterpriseNo'),
@@ -315,7 +359,7 @@ function queryDetailList(){
     $('#signorderlist').empty();
    if(datas.length>1){
    $(datas).each(function (index,data) {
-       detail_list =+ '<li href="#" onclick="querygoodlist(this);"  '
+       detail = '<li href="#" onclick="querygoodlist(this);"  '
            +'enterpriseno="'+data.enterpriseNo+'" dispatchno="'+data.dispatchNo+'"  class="f2" style="margin-top:4px;">'+
            '<div class="f2" style="height: 100px;margin-top:14px;">'+
            '<div class="" style="float:left;width: 90%;margin-top:14px;">'+
@@ -331,6 +375,7 @@ function queryDetailList(){
            '<div align="center" style="">'+
            '<img style="width:16px;height: 16px;" src="assets/img/right.png" />'+
            '</div></div></div><div style="clear:both;"></div></div></li>';
+       detail_list += detail;
    });
   // $('#signorderlist').empty();
    $('#signorderlist').append(detail_list);
@@ -415,16 +460,22 @@ function updategoodlistPanel(datas){
             '</div><br><div style="float:right;width:100%;">'+
             '<span class="f14 fco  p0-6 ">签收数量:</span>'+
             '<span class=" f14 fco" ><div style="line-height:0px;display:inline-block;" > ' +
-            '<input style="width:100px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
+            '<button style="border:none;"><img class="minus" src="assets/img/minus.png"/></button>' +
+            '<input style="width:100px;height:20px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
             ' orderNo="'+data.orderNo+'" ' +
             'articleNo="'+data.articleNo+'" articleBarcode="'+data.articleBarcode+'" ' +
-            'dispatchNo="'+data.dispatchNo+'" signQtybak="'+data.signQty+'" name="signQty" value="'+data.signQty+'"></div>'+
+            'dispatchNo="'+data.dispatchNo+'" signQtybak="'+data.signQty+'" name="signQty" value="'+data.signQty+'">' +
+                '<buttion style="border:none;"><img class="plus" src="assets/img/plus.png"/></buttion></div>'+
             '</span></div><div style="clear:both;"></div></div> </div>';
         });
         // $('#signorderlist').empty();
         $('#goodscontent').append(gooddetail);
         $.ui.loadContent("#signorderdetail", false, false, "slide");
         $('#signorderlist').empty();
+        $('.minus').unbind();
+        $('.minus').bind('click',function(){minusValue(this)});
+        $('.plus').unbind();
+        $('.plus').bind('click',function(){plusValue(this)});
     } else {
         errorPopup( '无商品明细!' );
     }
@@ -474,7 +525,7 @@ function show_photooms(element)
 
 function get_imgsoms()
 {
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var workType = user.obj.workerType;
     var workerNo = user.obj.workerNo;
     get_img_ajax(workerNo,workType);
@@ -491,7 +542,7 @@ function get_img_ajax_succ_oms(data)
 
     if(data.isSucc)
     {
-        var user = JSON.parse(localStorage.getItem('e_user'));
+        var user = JSON.parse(localStorage.getItem(USER_SESSION));
         var workType = user.obj.workerType;
         var baseUrlImg = fileUrl;
         var oldImgUrl = "assets/img/demo/no_photo.png";
@@ -528,7 +579,7 @@ function get_img_ajax_fail_oms()
 
 function idinfo_next_oms()
 {
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var workerType = user.obj.workerType;
     var flag = false;
     if(workerType == 1)

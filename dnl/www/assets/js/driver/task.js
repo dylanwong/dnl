@@ -24,7 +24,9 @@ function toggleTaskTabs(elm) {
 }
 
 function taskPanelLoad(taskStatus) {
-    var phone = '13613085473';
+
+    var user = JSON.parse(localStorage.getItem(USER_SESSION))
+    var phone = user.obj.phone;//'13613085473';
     var tdStatus = "";
     taskStatus == undefined ? tdStatus = '0' : tdStatus = taskStatus;
 

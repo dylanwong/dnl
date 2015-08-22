@@ -3,7 +3,7 @@
  */
 function getMySetup()
 {
-   var user =  localStorage.getItem('e_user');
+   var user =  localStorage.getItem(USER_SESSION);
    if(user!=null)
    {
        //如果是IOS的设备 device全部改为cloudId
@@ -105,7 +105,7 @@ function getMySetupError(data){
  */
 function updateMySetup(data)
 {
-    var user =  localStorage.getItem('e_user');
+    var user =  localStorage.getItem(USER_SESSION);
     if(user!=null)
     {
         //如果是IOS的设备 device全部改为cloudId
@@ -138,7 +138,7 @@ function updateMySetupError(data){}
 function initSetup()
 {
     getMySetup();
-    if(localStorage.getItem('e_user')==null){
+    if(localStorage.getItem(USER_SESSION)==null){
         $('#logoutBtn').hide();
     }else{
 
@@ -157,15 +157,15 @@ function saveFeedBack ()
         toastrTip('','请输入评论内容...','error');
     }else
     {
-        var user =  localStorage.getItem('e_user');
+        var user =  localStorage.getItem(USER_SESSION);
         if(user!=null)
         {
 
             user = JSON.parse(user);
             var options = {
-                feedbackName:user.obj.userNo,
+                feedbackName:user.obj.userCName,
                 phone:user.obj.phone,
-                email:'',
+                email:user.obj.email,
                 content:content,
                 enterpriseNo:user.obj.enterpriseNo
             };

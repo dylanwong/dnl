@@ -13,7 +13,7 @@ function initBoardSearchPage(){
     $('#product_search').val('');
     $('#product_search').attr('productid','');
 
-    if( JSON.parse(localStorage.getItem('e_user')).obj.isSubcompanyUser == '1'){
+    if( JSON.parse(localStorage.getItem(USER_SESSION)).obj.isSubcompanyUser == '1'){
         $('#select_city_div').hide();
     }else {
         $('#select_city_div').show();
@@ -70,7 +70,7 @@ function confirmSearch(){
     var ownerName = $('#product_search').val();
     if( owner != undefined && owner != '' && ownerName != undefined && ownerName != ''){
         $('#boardowner').empty();
-        var userType = JSON.parse(localStorage.getItem('e_user')).obj.userType;
+        var userType = JSON.parse(localStorage.getItem(USER_SESSION)).obj.userType;
         if(userType == 0) {
             $('#boardowner').append('<b>货&nbsp;&nbsp;&nbsp;主&nbsp;:</b>&nbsp;' + ownerName);
         }else if(userType == 1) {
@@ -157,7 +157,7 @@ function initLogisticBoard(){
     $.ui.blockUI(.3);
     //$.ui.showMask("获取看板数据..");
     localStorage.removeItem("searchFilter");
-    var user =  JSON.parse( localStorage.getItem('e_user') );
+    var user =  JSON.parse( localStorage.getItem(USER_SESSION) );
     $('#subCompany').empty();
     $('#boardowner').empty();
     $('#boardowner').attr('value','');
@@ -188,7 +188,7 @@ function initLogisticBoardAgain(){
     $("#oneId").addClass('selectTotalDay');
     $("#" + $('#oneId').attr('target')).fadeIn(300);
 
-    var user =  JSON.parse( localStorage.getItem('e_user') );
+    var user =  JSON.parse( localStorage.getItem(USER_SESSION) );
 
     //$('#subCompany').attr('value',user.obj.enterpriseNo);
     //$('#subCompany').attr('value','');
@@ -413,7 +413,7 @@ function orderlist_panel(statustype){
     /* setCacheData("searchFilter", mergeJson(JSON.parse(localStorage.getItem("searchFilter")),
      {'start': '1', 'length':'10', 'queryDate': '', 'status': ''}, true), true);*/
     var searchText = $('#searchText').val();
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var ownerText = '';
     var custText = ''
     var enterpriseText = '';
@@ -426,7 +426,7 @@ function orderlist_panel(statustype){
         custText = $('#boardowner').attr('value');
         enterpriseText = user.obj.logisticNo;
     }
-    if ( localStorage.getItem("e_user")==null ) {
+    if ( localStorage.getItem(USER_SESSION)==null ) {
         getAjax(searchUrl, {'start': '1', 'length':'10','orderNo':'','timeType':timeType,'status':status,'enterpriseText':$('#subCompany').attr('value'),
             'ownerText':ownerText,'custText':custText},
             "updateOrderlistPanel(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");

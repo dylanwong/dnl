@@ -850,3 +850,19 @@ li {list-style-type:none;}
 {
     cursor: pointer;
 }
+
+
+/*****/
+
+
+.minus{
+    width: 23px;
+    height: 23px;
+    /*background: url('../img/minus.png') no-repeat;*/
+}
+
+.plus{
+    width: 23px;
+    height: 23px;
+    /*background: url('../img/plus.png') no-repeat;*/
+}

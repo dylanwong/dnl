@@ -33,7 +33,7 @@ function mainPanleUnLoad(){
     console.log("mainPanleUnLoad")
 }
 function message_panel(){
-    var user = localStorage.getItem('e_user');
+    var user = localStorage.getItem(USER_SESSION);
     user = JSON.parse(user);
 
     if(user!=null){
@@ -52,7 +52,7 @@ function mine_panel()
     //$("#userpart").height($("#mine").height()/2);
     //$("#mine_module").height($("#mine").height()-$("#userpart").height());
 
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
 
     if ( user == null){
         login_panel();
@@ -71,7 +71,7 @@ function adDetail_panel() {
 function main_panel()
 {
 
-    if ( localStorage.getItem('e_user') == null){
+    if ( localStorage.getItem(USER_SESSION) == null){
         login_panel();
     }else{
         $.ui.loadContent("#main", false, false, "slide");
@@ -85,7 +85,7 @@ function home_panel()
 
 function login_panel()
 {
-    //var user = JSON.parse(localStorage.getItem('e_user'));
+    //var user = JSON.parse(localStorage.getItem(USER_SESSION));
     //$('#userNameMine').text(user.obj.userName);
     $.ui.loadContent("#login", false, false, "slide");
 }
@@ -169,7 +169,7 @@ function ownerboard_panel(){
 }
 function custboard_panel(elm){
 
-    if(localStorage.getItem('e_user')==null){
+    if(localStorage.getItem(USER_SESSION)==null){
         $.ui.loadContent("#portal", false, false, "slide");
     }else
     {
@@ -193,7 +193,7 @@ function driverboard_panel(){
    // $.ui.loadContent("#driverboard", false, false, "slide");
 
 
-    if(localStorage.getItem('e_user')==null){
+    if(localStorage.getItem(USER_SESSION)==null){
         $.ui.loadContent("#portal", false, false, "slide");
     }else
     {
@@ -251,7 +251,7 @@ function traceInfo33(){
      "$.ui.loadContent('#orderlist', false, false, 'slide')");*/
 
 
- //   var user = JSON.parse(localStorage.getItem('e_user'));
+ //   var user = JSON.parse(localStorage.getItem(USER_SESSION));
 //    if(user.obj.userType == 2){
 //        //$('#orderdetailBackId').attr('onclick',"$.ui.loadContent('#custboard', false, false, 'slide')");
 //        $('#orderdetailBackId').attr('onclick',"custboard_panel();");
@@ -277,7 +277,7 @@ function traceSingleInfo33(){
     } else {
         $('#orderdetailBackId').attr('onclick',"$.ui.goBack()" );
     }
-//    var user = JSON.parse(localStorage.getItem('e_user'));
+//    var user = JSON.parse(localStorage.getItem(USER_SESSION));
 //    if(user.obj.userType == 2){
 //        //$('#orderdetailBackId').attr('onclick',"$.ui.loadContent('#custboard', false, false, 'slide')");
 //        if ($("#orderdetailBackId").attr('onclick')=="$.ui.loadContent('#orderlist', false, false, 'slide')"){
@@ -304,7 +304,7 @@ function traceSingleInfo33(){
 }
 
 function traceSingleInfo(){
-//    var user = JSON.parse(localStorage.getItem('e_user'));
+//    var user = JSON.parse(localStorage.getItem(USER_SESSION));
 //    if(user.obj.userType == 2){
 //        $('#orderdetailBackId').attr('onclick',"custboard_panel();");
 //
@@ -361,8 +361,8 @@ function init_search_panel(){
     localStorage.removeItem('searchFilter');
    // localStorage.removeItem('routeList');
     $('#searchText').val('');
-    if(localStorage.getItem("e_user")!=null) {
-        var user = JSON.parse(localStorage.getItem("e_user"));
+    if(localStorage.getItem(USER_SESSION)!=null) {
+        var user = JSON.parse(localStorage.getItem(USER_SESSION));
         if(user.obj.userType=='0'){
             $('#searchText').attr("placeholder", "请输入单号/货主名称模糊查找");
         }else if(user.obj.userType=='1'){
@@ -432,6 +432,9 @@ function queryAd() {
  */
 function queryAdListSucc(data) {
     try{
+    if(data == null){
+            ifAdNull();
+    }
     var html = '';
     if(data.isSucc){
 
@@ -552,7 +555,7 @@ function qrcode_panel() {
 //初始化首页看板
 function initHomeModuleTable(){
    // userType,  userNo,enterpriseNo,ownerNo,custNo
-    var user = JSON.parse(localStorage.getItem('e_user'));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     getAjax(queryIndexOrderCountUrl ,{'enterpriseno':user.obj.logisticNo,
             'ownerNo':user.obj.ownerNo, 'custNo':user.obj.custNo
            },
@@ -580,7 +583,7 @@ function queryIndexOrderCountSucc(data){
     if( data.isSucc ){
 
     $('#home-module-table').html('');
-    var user = JSON.parse(localStorage.getItem("e_user"));
+    var user = JSON.parse(localStorage.getItem(USER_SESSION));
     var userType = user.obj.userType;
     var result = '';
 
@@ -701,13 +704,13 @@ function postion_change(){
 
 function idinfo_panel(flag)
 {
-    if(localStorage.getItem('e_user')==null)
+    if(localStorage.getItem(USER_SESSION)==null)
     {
         $.ui.loadContent("#portal", false, false, "slide");
     }else
     {
         verify_flag = flag;
-        var user = JSON.parse(localStorage.getItem('e_user'));
+        var user = JSON.parse(localStorage.getItem(USER_SESSION));
         if(user.obj.workerType == 2)
         {
             if(verify_flag == 0)
