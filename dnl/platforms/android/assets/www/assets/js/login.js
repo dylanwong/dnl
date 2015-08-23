@@ -3,7 +3,7 @@
  */
 function login()
 {
-   // errorPopup(baseUrl);
+    errorPopup(window.OSInfo.push);
     var userNo = $("#username").val();
     var pwd = $("#pwd").val();
 
@@ -25,7 +25,16 @@ function login()
                 locationObj = JSON.parse(locationObj);
                 currentAddr = locationObj.provinceName+"-"+locationObj.cityName;
             }
-
+            var os = '';
+            if ($.os.ios) {
+                os='ios';
+            }else{
+                os='android';
+            }
+      //  var deviceNo = device.uuid;
+      //  if (window.OSInfo.os.toLocaleUpperCase() == "IOS") {
+      //      deviceNo = window.OSInfo.push;
+      //  }
             var url = baseUrl+"account/login.action";
             var options =
             {
@@ -35,7 +44,10 @@ function login()
                 deviceNo:deviceNo,
                 currentAddr:currentAddr,
                 longitude:'',
-                latitude:''
+                latitude:'',
+                currentVersion:currentVersion,
+                os:os,
+                appId:window.OSInfo.push
             };
             getAjax(url,options,'save_login_succ(data)','save_login_fail');
     }

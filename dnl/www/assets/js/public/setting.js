@@ -27,8 +27,8 @@ var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
 //var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-//var baseUrl = "http://192.168.16.108:8080/daonala_mobile/";
-var baseUrl = "http://192.168.16.98/daonala_mobile/";
+var baseUrl = "http://192.168.16.73:8080/daonala_mobile/";
+//var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
 
 
@@ -73,7 +73,7 @@ var ISSELROLE = "2";
 
 // 用来判断是否展示启动引导页
 // 变量为数字
-var currentVersion='1.2';
+var currentVersion='1.0';
 var iOSInHouse=true;
 
 var ajaxFlag=true;

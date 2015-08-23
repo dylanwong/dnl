@@ -30,7 +30,15 @@
     <feature name="Device">
         <param name="android-package" value="org.apache.cordova.device.Device" />
     </feature>
-    <name>到哪啦</name>
+    <feature name="CheckUpdatePlugin" >
+        <param
+                name="android-package"
+                value="com.sealinkin.dnl.CheckUpdatePlugin" />
+    </feature>
+
+    <name>
+到哪啦
+    </name>
     <description>
         到哪啦是一款订单管理应用，由海联天下出品.
     </description>
