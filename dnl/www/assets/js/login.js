@@ -3,7 +3,7 @@
  */
 function login()
 {
-   
+
     var userNo = $("#username").val();
     var pwd = $("#pwd").val();
 
@@ -26,10 +26,15 @@ function login()
                 currentAddr = locationObj.provinceName+"-"+locationObj.cityName;
             }
             var os = '';
+            var appId = '';
             if ($.os.ios) {
-                os='ios';
+              //  os='ios';
+                appId = window.OSInfo.push;
+            }else if($.os.android){
+             //   os='android';
+                appId = window.OSInfo.push;
             }else{
-                os='android';
+
             }
       //  var deviceNo = device.uuid;
       //  if (window.OSInfo.os.toLocaleUpperCase() == "IOS") {
@@ -47,7 +52,7 @@ function login()
                 latitude:'',
                 currentVersion:currentVersion,
                 os:os,
-                appId:window.OSInfo.push
+                appId:appId
             };
             getAjax(url,options,'save_login_succ(data)','save_login_fail');
     }

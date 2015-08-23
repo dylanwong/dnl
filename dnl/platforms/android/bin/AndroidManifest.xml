@@ -1,49 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sealinkin.dnl"
-    android:hardwareAccelerated="true"
-    android:versionCode="1"
-    android:versionName="0.0.1" >
-
-    <supports-screens
-        android:anyDensity="true"
-        android:largeScreens="true"
-        android:normalScreens="true"
-        android:resizeable="true"
-        android:smallScreens="true"
-        android:xlargeScreens="true" />
-
+<manifest android:hardwareAccelerated="true" android:versionCode="1" android:versionName="0.0.1" package="com.sealinkin.dnl" xmlns:android="http://schemas.android.com/apk/res/android">
+    <supports-screens android:anyDensity="true" android:largeScreens="true" android:normalScreens="true" android:resizeable="true" android:smallScreens="true" android:xlargeScreens="true" />
     <uses-permission android:name="android.permission.INTERNET" />
-
-    <application
-        android:name="com.sealinkin.dnl.Push"
-        android:hardwareAccelerated="true"
-        android:icon="@drawable/icon"
-        android:label="@string/app_name" >
-        <activity
-            android:name="CordovaApp"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
-            android:label="@string/activity_name"
-            android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Black.NoTitleBar"
-            android:windowSoftInputMode="adjustResize" >
-            <intent-filter android:label="@string/launcher_name" >
+    <application android:hardwareAccelerated="true" android:icon="@drawable/icon" android:label="@string/app_name" android:name="com.sealinkin.dnl.Push">
+        <activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" android:label="@string/activity_name" android:launchMode="singleTop" android:name="CordovaApp" android:theme="@android:style/Theme.Black.NoTitleBar" android:windowSoftInputMode="adjustResize">
+            <intent-filter android:label="@string/launcher_name">
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name="com.avos.avoscloud.PushService"/>
-        
-        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver" >
+        <service android:name="com.avos.avoscloud.PushService" />
+        <receiver android:name="com.avos.avoscloud.AVBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        
-        <receiver android:name="com.sealinkin.dnl.CustomReceiver" >
+        <receiver android:name="com.sealinkin.dnl.CustomReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -52,21 +25,10 @@
                 <action android:name="com.sealinkin.dnl.Push" />
             </intent-filter>
         </receiver>
-
-        <service
-            android:name="com.baidu.location.f"
-            android:enabled="true"
-            android:process=":remote" />
-
-        <meta-data
-            android:name="com.baidu.lbsapi.API_KEY"
-            android:value="5ppUGd9yKd3MRwZwZ4CwFY3I" />
-        </application>
-
-    <uses-sdk
-        android:minSdkVersion="10"
-        android:targetSdkVersion="19" />
-
+        <service android:enabled="true" android:name="com.baidu.location.f" android:process=":remote" />
+        <meta-data android:name="com.baidu.lbsapi.API_KEY" android:value="5ppUGd9yKd3MRwZwZ4CwFY3I" />
+    </application>
+    <uses-sdk android:minSdkVersion="10" android:targetSdkVersion="19" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -79,5 +41,4 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
     <uses-permission android:name="android.permission.RECORD_VIDEO" />
-
 </manifest>

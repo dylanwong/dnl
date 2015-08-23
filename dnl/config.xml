@@ -3,11 +3,8 @@
     id="com.sealinkin.dnl"
     version="0.0.1"
     xmlns="http://www.w3.org/ns/widgets" >
-
-    <name>
-到哪啦
+    <name>到哪啦
     </name>
-
     <description>
         到哪啦是一款订单管理应用，由海联天下出品.
     </description>
