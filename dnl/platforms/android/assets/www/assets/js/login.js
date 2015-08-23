@@ -17,6 +17,7 @@ function login()
     }else
     {
             var deviceNo = getDeviceNo();
+            alert(deviceNo);
             var os = getOs();
             var locationObj = localStorage.getItem('locationObj');
             var currentAddr ="";
@@ -25,16 +26,18 @@ function login()
                 locationObj = JSON.parse(locationObj);
                 currentAddr = locationObj.provinceName+"-"+locationObj.cityName;
             }
-            var os = '';
+
             var appId = '';
             if ($.os.ios) {
               //  os='ios';
+                appId = window.OSInfo.push;
             }else if($.os.android){
              //   os='android';
                 appId = window.OSInfo.push;
             }else{
 
             }
+            console.info('os succ:'+os);
       //  var deviceNo = device.uuid;
       //  if (window.OSInfo.os.toLocaleUpperCase() == "IOS") {
       //      deviceNo = window.OSInfo.push;
