@@ -157,8 +157,8 @@ public class CordovaApp extends CordovaActivity {
 	};
 
 	public MessageReceiver mMessageReceiver;
-	public static String ACTION_INTENT_RECEIVER = "com.sealinkin.daonala.inside.push";
-	public static String ONRESUME_RECEIVER = "com.sealinkin.daonala.onresume.push";
+	public static String ACTION_INTENT_RECEIVER = "com.sealinkin.dnl.inside.push";
+	public static String ONRESUME_RECEIVER = "com.sealinkin.dnl.onresume.push";
 
 	public void method(String message) {
 		// 1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
@@ -208,8 +208,8 @@ public class CordovaApp extends CordovaActivity {
 						parameters = "'" + method + "(" + parameters + ")"
 								+ "'";
 						method(message);
-						loadUrl("javascript:pushMsg('" + message + "',"
-								+ parameters + " )");
+						/*loadUrl("javascript:pushMsg('" + message + "',"
+								+ parameters + " )");*/
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
