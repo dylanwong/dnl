@@ -208,8 +208,7 @@ public class CordovaApp extends CordovaActivity {
 						parameters = "'" + method + "(" + parameters + ")"
 								+ "'";
 						method(message);
-						/*loadUrl("javascript:pushMsg('" + message + "',"
-								+ parameters + " )");*/
+						loadUrl("javascript:" + parameters + " ");
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
