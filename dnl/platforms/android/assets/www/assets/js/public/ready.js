@@ -1075,9 +1075,11 @@ function androidQueryInstallId() {
     cordova.exec(androidQueryInstallIdResultHandler,
         androidQueryInstallIdErrorHandler, "CheckUpdatePlugin",
         "queryInstallId", []);
+    console.log( window.OSInfo);
 }
 function androidQueryInstallIdResultHandler(data){
     window.OSInfo ={os:'android',push:data};
+    console.log( 'androidQueryInstallIdSUCC: '+window.OSInfo.push);
 }
 function androidQueryInstallIdErrorHandler(data){
     console.log(data);

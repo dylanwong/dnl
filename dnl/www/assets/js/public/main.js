@@ -627,7 +627,7 @@ function queryIndexOrderCountSucc(data){
             '<tr><td count = "'+data.obj.missionCount+'" ' +
             'onclick = "searchOrderFromIndex(6,'+data.obj.missionCount+' );"style="width:33%;">'+
             '<div style="color:#ef8305;font-size:24px;">'+data.obj.missionCount+'</div>'+
-            '<div style="color:#636363;font-size:18px;">任务</div>'+
+            '<div style="color:#636363;font-size:18px;">配送数</div>'+
             '</td><td count = "'+data.obj.finishedCount+'" ' +
             'onclick = "searchOrderFromIndex(7, '+data.obj.finishedCount+');" style="width:33%;border-left:1px solid #e6e6e6;'+
             'border-right: 1px solid #e6e6e6">'+

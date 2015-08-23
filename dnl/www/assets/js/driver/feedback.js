@@ -408,7 +408,7 @@ function queryDetailList(){
 }
 
 function querygoodlist2(elm){
-    var enterpriseNo = eval('(' +$(elm).attr('enterpriseno')+ ')');
+    var enterpriseNo = $(elm).attr('enterpriseno');
     var dispatchNo = $(elm).attr('dispatchno');
     var orderNo =  $(elm).attr('orderNo');
     var detail_list = '';

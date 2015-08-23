@@ -1,28 +1,67 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.sealinkin.dnl" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>到哪啦</name>
+<widget xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    id="com.sealinkin.dnl"
+    version="0.0.1"
+    xmlns="http://www.w3.org/ns/widgets" >
+
+    <name>
+到哪啦
+    </name>
+
     <description>
         到哪啦是一款订单管理应用，由海联天下出品.
     </description>
-    <author email="wangyay@sealinkin.com" href="http://www.sealinkin.com">
+
+    <author
+        email="wangyay@sealinkin.com"
+        href="http://www.sealinkin.com" >
         深圳市海联天下科技有限公司
     </author>
+
     <content src="index.html" />
+
     <access origin="*" />
-    <access origin="tel:*" launch-external="yes"/>
-    <access origin="geo:*" launch-external="yes"/>
-    <access origin="mailto:*" launch-external="yes"/>
-    <access origin="sms:*" launch-external="yes"/>
-    <access origin="market:*" launch-external="yes"/>
 
-    <!--升级时候替换android config.xml -->
-    <feature name="CheckUpdatePlugin">
-        <param name="android-package" value="com.sealinkin.dnl.CheckUpdatePlugin"/>
-    </feature>
-    <feature name="SplashScreen">
-        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
-    </feature>
-    <preference name="SplashScreen" value="screen" /> <!-- 不带后缀png的文件名，默认是screen-->
+    <access
+        launch-external="yes"
+        origin="tel:*" />
 
-    <preference name="wechatappid" value="wx698db989e73cb314" />
+    <access
+        launch-external="yes"
+        origin="geo:*" />
+
+    <access
+        launch-external="yes"
+        origin="mailto:*" />
+
+    <access
+        launch-external="yes"
+        origin="sms:*" />
+
+    <access
+        launch-external="yes"
+        origin="market:*" />
+
+    <!-- 升级时候替换android config.xml -->
+
+    <feature name="CheckUpdatePlugin" >
+        <param
+            name="android-package"
+            value="com.sealinkin.dnl.CheckUpdatePlugin" />
+    </feature>
+
+    <feature name="SplashScreen" >
+        <param
+            name="android-package"
+            value="org.apache.cordova.splashscreen.SplashScreen" />
+    </feature>
+
+    <preference
+        name="SplashScreen"
+        value="screen" /> <!-- 不带后缀png的文件名，默认是screen -->
+
+    <preference
+        name="wechatappid"
+        value="wx698db989e73cb314" />
+
 </widget>
