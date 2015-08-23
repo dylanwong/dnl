@@ -24,7 +24,7 @@ public class CustomReceiver extends BroadcastReceiver {
 		LogUtil.log.d(TAG, "Get Broadcat");
 		LogUtil.log.d(TAG, intent.getAction());
 		try {
-			if (intent.getAction().equals("com.sealinkin.daonala.PUSH")) {
+			if (intent.getAction().equals("com.sealinkin.dnl.Push")) {
 				Bundle bundle = intent.getExtras();
 				if (isRunningForeground(context)) {
 					// 应用再打开的时候
@@ -58,6 +58,7 @@ public class CustomReceiver extends BroadcastReceiver {
 				}
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
