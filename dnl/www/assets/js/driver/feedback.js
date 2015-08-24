@@ -156,8 +156,16 @@ function confirmhandoverorder(){
    /* localStorage.removeItem("chocieorders");*/
     }
 }
+function confirmdiffsignorder(){
+    querygoodlist();
+//    $('#signBtn').attr('disabled',"true");
+//    $('#signBtn').removeAttr("disabled");
+    $('#diffsignBtn').unbind('click').bind('click',function(){
+        confirmsignorder();
+    });
+}
 
-/**签收货物确认**/
+/**签收确认**/
 function confirmsignorder(){
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
@@ -211,7 +219,7 @@ function confirmsignorder(){
 }
 
 
-/**签收货物确认**/
+/**补录确认**/
 function addInfororder(){
     if($("#addInfooperater").val()==''||$("#addInfooperater")==undefined){
         errorPopup('请输入补录人');
@@ -250,17 +258,17 @@ function addInfororder(){
             longitude:''
         };
 
-        getAjax(url,option,'addorderstatus_result_succ(data)');
-        var signQtyurl = baseUrl+"driver/signQty.action";
-        var goodslist = localStorage.getItem("signQtyItem");
-
-        if (JSON.parse(goodslist).length>0 ){
-            var qtyOptions = {
-                goodslist:goodslist
-            };
-            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
-        }
-        localStorage.removeItem("chocieorders");
+//        getAjax(url,option,'addorderstatus_result_succ(data)');
+//        var signQtyurl = baseUrl+"driver/signQty.action";
+//        var goodslist = localStorage.getItem("signQtyItem");
+//
+//        if (JSON.parse(goodslist).length>0 ){
+//            var qtyOptions = {
+//                goodslist:goodslist
+//            };
+//            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
+//        }
+//        localStorage.removeItem("chocieorders");
     }
 }
 
@@ -451,12 +459,15 @@ function updategoodlistPanel(datas){
             gooddetail +=
             '<div style="margin-top:5px;"><hr style="margin-left:5px;width:90%;' +
             'margin-top:0px;margin-bottom:5px;border: 0;border-top:1px solid #06ABD4;">'+
-            '</div> <div><div style="float:left;width:100%;height:70px;">'+
+            '</div> <div><div style="float:left;width:100%;height:85px;">'+
             '<span class="f14 fco  p0-6" >产品名称:</span>'+
             '<span class=" f14 fco" >'+data.articleName+'</span><br>'+
             '<div style="float:left;width:100%;">'+
             '<span class="f14 fco  p0-6">产品条码:</span>'+
             '<span class=" f14 fco" >'+data.articleBarcode+'</span>'+
+            '</div><div style="float:left;width:100%;">'+
+            '<span class="f14 fco  p0-6">送货数量:</span>'+
+            '<span class=" f14 fco" >'+data.deliveryQty+'</span>'+
             '</div><br><div style="float:right;width:100%;">'+
             '<span class="f14 fco  p0-6 ">签收数量:</span>'+
             '<span class=" f14 fco" ><div style="line-height:0px;display:inline-block;" > ' +
@@ -464,7 +475,7 @@ function updategoodlistPanel(datas){
             '<input style="width:100px;height:20px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
             ' orderNo="'+data.orderNo+'" ' +
             'articleNo="'+data.articleNo+'" articleBarcode="'+data.articleBarcode+'" ' +
-            'dispatchNo="'+data.dispatchNo+'" signQtybak="'+data.signQty+'" name="signQty" value="'+data.signQty+'">' +
+            'dispatchNo="'+data.dispatchNo+'" signQtybak="'+data.deliveryQty+'" name="signQty" value="'+data.deliveryQty+'">' +
                 '<buttion style="border:none;"><img class="plus" src="assets/img/plus.png"/></buttion></div>'+
             '</span></div><div style="clear:both;"></div></div> </div>';
         });

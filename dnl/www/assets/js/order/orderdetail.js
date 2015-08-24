@@ -98,7 +98,7 @@ function initTraceInfo2(){
 
         $('#evalutePanelBtn').unbind('click');
     }else{
-        $('#evalute_ifNull').text('无');
+        $('#evalute_ifNull').text('暂无评论信息');
         $('#evalutePanelBtn').unbind('click');
     }
     queryDetailProduct();
@@ -201,7 +201,7 @@ function updataDetailPanel(data){
                 $.ui.loadContent("#orderDetailProduct", false, false, "slide");
             });
         }else{
-            $('#good_ifNull').text('无');
+            $('#good_ifNull').text(' ');
         }
         for (var i = 0; i < len; i++) {
              products +=
@@ -592,14 +592,18 @@ function updateEvalute(datas){
                 });
               //  $.ui.loadContent("#evaluate", false, false, "slide");
             }else{
-                $('#evalute_ifNull').text('无');
+                $('#evalute_ifNull').text('暂无评论信息');
                // errorPopup('暂无评价信息');
 //                $('#orderDetailEvaluate').empty();
 //                evaluteResult = '<div><p>无评论信息</p></div>';
             }
             $('#orderDetailEvaluate').append(evaluteResult);
         }else{
-            $('#evalute_ifNull').text('有');
+            var averageVal =  ( parseInt(datas.obj[0].bodmEvaluate.reviewsItem2 )
+                + parseInt( datas.obj[0].bodmEvaluate.reviewsItem2 )
+                + parseInt( datas.obj[0].bodmEvaluate.reviewsItem3 ) )/3;
+            $('#evalute_ifNull').text(fomatFloat(averageVal,1)+'分');
+          //  $('#evalute_ifNull').html(showAverageStar(averageVal));
             $('#evalutePanelBtn').bind('click',function(){
                 $.ui.loadContent("#orderDetailEvalute", false, false, "slide");//绑定物流看板
             });
@@ -652,7 +656,14 @@ function updateEvalute(datas){
         //errorPopup(data.msg);
     }
 }
-
+function showAverageStar(average){
+    var result = '<ul class="averagestar" style="padding-top:0px;">';
+    for( var i= 0; i < average; i++){
+        result += '<li ><img src="assets/img/bluestar.png"/></li>'
+    }
+    result += '</ul> ';
+    return result;
+}
 function showStar(star){
     if(star == 0){
        return '<ul class="star1" style="padding-top:0px;">'+

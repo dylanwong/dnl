@@ -362,6 +362,7 @@ function nextstup(nexttype){
             $("#addInfocustcity").text(data.endAdr);
             $("#addInfoconsignno").text(data.sendNo);
             imgLocation='4';
+            localStorage.removeItem("signQty");
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }
         else{

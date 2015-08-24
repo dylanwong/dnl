@@ -123,7 +123,7 @@ data-defer:加载一个html进来
 </div>
 
 <div class="panel p0"
-     title="" id="map" data-defer="assets/panel/setup/map.html"
+     title="广告" id="map" data-defer="assets/panel/setup/map.html"
      data-load=""
      data-header=""
      data-unload=""
@@ -983,10 +983,20 @@ data-defer:加载一个html进来
 </footer>
 
 <footer align="center" id="signfooter" style="  padding-left: 15%;background: white;">
-    <button role="button"
-            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+    <div class="clearfix" style="width:100%;">
+    <div class="fl" style="width:45%;">
+    <button role="button" id="signBtn"
+            style="width:90%;background:#06ABD4;font-size:large;color:#fff"
             onclick="confirmsignorder();"
-            class="btn  btn-block">签收确认</button>
+            class="btn ">一键签收</button>
+    </div>
+    <div class="fl"  style="width:45%;">
+    <button role="button" id="diffsignBtn"
+            style="width:90%;background:#06ABD4;font-size:large;color:#fff"
+            onclick="confirmdiffsignorder();"
+            class="btn  ">差异签收</button>
+    </div>
+    </div>
 </footer>
 
 <footer align="center" id="chocieordersfooter" style="  padding-left: 15%;background: white;">

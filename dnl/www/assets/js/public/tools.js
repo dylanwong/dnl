@@ -148,3 +148,8 @@ Array.prototype.push = function() {
 Array.prototype.clear = function() {
     this.length = 0;
 }  ;
+
+
+function fomatFloat(src,pos){
+    return Math.round(src*Math.pow(10, pos))/Math.pow(10, pos);
+}

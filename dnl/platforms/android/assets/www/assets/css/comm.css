@@ -104,6 +104,15 @@ li{ position:relative; }
     color:#06ABD4;/*#ef8305*/
 }
 
+.averagestar {padding-top:-1px;margin-top:-2px;list-style:none; float:left;}
+.averagestar li {
+    float: left;
+    margin-top:0px;
+}
+.averagestar li img{
+    height: 20px;
+    width: 20px;
+}
 .star1 {padding-top:-1px;margin-top:-2px;list-style:none; float:left;}
 .star1 li {
     float: left;
