@@ -17,7 +17,7 @@ function login()
     }else
     {
             var deviceNo = getDeviceNo();
-            alert(deviceNo);
+            //alert(deviceNo);
             var os = getOs();
             var locationObj = localStorage.getItem('locationObj');
             var currentAddr ="";

@@ -34,14 +34,18 @@ public class CordovaApp extends CordovaActivity {
 					new SaveCallback() {
 						public void done(AVException e) {
 							if (e == null) {
-								Cons.INSTALLATIONID = AVInstallation.getCurrentInstallation().getInstallationId();
-								//loadUrl("javascript:window.OSInfo ={os:'android',push:'"+ AVInstallation.getCurrentInstallation().getInstallationId() + "'}");
+								Cons.INSTALLATIONID = AVInstallation
+										.getCurrentInstallation()
+										.getInstallationId();
+								// loadUrl("javascript:window.OSInfo ={os:'android',push:'"+
+								// AVInstallation.getCurrentInstallation().getInstallationId()
+								// + "'}");
 							} else {
 								// 保存失败，输出错误信息
 							}
 						}
-			});
-			
+					});
+
 			SpeechUtility.createUtility(this, SpeechConstant.APPID
 					+ "=55239db0");
 			PushService.setDefaultPushCallback(this, CordovaApp.class);// 这里不回调的话不能接收消息
@@ -62,11 +66,11 @@ public class CordovaApp extends CordovaActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		   loadUrl(launchUrl);
-		   try
-		   {
-			   Bundle bundle = getIntent().getExtras();
-				if (bundle != null && bundle.containsKey("com.avos.avoscloud.Data")) {
+			loadUrl(launchUrl);
+			try {
+				Bundle bundle = getIntent().getExtras();
+				if (bundle != null
+						&& bundle.containsKey("com.avos.avoscloud.Data")) {
 					JSONObject json = new JSONObject(getIntent().getExtras()
 							.getString("com.avos.avoscloud.Data"));
 					String message = json.getString("alert");
@@ -77,10 +81,9 @@ public class CordovaApp extends CordovaActivity {
 					Cons.PARAMETER = parameter;
 					Cons.MESSAGE = message;
 				}
-		   }catch(Exception e)
-		   {
-			   e.printStackTrace();
-		   }
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -133,24 +136,30 @@ public class CordovaApp extends CordovaActivity {
 		// 会话结束回调接口，没有错误时，error为null
 		public void onCompleted(SpeechError error) {
 		}
+
 		// 缓冲进度回调
 		// percent为缓冲进度0~100，beginPos为缓冲音频在文本中开始位置，endPos表示缓冲音频在文本中结束位置，info为附加信息。
 		public void onBufferProgress(int percent, int beginPos, int endPos,
 				String info) {
 		}
+
 		// 开始播放
 		public void onSpeakBegin() {
 		}
+
 		// 暂停播放
 		public void onSpeakPaused() {
 		}
+
 		// 播放进度回调
 		// percent为播放进度0~100,beginPos为播放音频在文本中开始位置，endPos表示播放音频在文本中结束位置.
 		public void onSpeakProgress(int percent, int beginPos, int endPos) {
 		}
+
 		// 恢复播放回调接口
 		public void onSpeakResumed() {
 		}
+
 		// 会话事件回调接口
 		public void onEvent(int arg0, int arg1, int arg2, Bundle arg3) {
 		}
@@ -201,20 +210,20 @@ public class CordovaApp extends CordovaActivity {
 						String parameters = "";
 
 						for (String i : parameter.split(",")) {
-							parameters += "\"" + i + "\"" + ",";// 添加JS引号转义
+							parameters += "'" + i + "',";
 						}
-						parameters = parameters.substring(0,
-								parameters.length() - 1);
-						parameters = "'" + method + "(" + parameters + ")"
-								+ "'";
+						parameters = parameters.substring(0, parameters.length() - 1);
+						parameters = method + "(" + parameters + ")";
 						method(message);
+
 						loadUrl("javascript:" + parameters + " ");
+						
+						
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 		}
 	}
