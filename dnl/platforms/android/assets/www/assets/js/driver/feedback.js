@@ -157,15 +157,20 @@ function confirmhandoverorder(){
     }
 }
 function confirmdiffsignorder(){
-    querygoodlist();
-    $('#signBtn').disabled = true;
-    $('#diffsignBtn').unbind('click').bind('click',function(){
-        confirmsignorder();
-    });
+    if($("#signoperater").val()==''||$("#signoperater")==undefined){
+        errorPopup('请输入签收人');
+    }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
+        errorPopup('请输入备注');
+    }else{
+        querygoodlist();
+//    $('#signBtn').attr('disabled',"true");
+//    $('#signBtn').removeAttr("disabled");
+        $('#diffsignBtn').unbind('click').bind('click',function(){
+            confirmdiffsignorder2();
+        });
+    }
 }
-
-/**签收货物确认**/
-function confirmsignorder(){
+function confirmdiffsignorder2(){
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
@@ -217,8 +222,61 @@ function confirmsignorder(){
     }
 }
 
+/**签收确认**/
+function confirmsignorder(){
+    if($("#signoperater").val()==''||$("#signoperater")==undefined){
+        errorPopup('请输入签收人');
+    }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
+        errorPopup('请输入备注');
+    }else{
+        var chk_value = [];
+        $("img[name=picture]").each(function() {
+            var newfileName=$(this).attr("fileName");
+            //var strings = newfileName.replace("/uploadFiles/temp/", "");
+            chk_value.push(newfileName);
+        });
+        var latitude = JSON.parse(localStorage.getItem('latitude'));
+        var longitude = JSON.parse(localStorage.getItem('longitude'));
+        var fileList=JSON.stringify(chk_value);
+        var data = JSON.parse(localStorage.getItem("currenttask"));
+        //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
+        var url = baseUrl+"driver/sign_order_status.action";
+        var user = JSON.parse( localStorage.getItem(USER_SESSION) );
+        var option = {
+            operater:$('#signoperater').val(),
+            enterpriseNo:data.enterpriseNo,
+            deliveryNo:data.deliveryNo,
+            sendNo:data.sendNo,
+            orders: localStorage.getItem("chocieorders"),
+            imgurls:fileList,
+            substatus:'',
+            location:$('#currentlocation').val(),
+            remarks:$('#handoverremarks').val(),
+            type:'4',
+            tel:user.obj.phone,
+            status:'90',
+            userName:user.obj.userName,
+            userNo:user.obj.userNo,
+            latitude:latitude,
+            longitude:longitude
+        };
 
-/**签收货物确认**/
+//        getAjax(url,option,'addorderstatus_result_succ(data)');
+//        var signQtyurl = baseUrl+"driver/signQty.action";
+//        var goodslist = localStorage.getItem("signQtyItem");
+//
+//        if (JSON.parse(goodslist).length>0 ){
+//            var qtyOptions = {
+//                goodslist:goodslist
+//            };
+//            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
+//        }
+//        localStorage.removeItem("chocieorders");
+    }
+}
+
+
+/**补录确认**/
 function addInfororder(){
     if($("#addInfooperater").val()==''||$("#addInfooperater")==undefined){
         errorPopup('请输入补录人');
@@ -257,29 +315,31 @@ function addInfororder(){
             longitude:''
         };
 
-        getAjax(url,option,'addorderstatus_result_succ(data)');
-        var signQtyurl = baseUrl+"driver/signQty.action";
-        var goodslist = localStorage.getItem("signQtyItem");
-
-        if (JSON.parse(goodslist).length>0 ){
-            var qtyOptions = {
-                goodslist:goodslist
-            };
-            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
-        }
-        localStorage.removeItem("chocieorders");
+//        getAjax(url,option,'addorderstatus_result_succ(data)');
+//        var signQtyurl = baseUrl+"driver/signQty.action";
+//        var goodslist = localStorage.getItem("signQtyItem");
+//
+//        if (JSON.parse(goodslist).length>0 ){
+//            var qtyOptions = {
+//                goodslist:goodslist
+//            };
+//            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
+//        }
+//        localStorage.removeItem("chocieorders");
     }
 }
 
 //< parseInt( $(elm).parent().next().attr('signqtybak'))
 function minusValue(elm) {
     try{
-
-    if (parseInt( $(elm).parent().next().val() ) > 0 ) {
-        $(elm).parent().next().attr('value',parseInt( $(elm).parent().next().val() )-1) ;
+    if ( parseFloat( $(elm).parent().next().val() ) > 0 ) {
+        $(elm).parent().next().attr('value', parseFloat( $(elm).parent().next().val() )-1) ;
     } else {
         $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
     }
+    $(elm).parent().parent().parent().parent().parent().find('#diffQty').text(
+        $(elm).parent().next().attr('value')-$(elm).parent().next().attr('signqtybak'));
+
     }catch(e){
         $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
     }
@@ -287,20 +347,32 @@ function minusValue(elm) {
 }
 function plusValue(elm) {
     try{
-        if (parseInt( $(elm).parent().prev().val() ) >= 0 ) {
-            $(elm).parent().prev().attr('value',parseInt($(elm).parent().prev().val()) + 1);
+        if ( parseFloat( $(elm).parent().prev().val() ) >= 0 ) {
+            $(elm).parent().prev().attr('value',parseFloat($(elm).parent().prev().val()) + 1);
         } else {
             $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+        }
+
+        var diff = $(elm).parent().prev().attr('value')-$(elm).parent().prev().attr('signqtybak');
+        if( diff == 0){
+            $(elm).parent().parent().parent().parent().parent().find('#diffQty').removeClass('redClass');
+        }else{
+            $(elm).parent().parent().parent().parent().parent().find('#diffQty').addClass('redClass');
+            $(elm).parent().parent().parent().parent().parent().find('#diffQty').text(diff);
         }
     }catch(e){
         $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
     }
 }
 function saveGoodQty(){
+    var data = JSON.parse(localStorage.getItem(dispatchNo));
+    if(data != null){
 
+    }
     var goodslist = new Array();
     var qtyOption;
     var flag = true;
+    var dispatchNo=''
     $("input[name='signQty']").each(function (){
         if( $(this).attr('signqtybak')!=$(this).val() ) {
             if( $(this).val() >= 0){
@@ -313,17 +385,22 @@ function saveGoodQty(){
                     signQty: $(this).val()
                 };
                 goodslist.push(qtyOption);
+                dispatchNo = $(this).attr('dispatchNo');
             }else{
                 errorPopup('数量应该为正数！');
                 flag = false;
             }
         }else {
-
         }
-
     });
     if(goodslist.length>0){
         localStorage.setItem("signQtyItem",JSON.stringify(goodslist ));
+        var data = JSON.parse(localStorage.getItem(dispatchNo));
+        if(data != null){
+
+        }else{
+            localStorage.setItem($(this).attr('dispatchNo'),JSON.stringify(goodslist ));
+        }
     }
     if(flag == false){
         ;
@@ -360,6 +437,45 @@ function refreshlocation(){
 /*订单明细选择列表*/
 
 function queryDetailList(){
+    var data = JSON.parse(localStorage.getItem(dispatchNo));
+    if(data != null){
+
+    }
+    var goodslist = new Array();
+    var qtyOption;
+    var flag = true;
+    var dispatchNo=''
+    $("input[name='signQty']").each(function (){
+        if( $(this).attr('signqtybak')!=$(this).val() ) {
+            if( $(this).val() >= 0){
+                qtyOption = {
+                    enterpriseNo: $(this).attr('enterpriseNo'),
+                    orderNo: $(this).attr('orderNo'),
+                    dispatchNo: $(this).attr('dispatchNo'),
+                    articleNo: $(this).attr('articleNo'),
+                    articleBarcode: $(this).attr('articlebarcode'),
+                    signQty: $(this).val()
+                };
+                goodslist.push(qtyOption);
+                dispatchNo = $(this).attr('dispatchNo');
+            }else{
+                errorPopup('数量应该为正数！');
+                flag = false;
+            }
+        }else {
+        }
+    });
+    if(goodslist.length>0){
+        localStorage.setItem("signQtyItem",JSON.stringify(goodslist ));
+        var data = JSON.parse(localStorage.getItem(dispatchNo));
+        if(data != null){
+
+        }else{
+            localStorage.setItem($(this).attr('dispatchNo'),JSON.stringify(goodslist ));
+        }
+    }
+
+
    var datas = JSON.parse(localStorage.getItem("chocieorders") );
    var detail_list = '';
    var gooddetail = '';
@@ -458,7 +574,7 @@ function updategoodlistPanel(datas){
             gooddetail +=
             '<div style="margin-top:5px;"><hr style="margin-left:5px;width:90%;' +
             'margin-top:0px;margin-bottom:5px;border: 0;border-top:1px solid #06ABD4;">'+
-            '</div> <div><div style="float:left;width:100%;height:85px;">'+
+            '</div> <div><div style="float:left;width:100%;height:100px;">'+
             '<span class="f14 fco  p0-6" >产品名称:</span>'+
             '<span class=" f14 fco" >'+data.articleName+'</span><br>'+
             '<div style="float:left;width:100%;">'+
@@ -471,12 +587,15 @@ function updategoodlistPanel(datas){
             '<span class="f14 fco  p0-6 ">签收数量:</span>'+
             '<span class=" f14 fco" ><div style="line-height:0px;display:inline-block;" > ' +
             '<button style="border:none;"><img class="minus" src="assets/img/minus.png"/></button>' +
-            '<input style="width:100px;height:20px;" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
+            '<input style="width:100px;height:20px;" id="signText" type="text" enterpriseNo="'+data.enterpriseNo+'"' +
             ' orderNo="'+data.orderNo+'" ' +
             'articleNo="'+data.articleNo+'" articleBarcode="'+data.articleBarcode+'" ' +
             'dispatchNo="'+data.dispatchNo+'" signQtybak="'+data.deliveryQty+'" name="signQty" value="'+data.deliveryQty+'">' +
                 '<buttion style="border:none;"><img class="plus" src="assets/img/plus.png"/></buttion></div>'+
-            '</span></div><div style="clear:both;"></div></div> </div>';
+            '</span></div><br><div style="float:left;width:100%;">'+
+                '<span class="f14 fco  p0-6">差异数量:</span>'+
+                '<span class=" f14 fco" id="diffQty">0</span>'+
+                '</div><div style="clear:both;"></div></div> </div>';
         });
         // $('#signorderlist').empty();
         $('#goodscontent').append(gooddetail);
@@ -486,11 +605,26 @@ function updategoodlistPanel(datas){
         $('.minus').bind('click',function(){minusValue(this)});
         $('.plus').unbind();
         $('.plus').bind('click',function(){plusValue(this)});
+
+        getGoodItemAche(datas.obj[0].dispatchNo);
     } else {
         errorPopup( '无商品明细!' );
     }
     }else{
         errorPopup('程序异常，请检查代码');
+    }
+}
+
+function getGoodItemAche(dispatchNo){
+    var data = JSON.parse(localStorage.getItem(dispatchNo));
+    if(data != null){
+        for ( var i = 0,len = data.length;i<len ;i++){
+            $("input[id=signText]").each(function() {
+                $(this).attr('articleNo') == data.articleNo;
+                $(this).val(data.signQty);
+            });
+        }
+       // $(input[id='signText'])
     }
 }
 /**

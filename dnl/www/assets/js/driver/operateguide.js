@@ -362,6 +362,9 @@ function nextstup(nexttype){
             $("#addInfocustcity").text(data.endAdr);
             $("#addInfoconsignno").text(data.sendNo);
             imgLocation='4';
+            $('#diffsignBtn').unbind('click').bind('click',function(){
+                confirmdiffsignorder();
+            });
             localStorage.removeItem("signQty");
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }

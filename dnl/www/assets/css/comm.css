@@ -104,6 +104,10 @@ li{ position:relative; }
     color:#06ABD4;/*#ef8305*/
 }
 
+.redClass{
+    color:red;
+}
+
 .averagestar {padding-top:-1px;margin-top:-2px;list-style:none; float:left;}
 .averagestar li {
     float: left;
