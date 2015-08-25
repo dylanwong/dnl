@@ -47,4 +47,7 @@
     <access launch-external="yes" origin="market:*" />
     <preference name="SplashScreen" value="screen" />
     <preference name="wechatappid" value="wx698db989e73cb314" />
+    <feature name="Navigation">
+        <param name="android-package" value="com.lovedudu.cordova.Navigation" />
+    </feature>
 </widget>

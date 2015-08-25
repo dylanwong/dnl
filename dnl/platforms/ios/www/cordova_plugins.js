@@ -236,6 +236,13 @@ module.exports = [
         "clobbers": [
             "navigator.device.capture"
         ]
+    },
+    {
+        "file": "plugins/com.lovedudu.cordova/www/Navigation.js",
+        "id": "com.lovedudu.cordova.Navigation",
+        "clobbers": [
+            "Navigation"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -247,7 +254,8 @@ module.exports.metadata =
     "org.apache.cordova.file": "1.3.3",
     "org.apache.cordova.file-transfer": "0.5.0",
     "org.apache.cordova.media": "0.2.16",
-    "org.apache.cordova.media-capture": "0.3.6"
+    "org.apache.cordova.media-capture": "0.3.6",
+    "com.lovedudu.cordova": "0.0.1"
 }
 // BOTTOM OF METADATA
 });

@@ -49,4 +49,7 @@
     <feature name="Capture">
         <param name="ios-package" value="CDVCapture" />
     </feature>
+    <feature name="Navigation">
+        <param name="ios-package" value="Navigation" />
+    </feature>
 </widget>

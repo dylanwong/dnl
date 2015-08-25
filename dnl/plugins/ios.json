@@ -65,6 +65,10 @@
                         {
                             "xml": "<feature name=\"Capture\"><param name=\"ios-package\" value=\"CDVCapture\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Navigation\"><param name=\"ios-package\" value=\"Navigation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -91,6 +95,9 @@
             "PACKAGE_NAME": "com.sealinkin.dnl"
         },
         "org.apache.cordova.media-capture": {
+            "PACKAGE_NAME": "com.sealinkin.dnl"
+        },
+        "com.lovedudu.cordova": {
             "PACKAGE_NAME": "com.sealinkin.dnl"
         }
     },
