@@ -63,6 +63,8 @@ var queryAdList = baseUrl + "base/query_ad_Version.action";
 var choiceOwnerAddrUrl = baseUrl + "order/queryOwnerAddr.action";
 var choiceCustAddrUrl = baseUrl + "order/queryCustAddr.action";
 
+var queryTraceOrderList =  baseUrl + "order/query_order_list_of_delivery.action";
+var queryTraceDescList =  baseUrl + "order/query_delivery_trace_list.action";
 //event target ID
 var ETID = null;
 //选中的任务ID

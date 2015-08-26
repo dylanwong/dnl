@@ -29,6 +29,7 @@ include("assets/js/public/iscroll.js");
 include("assets/js/setup/share.js");
 include("assets/js/setup/map.js");
 include("assets/js/order/addressScroll.js");
+include("assets/js/driver/trace.js");
 function mainPanleUnLoad(){
     console.log("mainPanleUnLoad")
 }
@@ -699,7 +700,7 @@ function initHomeFooter(userType){
 
 }
 
-function trace_panel(elm)
+function trace_panel_of_driver(elm)
 {
     $.ui.loadContent("#trace", false, false, "slide");
     if(elm!=undefined)
