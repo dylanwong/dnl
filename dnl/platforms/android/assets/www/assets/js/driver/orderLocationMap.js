@@ -18,6 +18,7 @@ function toLocationMapPanel(fromAdr,endAdr,sendNo,licensePlate,custphone,license
     getAjax(queryCoordinateUrl,option,'queryAllOrders_result_succ(data)');
   //  getAjax(queryCoordinateUrl,{});
 }
+var driver_map = new BMap.Map("location_map_content");
 function queryAllOrders_result_succ(data){
     localStorage.setItem('currenttaskorder',data);
     var points = [];
@@ -28,7 +29,7 @@ function queryAllOrders_result_succ(data){
     $("#location_map_content").height(2*($("#locationMap").height()
         -$('#header').height())/3);
     //$("#location_map_content").width($("#locationMap").width());
-    var map = new BMap.Map("location_map_content");
+
 //    var curve = new BMapLib.CurveLine(points,
 //        {strokeColor:"red", strokeWeight:3, strokeOpacity:0.5,strokeStyle:'solid'}); //创建弧线对象
 //    map.addOverlay(curve); //添加到地图中

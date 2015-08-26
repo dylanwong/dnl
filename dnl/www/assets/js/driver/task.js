@@ -182,11 +182,11 @@ function taskInfo(elm)
     TDID = $(elm).attr('id');
     var data = eval('(' +$(elm).attr('data-task-detail')+ ')');
     $.ui.loadContent("#operateguide", false, false, "slide");
+    localStorage.setItem("currenttask",$(elm).attr('data-task-detail'));
     $('#startplace').text(data.fromAdr);
     $('#endplace').text(data.endAdr);
     $('#o_sendNo').text(data.sendNo);
     $('#o_licensePlate').text(data.licensePlate);
-    localStorage.setItem("currenttask",$(elm).attr('data-task-detail'));
     $('#chocieordersTelButton').attr('href','tel:'+data.custphone);
     $('#operateguideTelButton').attr('href','tel:'+data.custphone);
     $('#deliverordersTelButton').attr('href','tel:'+data.custphone);
@@ -209,13 +209,22 @@ function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,ente
     $('#deliverordersTelButton').attr('href','tel:'+custphone);
     $('#followorderTelButton').attr('href','tel:'+custphone);
     $('#handoverordersTelButton').attr('href','tel:'+custphone);
-    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+    getAjax(taskDeatilqueryUrl,{'enterpriseno':enterpriseno,'deliveryNo':deliveryNo}
         , "setTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
 
 function setTaskCache(data){
     if(data.isSucc){
         localStorage.setItem("currenttask",JSON.stringify(data.obj));
+        $('#startplace').text(data.fromAdr);
+        $('#endplace').text(data.endAdr);
+        $('#o_sendNo').text(data.sendNo);
+        $('#o_licensePlate').text(data.licensePlate);
+//        $('#chocieordersTelButton').attr('href','tel:'+data.custphone);
+//        $('#operateguideTelButton').attr('href','tel:'+data.custphone);
+//        $('#deliverordersTelButton').attr('href','tel:'+data.custphone);
+//        $('#followorderTelButton').attr('href','tel:'+data.custphone);
+//        $('#handoverordersTelButton').attr('href','tel:'+data.custphone);
     }
 }
 

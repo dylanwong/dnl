@@ -27,9 +27,12 @@ var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
 //var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-var baseUrl = "http://192.168.1.109:8080/daonala_mobile/";
+
+//var baseUrl = "http://192.168.16.92:8080/daonala_mobile/";
+
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
+var baseUrl = "http://localhost:8080/daonala_mobile/";
 
 
 var omsManageUrl = "";
@@ -62,6 +65,8 @@ var queryAdList = baseUrl + "base/query_ad_Version.action";
 var choiceOwnerAddrUrl = baseUrl + "order/queryOwnerAddr.action";
 var choiceCustAddrUrl = baseUrl + "order/queryCustAddr.action";
 
+var queryTraceOrderList =  baseUrl + "order/query_order_list_of_delivery.action";
+var queryTraceDescList =  baseUrl + "order/query_delivery_trace_list.action";
 //event target ID
 var ETID = null;
 //选中的任务ID

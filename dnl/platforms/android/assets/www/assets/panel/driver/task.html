@@ -12,51 +12,40 @@
                 <div id="tasklist_ul"></div>
                 <script id="taskListTemp" type="text/html">
                     {{each obj.data as obj i}}
-                    {{if obj.status<=70}}
-                    <div id="task_{{obj.sendNo}}"  onclick="toLocationMapPanel('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
-                    {{/if}}
-                    {{if obj.status>70}}
-                        <div id="task_{{obj.sendNo}}"  onclick="biddingaddInfoorder('{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
 
-                     {{/if}}
-                        <div  class="lh4 f16 f2 p0-6">
-                        <div class="fl f18">运输单号<span class=""></span> {{obj.sendNo}}</div>
-                        {{if obj.status<=70}}
-                        <div class="fr f10"><div class="fl">
-                            <p class="f10 " style="color:#00B2EE">未完成</p><div style="margin: -5px auto;"
-                            class="circle bg_blue">
-                        </div></div><div class="fl"><p></p><div style="margin: 10px auto; height:10px;"
-                        class="">—</div></div><div class="fl">
-                        <p class="f10" style="">完成</p>
-                        <div style="margin: -5px auto;" class="circle bg_black"></div></div>
-                        <div style="clear:both; "></div></div>
-                        {{/if}}
-                        {{if obj.status>70}}
-                        <div class="fr f10"><div class="fl">
-                            <p class="f10 " style="color:#00B2EE">未完成</p><div style="margin: -5px auto;"
-                                                                              class="circle bg_blue">
-                        </div></div><div class="fl"><p></p><div style="margin: 10px auto; height:10px;"
-                                                                class="">—</div></div><div class="fl">
-                            <p class="f10" style="color:#00B2EE;">完成</p>
-                            <div style="margin: -5px auto;" class="circle bg_blue"></div></div>
-                            <div style="clear:both; "></div></div>
-                        {{/if}}
-                    </div>
-                    <div class="lh7 p0-6"><div class="fl width5 lh4"><div>
-                        <p class="lh2 order-detail-text mt0">车牌号:{{obj.licensePlate}}</p>
-                        <p class="lh2 order-detail-text mt0">{{obj.fromAdr}} ->{{obj.endAdr}}</p>
-                        <p class="lh2 order-detail-text">发车时间：{{obj.deliveryDate}}</p></div></div>
-                        <div class="fr width3 lh7 text-right get-order">  <p class="lh2 mb10 order-detail-text">
-                            <span class="f16"></span>'</span> </p>
-                        <p class="lh5"><a class="p6 f18 order-btn" style="padding: 5px 5px">
-                            {{if obj.status<=70}}
-                            任务反馈
-                            {{/if}}
-                            {{if obj.status>70}}
-                            补录
-                            {{/if}}
-                        </a></p></div></div>
-                    </div></div>
+                        <div id="task_{{obj.sendNo}}" >
+                            <div  class="lh4 f16 f2 p0-6">
+                                <div class="fl f18">运输单号<span class=""></span> {{obj.sendNo}}</div>
+                                <div class="fr f10"><div class="fl">
+                                    <p class="f10 " style="color:#00B2EE">
+                                        <a href="tel:4001110005"  class="iconfont icon-kefu" style="color:#00B2EE;font-size:28px;"></a>
+                                    </p>
+                                </div>
+                                </div>
+                            </div>
+                               {{if obj.status<=70}}
+                                <div class="lh6 p0-6" onclick="taskInfo('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
+                                {{/if}}
+                                {{if obj.status>70}}
+                                <div class="lh6 p0-6" onclick="biddingaddInfoorder('{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
+                                 {{/if}}
+                                <div class="fl width5 lh4" ><div>
+                                <p class="lh2 order-detail-text mt0">{{obj.fromAdr}} ->{{obj.endAdr}}</p>
+                                <p class="lh2 order-detail-text">发车时间：{{obj.deliveryDateDesc}}</p></div></div>
+                                <div class="fr width3 lh7 text-right get-order" style="padding-top:11px;">
+                                    <p class="lh5">
+                                        <a class="p6 f18 order-btn" style="padding: 5px 5px">
+                                            {{if obj.status<=70}}
+                                            查看任务
+                                            {{/if}}
+                                            {{if obj.status>70}}
+                                            补录
+                                            {{/if}}
+                                        </a></p>
+                                </div>
+                            </div>
+                        </div></div>
+                    <div style="clear:both;"></div>
                     {{/each}}
                 </script>
                 </div>

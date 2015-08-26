@@ -30,6 +30,7 @@ include("assets/js/public/iscroll.js");
 include("assets/js/setup/share.js");
 include("assets/js/setup/map.js");
 include("assets/js/order/addressScroll.js");
+include("assets/js/driver/trace.js");
 function mainPanleUnLoad(){
     console.log("mainPanleUnLoad")
 }
@@ -625,21 +626,36 @@ function queryIndexOrderCountSucc(data){
             '<div style="color:#636363;font-size:18px;">逾期</div>'+
             '</td></tr>';
     }else if (userType == 3){
+//        result =
+//            '<tr><td count = "'+data.obj.missionCount+'" ' +
+//            'onclick = "searchOrderFromIndex(6,'+data.obj.missionCount+' );"style="width:33%;">'+
+//            '<div style="color:#ef8305;font-size:24px;">'+data.obj.missionCount+'</div>'+
+//            '<div style="color:#636363;font-size:18px;">今日送</div>'+
+//            '</td><td count = "'+data.obj.finishedCount+'" ' +
+//            'onclick = "searchOrderFromIndex(7, '+data.obj.finishedCount+');" style="width:33%;border-left:1px solid #e6e6e6;'+
+//            'border-right: 1px solid #e6e6e6">'+
+//            '<div style="color:#ef8305;font-size:24px;">'+data.obj.finishedCount+'</div>'+
+//            '<div style="color:#636363;font-size:18px;">任务数</div>'+
+//            '</td>' +
+//             '<td count = "'+data.obj.unfinishedCount+'" ' +
+//            'onclick = "searchOrderFromIndex(8,'+data.obj.unfinishedCount+' );" style="width:33%;">'+
+//            '<div style="color:#ef8305;font-size:24px;">'+data.obj.unfinishedCount+'</div>'+
+//            '<div style="color:#636363;font-size:18px;">未配送</div>'+
+//            '</td></tr>';
+
+
         result =
-            '<tr><td count = "'+data.obj.missionCount+'" ' +
-            'onclick = "searchOrderFromIndex(6,'+data.obj.missionCount+' );"style="width:33%;">'+
-            '<div style="color:#ef8305;font-size:24px;">'+data.obj.missionCount+'</div>'+
-            '<div style="color:#636363;font-size:18px;">配送数</div>'+
-            '</td><td count = "'+data.obj.finishedCount+'" ' +
-            'onclick = "searchOrderFromIndex(7, '+data.obj.finishedCount+');" style="width:33%;border-left:1px solid #e6e6e6;'+
+            '<tr><td count = "'+data.obj.todayMissionCount+'" ' +
+            'onclick = "searchOrderFromIndex(10,'+data.obj.todayMissionCount+' );"style="width:33%;">'+
+            '<div style="color:#ef8305;font-size:24px;">'+data.obj.todayMissionCount+'</div>'+
+            '<div style="color:#636363;font-size:18px;">今日送</div>'+
+            '</td>' +
+            '<td count = "'+data.obj.deliveryMissionCount+'" ' +
+            'onclick = "searchOrderFromIndex(9, '+data.obj.deliveryMissionCount+');" style="width:33%;border-left:1px solid #e6e6e6;'+
             'border-right: 1px solid #e6e6e6">'+
-            '<div style="color:#ef8305;font-size:24px;">'+data.obj.finishedCount+'</div>'+
-            '<div style="color:#636363;font-size:18px;">已配送</div>'+
-            '</td><td count = "'+data.obj.unfinishedCount+'" ' +
-            'onclick = "searchOrderFromIndex(8,'+data.obj.unfinishedCount+' );" style="width:33%;">'+
-            '<div style="color:#ef8305;font-size:24px;">'+data.obj.unfinishedCount+'</div>'+
-            '<div style="color:#636363;font-size:18px;">未配送</div>'+
-            '</td></tr>';
+            '<div style="color:#ef8305;font-size:24px;">'+data.obj.deliveryMissionCount+'</div>'+
+            '<div style="color:#636363;font-size:18px;">任务数</div>'+
+            '</td>' ;
     }
     $('#home-module-table').empty();
     $('#home-module-table').append(result);
@@ -685,7 +701,7 @@ function initHomeFooter(userType){
 
 }
 
-function trace_panel(elm)
+function trace_panel_of_driver(elm)
 {
     $.ui.loadContent("#trace", false, false, "slide");
     if(elm!=undefined)
