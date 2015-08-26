@@ -13,7 +13,7 @@
                 <script id="taskListTemp" type="text/html">
                     {{each obj.data as obj i}}
                     {{if obj.status<=70}}
-                    <div id="task_{{obj.sendNo}}"  onclick="taskInfo('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
+                    <div id="task_{{obj.sendNo}}"  onclick="toLocationMapPanel('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
                     {{/if}}
                     {{if obj.status>70}}
                         <div id="task_{{obj.sendNo}}"  onclick="biddingaddInfoorder('{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">

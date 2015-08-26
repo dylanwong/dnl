@@ -157,6 +157,7 @@ function confirmhandoverorder(){
     }
 }
 function confirmdiffsignorder(){
+    localStorage.removeItem($(this).attr('signQtyItem'));
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
@@ -165,12 +166,11 @@ function confirmdiffsignorder(){
         querygoodlist();
 //    $('#signBtn').attr('disabled',"true");
 //    $('#signBtn').removeAttr("disabled");
-        $('#diffsignBtn').unbind('click').bind('click',function(){
-            confirmdiffsignorder2();
-        });
+
     }
 }
 function confirmdiffsignorder2(){
+
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
@@ -209,16 +209,7 @@ function confirmdiffsignorder2(){
         };
 
         getAjax(url,option,'addorderstatus_result_succ(data)');
-        var signQtyurl = baseUrl+"driver/signQty.action";
-        var goodslist = localStorage.getItem("signQtyItem");
 
-        if (JSON.parse(goodslist).length>0 ){
-            var qtyOptions = {
-                goodslist:goodslist
-            };
-            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
-        }
-        localStorage.removeItem("chocieorders");
     }
 }
 
@@ -406,6 +397,9 @@ function saveGoodQty(){
         ;
     }else{
         $.ui.loadContent('#signorders', false, false, 'slide');
+        $('#diffsignBtn').unbind('click').bind('click',function(){
+            confirmdiffsignorder2();
+        });
     }
 }
 function saveGoodQty_result_succ(data){
@@ -414,8 +408,18 @@ function saveGoodQty_result_succ(data){
 
 function addorderstatus_result_succ(data){
     localStorage.removeItem("chocieorders");
-    if(data.isSuc)
+    if(data.isSucc){
+        var signQtyurl = baseUrl+"driver/signQty.action";
+        var goodslist = localStorage.getItem("signQtyItem");
+        if (JSON.parse(goodslist).length>0 ){
+            var qtyOptions = {
+                goodslist:goodslist
+            };
+            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
+        }
+        localStorage.removeItem("chocieorders");
         errorPopup(data.msg);
+    }
     else{
         errorPopup(data.msg);
     }
@@ -471,7 +475,7 @@ function queryDetailList(){
         if(data != null){
 
         }else{
-            localStorage.setItem($(this).attr('dispatchNo'),JSON.stringify(goodslist ));
+            localStorage.setItem(dispatchNo,JSON.stringify(goodslist ));
         }
     }
 
@@ -618,12 +622,15 @@ function updategoodlistPanel(datas){
 function getGoodItemAche(dispatchNo){
     var data = JSON.parse(localStorage.getItem(dispatchNo));
     if(data != null){
-        for ( var i = 0,len = data.length;i<len ;i++){
+
             $("input[id=signText]").each(function() {
-                $(this).attr('articleNo') == data.articleNo;
-                $(this).val(data.signQty);
+                for ( var i = 0,len = data.length;i<len ;i++){
+                    if( $(this).attr('articleNo') == data[i].articleNo ){
+                        $(this).val(data[i].signQty);
+                    }
+                }
             });
-        }
+
        // $(input[id='signText'])
     }
 }
