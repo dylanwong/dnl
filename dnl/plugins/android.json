@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"android-package\" value=\"org.apache.cordova.device.Device\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Navigation\"><param name=\"android-package\" value=\"com.lovedudu.cordova.Navigation\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -139,6 +143,9 @@
             "PACKAGE_NAME": "com.sealinkin.dnl"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.sealinkin.dnl"
+        },
+        "com.lovedudu.cordova": {
             "PACKAGE_NAME": "com.sealinkin.dnl"
         }
     },
