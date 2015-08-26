@@ -27,9 +27,10 @@ var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
 //var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-var baseUrl = "http://192.168.16.114:8080/daonala_mobile/";
+//var baseUrl = "http://192.168.16.114:8080/daonala_mobile/";
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
+var baseUrl = "http://localhost:8080/daonala_mobile/";
 
 
 var omsManageUrl = "";

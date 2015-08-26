@@ -209,6 +209,7 @@ function taskInfo(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,ente
     $('#deliverordersTelButton').attr('href','tel:'+custphone);
     $('#followorderTelButton').attr('href','tel:'+custphone);
     $('#handoverordersTelButton').attr('href','tel:'+custphone);
+    debugger;
     getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
         , "setTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
