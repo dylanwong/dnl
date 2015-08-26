@@ -73,12 +73,9 @@ function biddingaddInfoorder(enterpriseno,deliveryNo){
     $('#optguideHeader').bind('click',function(){
         $.ui.loadContent("#driverboard", false, false, "slide");
     });
-
-
    // var data = JSON.parse(localStorage.getItem("currenttask"));
-
     $("#nextstup").attr("onclick","nextstup(4);");
-    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+    getAjax(taskDeatilqueryUrl,{'enterpriseno':enterpriseno,'deliveryNo':deliveryNo}
         , "setHistoryTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
 function setHistoryTaskCache(data){
