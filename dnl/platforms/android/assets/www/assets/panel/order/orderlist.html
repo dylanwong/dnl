@@ -114,7 +114,7 @@
 
             {{/each}}
         </script>
-      <script id="taskListTemp" type="text/html">
+      <script id="taskListTempOfOrderPage" type="text/html">
         {{each obj.data as obj i}}
 
 
@@ -132,13 +132,13 @@
                 </div>
 
                    {{if obj.status<=70}}
-                   <div class="lh6 p0-6" onclick="taskInfo('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
+                   <div class="lh6 p0-6" style="padding-top: 7px;" onclick="taskInfo('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
                     {{/if}}
                     {{if obj.status>70}}
-                    <div class="lh6 p0-6" onclick="biddingaddInfoorder('{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
+                    <div class="lh6 p0-6" style="padding-top: 7px;" onclick="biddingaddInfoorder('{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
                     {{/if}}
                     <div class="fl width5 lh4" ><div>
-                    <p class="lh2 order-detail-text mt0">{{obj.fromAdr}} ->{{obj.endAdr}}</p>
+                    <p class="lh2 order-detail-text mt0" >{{obj.fromAdr}} ->{{obj.endAdr}}</p>
                     <p class="lh2 order-detail-text">发车时间：{{obj.deliveryDateDesc}}</p></div></div>
                     <div class="fr width3 lh7 text-right get-order" style="padding-top:11px;">
                         <p class="lh5">

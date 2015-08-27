@@ -42,7 +42,7 @@ function queryTraceDescSucc(datas) {
         for(var index=0;index<obj.length;index++){
             var data =obj[index];
             var status = data.status;
-             dispatchNo = data.dispathchNo;
+             dispatchNo = data.dispatchNo;
             time = data.changeTimeDesc;
             desc = data.statusDesc;
             if (desc == "") {

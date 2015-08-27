@@ -121,7 +121,7 @@ function updateOrderlistPanel(data,flag){
             $.ui.showMask("我们正在拼命的加载数据...");
                 if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
                     $("#orderlistTitle").html("任务列表");
-                    result = template('taskListTemp',data);
+                    result = template('taskListTempOfOrderPage',data);
                 }else{
                     $("#orderlistTitle").html("订单列表");
                     result = template('orderListTemp',data);
@@ -134,7 +134,7 @@ function updateOrderlistPanel(data,flag){
                     $.ui.showMask("我们正在拼命的加载数据...");
 
                     $("#orderlistTitle").html("任务列表");
-                    result = template('taskListTemp',data);
+                    result = template('taskListTempOfOrderPage',data);
                 }else{
                     setCacheData("currentorder", data.obj[0], 1);
                     if( loginStatus==0 || loginStatus== '0' ){
