@@ -18,6 +18,7 @@ include("assets/js/order/orderdetail.js");
 include("assets/js/order/linkData.js");
 include("assets/js/driver/feedback.js");
 include("assets/js/driver/operateguide.js");
+include("assets/js/driver/orderLocationMap.js");
 include("assets/js/public/filetooms.js");
 include("assets/js/public/tools.js");
 //include("assets/js/.js");

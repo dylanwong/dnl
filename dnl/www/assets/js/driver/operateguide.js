@@ -172,7 +172,7 @@ function querysignchioceorderlist(){
 function queryallchioceorderlist(data){
     $.ui.unblockUI();
     $.ui.showMask("我们正在拼命的加载数据...");
-    var url = baseUrl+"order/query_orderbytraceorder.action";
+    var traceorderurl = baseUrl+"order/query_orderbytraceorder.action";
     //var data = JSON.parse(localStorage.getItem("currenttask"));
     var option = {
         enterpriseNo:data.enterpriseNo,
@@ -182,7 +182,7 @@ function queryallchioceorderlist(data){
         status:'',
         type:'4'   //补录订单
     };
-    getAjax(url,option,'queryorders_result_succ(data,4)');
+    getAjax(traceorderurl,option,'queryorders_result_succ(data,4)');
 }
 function queryorders_result_succ(data,type){
 
@@ -312,6 +312,8 @@ function nextstup(nexttype){
 
                 }
                 ordernos.push(orderno);
+                localStorage.removeItem($(this).attr('dispatchNo'));
+                localStorage.removeItem($(this).attr('signQtyItem'));
                 //suborderno='"+obj[i].suborderno+"' transno='"+obj[i].transno+"'
             }
         );
