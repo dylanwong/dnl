@@ -163,7 +163,7 @@ function changeTraceOrder() {
         });
         $.ui.popup({
             title: "切换订单",
-            message: "<div>" + desc + "</div>",
+            message: "<div style='height: 200px; overflow: scroll;'>" + desc + "</div>",
             cancelCallback: function () {
             },
             cancelText: '取消',

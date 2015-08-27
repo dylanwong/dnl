@@ -107,7 +107,7 @@ function updateOrderlistPanel(data,flag){
                 $("#orderlistHeaderId").attr('onclick',"$.ui.loadContent('#home2', false, false, 'slide')");
             }
             setRounteListCache();
-            if (data.obj.data.length > 1) {
+            if (data.obj.data.length > 0) {
             //   $("#orderdetailBackId").attr('onclick',"$.ui.loadContent('#orderlist', false, false, 'slide')");
             //  $("#orderlistHeaderId").attr('onclick',"$.ui.loadContent('#search', false, false, 'slide')");
 
@@ -119,7 +119,6 @@ function updateOrderlistPanel(data,flag){
 //            }
             //for (var k in data.obj.data) {
             $.ui.showMask("我们正在拼命的加载数据...");
-                var result ='';
                 if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
                     $("#orderlistTitle").html("任务列表");
                     result = template('taskListTemp',data);
@@ -130,16 +129,24 @@ function updateOrderlistPanel(data,flag){
 
 
         } else if (data.obj.recordsTotal == 1) {
-            setCacheData("currentorder", data.obj[0], 1);
-            if( loginStatus==0 || loginStatus== '0' ){
-                setCacheData("currentorder",data.obj.data[0] ,1);
-               // JSON.stringify(data.obj.data[k])
-                traceSingleInfo();
-            }else{
-                //$("#orderdetailBackId").attr('onclick',"$.ui.loadContent('#orderlist', false, false, 'slide')");
-                setCacheData("currentorder",data.obj.data[0] ,1);
-                traceSingleInfo33();
-            }
+                if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
+                    $.ui.loadContent("#orderlist", false, false, "slide");
+                    $.ui.showMask("我们正在拼命的加载数据...");
+
+                    $("#orderlistTitle").html("任务列表");
+                    result = template('taskListTemp',data);
+                }else{
+                    setCacheData("currentorder", data.obj[0], 1);
+                    if( loginStatus==0 || loginStatus== '0' ){
+                        setCacheData("currentorder",data.obj.data[0] ,1);
+                        // JSON.stringify(data.obj.data[k])
+                        traceSingleInfo();
+                    }else{
+                        //$("#orderdetailBackId").attr('onclick',"$.ui.loadContent('#orderlist', false, false, 'slide')");
+                        setCacheData("currentorder",data.obj.data[0] ,1);
+                        traceSingleInfo33();
+                    }
+                }
         } else {
             //result = nullTrace;
         }
