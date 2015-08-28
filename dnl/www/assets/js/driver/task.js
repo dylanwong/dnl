@@ -225,6 +225,8 @@ function setTaskCache(data){
 //        $('#deliverordersTelButton').attr('href','tel:'+data.custphone);
 //        $('#followorderTelButton').attr('href','tel:'+data.custphone);
 //        $('#handoverordersTelButton').attr('href','tel:'+data.custphone);
+    }else{
+    //   errorPopup('该任务缺少任务信息');
     }
 }
 

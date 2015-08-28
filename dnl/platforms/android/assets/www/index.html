@@ -577,12 +577,12 @@ data-defer:加载一个html进来
      data-footer="addInfofooter">
 </div>
 
-<div class="panel "
-     title="" id="locationMap" data-defer="assets/panel/driver/locationMap.html"
+<div class="panel p0 no-scroll"
+     title="" id="locationMapPanel" data-defer="assets/panel/driver/locationMap.html"
      data-load=""
      data-unload=""
-     data-header="allHeader"
-     data-footer="none">
+     data-header="locationMapHeader"
+     data-footer="locationfooter">
 </div>
 
 <div class="panel p0"
@@ -708,6 +708,14 @@ data-defer:加载一个html进来
 
     </a>
     <h1 id="taskTitle" class="">任务列表</h1>
+    <div></div>
+</header>
+
+<header id="locationMapHeader">
+    <a class="headerBack"  onclick="$.ui.loadContent('#driverboard', false, false, 'slide')" >
+
+    </a>
+    <h1 id="locationMaptitle" class=""></h1>
     <div></div>
 </header>
 <header id="tracegobackHeader">
@@ -1014,6 +1022,12 @@ data-defer:加载一个html进来
     </div>
 </footer>
 
+<footer align="center" id="locationfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="toOperatePanel()"
+            class="btn  btn-block">反馈</button>
+</footer>
 <footer align="center" id="chocieordersfooter" style="  padding-left: 15%;background: white;">
     <button role="button"
             style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"

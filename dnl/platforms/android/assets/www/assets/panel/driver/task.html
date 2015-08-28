@@ -24,7 +24,7 @@
                                 </div>
                             </div>
                                {{if obj.status<=70}}
-                                <div class="lh6 p0-6" onclick="taskInfo('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
+                                <div class="lh6 p0-6" onclick="toLocationMapPanel('{{obj.fromAdr}}','{{obj.endAdr}}','{{obj.sendNo}}','{{obj.licensePlate}}','{{obj.custphone}}','{{obj.licensePlate}}','{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">
                                 {{/if}}
                                 {{if obj.status>70}}
                                 <div class="lh6 p0-6" onclick="biddingaddInfoorder('{{obj.enterpriseNo}}','{{obj.deliveryNo}}')">

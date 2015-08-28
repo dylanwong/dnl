@@ -19,6 +19,7 @@ include("assets/js/order/linkData.js");
 include("assets/js/driver/feedback.js");
 include("assets/js/driver/operateguide.js");
 include("assets/js/driver/orderLocationMap.js");
+include("assets/js/public/navigation.js");
 include("assets/js/public/filetooms.js");
 include("assets/js/public/tools.js");
 //include("assets/js/.js");
@@ -200,11 +201,11 @@ function driverboard_panel(){
     }else
     {
         $.ui.loadContent("#driverboard", false, false, "slide");
-        $("#taskHeader").html("<div style='float:left;width:15%;cursor:pointer;'>" +
-            "<a onclick='home_panel()'>" +
-            "<img src='assets/img/back.png' />" +
-            "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'>首页</b></a></div>" +
-            "<div style='float:left;width:75%;text-align:center;margin:5px auto;' " +
+        $("#taskHeader").html("<div style='float:left;'>" +
+            "<a onclick='home_panel()' class='headerBack'  >" +
+            "<img src='assets/img/backPage.png' height='32' />" +
+            "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'></b></a></div>" +
+            "<div style='float:left;width:100%;text-align:center;margin:5px auto;' " +
             " ><div class='btn-group' role='group'><button" +
             " style='width:70px;' onclick='toggleTaskTabs(this)' status='0' type='button' " +
             "class='btn btn-default tabTaskN'>当前</button>" +
@@ -217,6 +218,24 @@ function driverboard_panel(){
     }
 }
 
+function initlocationMapHeader(){
+
+   /* <a  class="headerBack"  onclick="backorderMaindetail();" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>*/
+    $("#locationMapHeader").html("<div style='float:left;width:15%;cursor:pointer;'>" +
+        "<a onclick='$.ui.goBack(-1)' class='headerBack'>" +
+        "<img src='assets/img/backPage.png' height='32'/>" +
+        "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'></b></a></div>" +
+        "<div style='float:left;width:100%;text-align:center;margin:5px auto;' " +
+        " ><div class='btn-group' role='group'><button" +
+        " style='width:70px;' onclick='toggleMapTabs(this)' status='0' type='button' " +
+        "class='btn btn-default tabMapN'>发货地</button>" +
+        " <button style='width:70px;' onclick='toggleMapTabs(this)' status='1'  type='button' " +
+        "class='btn btn-default tabMapY'  >" +
+        "收货地</button></div></div>" +
+        "<div style='clear:both;width:10%'></div>");
+}
 
 /*订单查询*/
 function searchorder_panel(){
