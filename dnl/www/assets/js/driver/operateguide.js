@@ -355,6 +355,9 @@ function nextstup(nexttype){
             lOCATIONID = 'currentlocation';
             getCurrentPositionAddress();
             imgLocation='3';
+            $('#diffsignBtn').unbind().bind('click',function(){
+                confirmdiffsignorder();
+            });
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }else if(nexttype=='4'){
             $.ui.loadContent("#addInfo", false, false, "slide");
@@ -362,9 +365,7 @@ function nextstup(nexttype){
             $("#addInfocustcity").text(data.endAdr);
             $("#addInfoconsignno").text(data.sendNo);
             imgLocation='4';
-            $('#diffsignBtn').unbind('click').bind('click',function(){
-                confirmdiffsignorder();
-            });
+
 
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }

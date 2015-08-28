@@ -397,7 +397,7 @@ function saveGoodQty(){
         ;
     }else{
         $.ui.loadContent('#signorders', false, false, 'slide');
-        $('#diffsignBtn').unbind('click').bind('click',function(){
+        $('#diffsignBtn').unbind().bind('click',function(){
             confirmdiffsignorder2();
         });
     }
@@ -486,8 +486,8 @@ function queryDetailList(){
     $('#signorderlist').empty();
    if(datas.length>1){
    $(datas).each(function (index,data) {
-       detail = '<li href="#" onclick="querygoodlist(this);"  '
-           +'enterpriseno="'+data.enterpriseNo+'" dispatchno="'+data.dispatchNo+'"  class="f2" style="margin-top:4px;">'+
+       detail = '<li href="#" onclick="querygoodlist2(this);"  '
+           +'enterpriseno="'+data.enterpriseNo+'" orderNo="'+data.subOrderNo+'" dispatchno="'+data.dispatchNo+'"  class="f2" style="margin-top:4px;">'+
            '<div class="f2" style="height: 100px;margin-top:14px;">'+
            '<div class="" style="float:left;width: 90%;margin-top:14px;">'+
            '<div ><div style="float:left;width:90%;margin-top:14px;">'+
@@ -511,7 +511,7 @@ function queryDetailList(){
        $(datas).each(function (index,data) {
            detail_list += '<li href="#" onclick="querygoodlist2(this);" '
                +' enterpriseno="'+data.enterpriseNo+'" dispatchno="'+data.dispatchNo+'" '+
-               ' orderNo="'+data.orderNo+'" class="f2" style="margin-top:4px;">'+
+               ' orderNo="'+data.subOrderNo+'" class="f2" style="margin-top:4px;">'+
                '<div class="f2" style="height: 100px;margin-top:14px;">'+
                '<div class="" style="float:left;width: 90%;margin-top:14px;">'+
                '<div ><div style="float:left;width:90%;margin-top:14px;">'+

@@ -58,11 +58,12 @@ function queryAllOrders_result_succ(data){
             +"<br/>发货地址:"+data.obj[k].ownerAddr]);
 
         }
-        for (var k= 0,len = data.obj.length; k<len; k++) {
+        for (var k= 0 ; k<mapdata_length; k++) {
             data_info.push([data.obj[k].custlatitude,data.obj[k].custlongtitude,
                     "联系人 ："+data.obj[k].custContacts
                     +"<a  href='tel:'"+data.obj[k].custPhone+"''>"
-                    +"<i class='icon-local-phone fs24'></i></a>"+"<br/>收货地址"+data.obj[k].custAddr]);
+                    +"<i class='icon-local-phone fs24'></i></a>"
+                    +"<br/>收货地址"+data.obj[k].custAddr]);
         }
 
         var opts = {
@@ -77,6 +78,7 @@ function queryAllOrders_result_succ(data){
             var singlepoint = new BMap.Point(data_info[i][0],data_info[i][1]);
             var content = data_info[i][2];
               // 将标注添加到地图中
+            console.info(content);
             if ( data_info[i] ){
                 addMarker(singlepoint,i,content);
               //  addClickHandler(content,marker);
@@ -110,7 +112,8 @@ function queryAllOrders_result_succ(data){
     }else{
         $.ui.loadContent("#operateguide", false, false, "slide");
         $('#operateguideBackBtn').unbind().bind('click',function(){
-            $.ui.loadContent("#driverboard", false, false, "slide");
+           // $.ui.loadContent("#driverboard", false, false, "slide");
+            driverboard_panel();
         });
     }
 
