@@ -365,7 +365,7 @@ function nextstup(nexttype){
             $('#diffsignBtn').unbind('click').bind('click',function(){
                 confirmdiffsignorder();
             });
-           
+
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }
         else{
