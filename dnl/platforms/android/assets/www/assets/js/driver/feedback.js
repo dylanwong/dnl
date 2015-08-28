@@ -411,7 +411,7 @@ function addorderstatus_result_succ(data){
     if(data.isSucc){
         var signQtyurl = baseUrl+"driver/signQty.action";
         var goodslist = localStorage.getItem("signQtyItem");
-        if (JSON.parse(goodslist).length>0 ){
+        if (goodslist!=null && JSON.parse(goodslist).length>0 ){
             var qtyOptions = {
                 goodslist:goodslist
             };

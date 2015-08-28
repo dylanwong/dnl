@@ -224,7 +224,7 @@ function initlocationMapHeader(){
         <img src="assets/img/backPage.png" height="32" />
     </a>*/
     $("#locationMapHeader").html("<div style='float:left;width:15%;cursor:pointer;'>" +
-        "<a onclick='$.ui.goBack(-1)' class='headerBack'>" +
+        "<a id='locationMapBackbtn' class='headerBack'>" +
         "<img src='assets/img/backPage.png' height='32'/>" +
         "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'></b></a></div>" +
         "<div style='float:left;width:100%;text-align:center;margin:5px auto;' " +
@@ -235,6 +235,12 @@ function initlocationMapHeader(){
         "class='btn btn-default tabMapY'  >" +
         "收货地</button></div></div>" +
         "<div style='clear:both;width:10%'></div>");
+//    $('#locationMapBackbtn').bind('click',function(){
+//        $.ui.loadContent("#driverboard_panel", false, false, "slide");
+//    });
+    $('#locationMapBackbtn').unbind().bind('click',function(){
+        $.ui.loadContent("#driverboard", false, false, "slide");
+    });
 }
 
 /*订单查询*/

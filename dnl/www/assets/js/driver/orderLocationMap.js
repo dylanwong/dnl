@@ -20,12 +20,12 @@ function toLocationMapPanel(fromAdr,endAdr,sendNo,licensePlate,custphone,license
     $("#mapwrapper").css('top',2*($("#locationMapPanel").height()-$('#header').height())/3);
     initlocationMapHeader();
 
-    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+    getAjax(taskDeatilqueryUrl,{'enterpriseno':enterpriseno,'deliveryNo':deliveryNo}
         , "setTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
     var queryCoordinateUrl = baseUrl+"base/queryCoordinate.action";
     var data = JSON.parse(localStorage.getItem("currenttask"));
     var option = {
-        enterpriseNo:enterpriseno,
+        enterpriseno:enterpriseno,
         deliveryNo:deliveryNo
     };
     getAjax(queryCoordinateUrl,option,'queryAllOrders_result_succ(data)');
@@ -38,6 +38,9 @@ function queryAllOrders_result_succ(data){
     try{
     showAllOrderLocationList(data);
     if(data.isSucc && (data.obj !=null && data.obj !='')){
+        $('#operateguideBackBtn').unbind().bind('click',function(){
+            $.ui.loadContent("#locationMapPanel", false, false, "slide");
+        });
         $.ui.loadContent("#locationMapPanel", false, false, "slide");
         driver_map = new BMap.Map("location_map_content");
         localStorage.setItem('currenttaskorder',JSON.stringify(data) );
@@ -103,8 +106,12 @@ function queryAllOrders_result_succ(data){
             var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
             driver_map.openInfoWindow(infoWindow,point); //开启信息窗口
         }
+
     }else{
         $.ui.loadContent("#operateguide", false, false, "slide");
+        $('#operateguideBackBtn').unbind().bind('click',function(){
+            $.ui.loadContent("#driverboard", false, false, "slide");
+        });
     }
 
     $.ui.unblockUI();

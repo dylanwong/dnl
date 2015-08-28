@@ -318,6 +318,7 @@ function nextstup(nexttype){
             }
         );
         localStorage.setItem("chocieorders",JSON.stringify(ordernos ));
+        localStorage.removeItem("signQty");
         var data = JSON.parse(localStorage.getItem("currenttask"));
         if(nexttype=='0'){
             $.ui.loadContent("#deliverorders", false, false, "slide");
@@ -364,7 +365,7 @@ function nextstup(nexttype){
             $('#diffsignBtn').unbind('click').bind('click',function(){
                 confirmdiffsignorder();
             });
-            localStorage.removeItem("signQty");
+
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }
         else{
