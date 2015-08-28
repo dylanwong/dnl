@@ -34,6 +34,7 @@ var baseUrl = "http://192.168.16.114:8080/daonala_mobile/";
 //var baseUrl = "http://localhost:8080/daonala_mobile/";
 
 
+
 var omsManageUrl = "";
 
 var saveFeedbackUrl = baseUrl + "base/saveFeedback.action";

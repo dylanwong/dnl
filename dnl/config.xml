@@ -52,7 +52,7 @@
             name="android-package"
             value="org.apache.cordova.splashscreen.SplashScreen" />
     </feature>
-
+ 
     <preference
         name="SplashScreen"
         value="screen" /> <!-- 不带后缀png的文件名，默认是screen -->
@@ -60,5 +60,6 @@
     <preference
         name="wechatappid"
         value="wx698db989e73cb314" />
+    
 
 </widget>

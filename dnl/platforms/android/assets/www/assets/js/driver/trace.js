@@ -42,7 +42,7 @@ function queryTraceDescSucc(datas) {
         for(var index=0;index<obj.length;index++){
             var data =obj[index];
             var status = data.status;
-             dispatchNo = data.dispathchNo;
+             dispatchNo = data.dispatchNo;
             time = data.changeTimeDesc;
             desc = data.statusDesc;
             if (desc == "") {
@@ -163,7 +163,7 @@ function changeTraceOrder() {
         });
         $.ui.popup({
             title: "切换订单",
-            message: "<div>" + desc + "</div>",
+            message: "<div style='height: 200px; overflow: scroll;'>" + desc + "</div>",
             cancelCallback: function () {
             },
             cancelText: '取消',
