@@ -333,28 +333,34 @@ function addInfororder(){
 //< parseInt( $(elm).parent().next().attr('signqtybak'))
 function minusValue(elm) {
     try{
-    if ( parseFloat( $(elm).parent().next().val() ) > 0 ) {
-        $(elm).parent().next().attr('value', parseFloat( $(elm).parent().next().val() )-1) ;
+    if ( parseFloat( $(elm).parent().next().val() ) >= 1 ) {
+      //  $(elm).parent().next().val( parseFloat( $(elm).parent().next().val()).toFixed(1)-1) ;
+        $(elm).parent().next().val(
+            parseFloat(parseFloat($(elm).parent().next().val()).toFixed(1)
+                -parseFloat(1).toFixed(1) ).toFixed(1)
+        );
     } else {
-        $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
+        $(elm).parent().next().val( $(elm).parent().next().attr('signqtybak') );
     }
     $(elm).parent().parent().parent().parent().parent().find('#diffQty').text(
-        $(elm).parent().next().attr('value')-$(elm).parent().next().attr('signqtybak'));
+        parseFloat( $(elm).parent().next().val()
+            -$(elm).parent().next().attr('signqtybak') ).toFixed(1) );
 
     }catch(e){
-        $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
+        $(elm).parent().next().val( $(elm).parent().next().attr('signqtybak') );
     }
 
 }
 function plusValue(elm) {
     try{
         if ( parseFloat( $(elm).parent().prev().val() ) >= 0 ) {
-            $(elm).parent().prev().attr('value',parseFloat($(elm).parent().prev().val()) + 1);
+            //$(elm).parent().prev().attr('value',parseFloat($(elm).parent().prev().val()) + 1);
+            $(elm).parent().prev().val(parseFloat($(elm).parent().prev().val()) + 1);
         } else {
-            $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+            $(elm).parent().prev().val(parseFloat($(elm).parent().prev().attr('signqtybak') ) );
         }
 
-        var diff = $(elm).parent().prev().attr('value')-$(elm).parent().prev().attr('signqtybak');
+        var diff = $(elm).parent().prev().val()-$(elm).parent().prev().attr('signqtybak');
         if( diff == 0){
             $(elm).parent().parent().parent().parent().parent().find('#diffQty').removeClass('redClass');
         }else{
@@ -362,7 +368,7 @@ function plusValue(elm) {
             $(elm).parent().parent().parent().parent().parent().find('#diffQty').text(diff);
         }
     }catch(e){
-        $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+        $(elm).parent().prev().val( $(elm).parent().prev().attr('signqtybak') );
     }
 }
 function saveGoodQty(){

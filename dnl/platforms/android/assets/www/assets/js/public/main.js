@@ -249,6 +249,10 @@ function initlocationMapHeader(){
             // $.ui.loadContent("#locationMapPanel", false, false, "slide");
             searchOrderFromIndex(10,3);
         });
+    }else {
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            $.ui.loadContent("#driverboard", false, false, "slide");
+        });
     }
 
 }
