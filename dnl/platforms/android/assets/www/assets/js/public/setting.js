@@ -21,21 +21,21 @@ var searchFlag = 0;//0     1为首页查询条件
 
 
 //var queryOrderList=baseUrl+"order/query_deliverorderlistfordirver.action";
-var omsUrl="http://192.168.16.98:8080/fileserver/struts_uploadReturnUrl.action";
+var omsUrl="http://120.24.218.170:8080/fileserver/struts_uploadReturnUrl.action";
 
-var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
+var smsManageUrl = "http://120.24.218.170/daonala_manage//uploadFiles/";
 //var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-var baseUrl = "http://192.168.16.87:8080/daonala_mobile/";
+//var baseUrl = "http://192.168.16.87:8080/daonala_mobile/";
 
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
-//var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
-<<<<<<< HEAD
+var baseUrl = "http://120.24.218.170/daonala_mobile/";
+
 //var baseUrl = "http://localhost:8080/daonala_mobile/";
-=======
-var baseUrl = "http://192.168.16.98/daonala_mobile/";
->>>>>>> c42e4d7894391604921ca47ca1cfcf3eb4833153
+
+//var baseUrl = "http://192.168.16.98/daonala_mobile/";
+
 
 
 
@@ -119,6 +119,12 @@ function onDeviceReadySettingEvents() {
     init_homepage();
     navigator.splashscreen.hide();
     androidQueryInstallId();
+    var Navigation = cordova.require('com.lovedudu.cordova.Navigation');
+    Navigation.route(function (message) {
+        alert(message);
+    }, function (message) {
+        alert(message);
+    });
 
   //  toTestPage();
 }

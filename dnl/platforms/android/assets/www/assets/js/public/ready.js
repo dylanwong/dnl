@@ -1139,16 +1139,23 @@ function myLocationOnSuccess(position)
 }
 
 
-//function init_dom()
-//{
-//    var height = $("#mine2").height();
-//    $("#mine2Content").css('height',height);
-//
-//    $("#home-content-panel").css('height',$("#home").height());
-//    $("#home-module").height($("#home").height()-$("#ad").height());
-//
-//}
-
+//msg内容 msgType类型
+function pushMsg(message, method) {
+    $.ui.popup({
+        title: "您有一条新消息",
+        message: message,
+        cancelText: "忽略",
+        cancelCallback: function () {
+        },
+        cancelClass: "popup-btn",
+        doneText: "立即查看",
+        doneClass: "popup-btn",
+        doneCallback: function () {
+            eval(method);
+        },
+        cancelOnly: false
+    });
+}
 
 
 

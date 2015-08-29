@@ -3,13 +3,14 @@
  */
 /**提取货物确认**/
 function deliveryorder() {
-    $.ui.blockUI(.3);
-    $.ui.showMask('正在提货中...');
+
     if ($("#deliveroperater").val() == '' || $("#deliveroperater") == undefined) {
         errorPopup('请输入交接人');
     }else if($("#deliverremarks").val() == '' || $("#deliverremarks") == undefined){
         errorPopup('请输入备注');
     }else {
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在提货中...');
             var chk_value = [];
             $("img[name=picture]").each(function () {
                 var newfileName = $(this).attr("fileName");
@@ -61,15 +62,15 @@ function deliveryorder() {
 
 /**反馈确认**/
 function confirmfolloworder(){
-    $.ui.blockUI(.3);
-    $.ui.showMask('正在反馈中...');
+
     if($("#followoperater").val()==''||$("#followoperater")==undefined){
         errorPopup('请输入操作人');
     }else if($("#followremarks").val() == '' || $("#followremarks") == undefined){
         errorPopup('请输入备注');
     }else {
 //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
-
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在反馈中...');
         var substatus='40';
         if ($('#followstatus').val() == '异常反馈') {
 //        <option value="在途异常">在途异常</option>
@@ -119,13 +120,14 @@ function confirmfolloworder(){
 
 /**交接货物确认**/
 function confirmhandoverorder(){
-    $.ui.blockUI(.3);
-    $.ui.showMask('正在交接中...');
+
     if($("#handoveroperater").val()==''||$("#handoveroperater")==undefined){
         errorPopup('请输入交接人');
     }else if($("#handoverremarks").val() == '' || $("#handoverremarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在交接中...');
     var chk_value = [];
     $("img[name=picture]").each(function() {
         var newfileName=$(this).attr("fileName");
@@ -175,13 +177,14 @@ function confirmdiffsignorder(){
     }
 }
 function confirmdiffsignorder2(){
-    $.ui.blockUI(.3);
-    $.ui.showMask('正在签收中...');
+
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在签收中...');
         var chk_value = [];
         $("img[name=picture]").each(function() {
             var newfileName=$(this).attr("fileName");
@@ -221,13 +224,14 @@ function confirmdiffsignorder2(){
 
 /**签收确认**/
 function confirmsignorder(){
-    $.ui.blockUI(.3);
-    $.ui.showMask('正在签收中...');
+
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在签收中...');
         var chk_value = [];
         $("img[name=picture]").each(function() {
             var newfileName=$(this).attr("fileName");
@@ -277,13 +281,14 @@ function confirmsignorder(){
 
 /**补录确认**/
 function addInfororder(){
-    $.ui.blockUI(.3);
-    $.ui.showMask('正在补录中...');
+
     if($("#addInfooperater").val()==''||$("#addInfooperater")==undefined){
         errorPopup('请输入补录人');
     }else if($("#addInforemarks").val() == '' || $("#addInforemarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在补录中...');
         var chk_value = [];
         $("img[name=picture]").each(function() {
             var newfileName=$(this).attr("fileName");

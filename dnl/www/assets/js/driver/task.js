@@ -143,7 +143,7 @@ function updateTaskPanel(data, flag) {
             driverLastPage = 0;
 
         }else{
-            $("#tasklist_ul").append("查询无任务");
+            $("#tasklist_ul").append("<div align='center' style='margin: 10px;'>查无任务...</div>");
              //   errorPopup('查无任务');
         }
     }else{

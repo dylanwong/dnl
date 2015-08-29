@@ -237,7 +237,8 @@ function initlocationMapHeader(){
         "<div style='clear:both;width:10%'></div>");
     if(driverLastPage == 0){
         $('#locationMapBackbtn').unbind().bind('click',function(){
-            $.ui.loadContent("#driverboard", false, false, "slide");
+            driverboard_panel();
+          //  $.ui.loadContent("#driverboard", false, false, "slide");
         });
     }else if(driverLastPage == 1){
         $('#locationMapBackbtn').unbind().bind('click',function(){
@@ -251,9 +252,11 @@ function initlocationMapHeader(){
         });
     }else {
         $('#locationMapBackbtn').unbind().bind('click',function(){
-            $.ui.loadContent("#driverboard", false, false, "slide");
+            driverboard_panel();
+            //$.ui.loadContent("#driverboard", false, false, "slide");
         });
     }
+    console.info('driverLastPage :'+driverLastPage);
 
 }
 

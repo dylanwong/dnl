@@ -210,15 +210,17 @@ public class CordovaApp extends CordovaActivity {
 						String parameters = "";
 
 						for (String i : parameter.split(",")) {
-							parameters += "'" + i + "',";
+							parameters += "\"" + i + "\"" + ",";// 添加JS引号转义
 						}
-						parameters = parameters.substring(0, parameters.length() - 1);
-						parameters = method + "(" + parameters + ")";
-						method(message);
+						parameters = parameters.substring(0,
+								parameters.length() - 1);
+						parameters = "'" + method + "(" + parameters + ")"
+								+ "'";
+						method(message + "接收中");
+						postMessage("splashscreen", "hide");
+						loadUrl("javascript:setTimeout(function(){pushMsg('"
+								+ message + "'," + parameters + " )},2000) ");
 
-						loadUrl("javascript:" + parameters + " ");
-						
-						
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

@@ -12,6 +12,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.sealinkin.dnl.Cons;
+import com.sealinkin.dnl.CordovaApp;
+
 public class Navigation extends CordovaPlugin {
 
     @SuppressLint("NewApi")

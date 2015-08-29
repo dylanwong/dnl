@@ -128,6 +128,11 @@ function queryAllOrders_result_succ(data){
                 // $.ui.loadContent("#locationMapPanel", false, false, "slide");
                 searchOrderFromIndex(10,3);
             });
+        }else {
+            $('#operateguideBackBtn').unbind().bind('click',function(){
+                // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+                driverboard_panel();
+            });
         }
 //        $('#operateguideBackBtn').unbind().bind('click',function(){
 //           // $.ui.loadContent("#driverboard", false, false, "slide");
