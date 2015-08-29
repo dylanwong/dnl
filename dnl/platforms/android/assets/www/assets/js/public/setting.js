@@ -31,7 +31,7 @@ var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
 
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
-var baseUrl = "http://localhost:8080/daonala_mobile/";
+var baseUrl = "http://192.168.16.98/daonala_mobile/";
 
 
 

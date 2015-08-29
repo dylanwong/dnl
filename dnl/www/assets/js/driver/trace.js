@@ -149,38 +149,49 @@ function changeTraceOrder() {
     if (traceOrderArray.length == 0) {
         errorPopup('该运输单无订单数据!');
     } else {
-        var desc = "";
+        //var desc = "";
+        var options="";
         $(traceOrderArray).each(function (i, data) {
-            desc += "<a dataId=" + data.orderNo + " " +
-                "subOrderNo="+data.subOrderNo+" " +
-                "enterpriseNo="+data.enterpriseNo+" " +
-                "dispatchNo="+data.dispatchNo+" " +
-                "systemNo="+data.systemNo+" " +
-                "style='color:#767A80;display:block;' " +
-                "href='javascript:;' onclick='selTraceOrder(this)'>" +
-                "<div  " +
-                " style='border-bottom: 1px solid #ccc;margin: 10px'>" + data.subOrderNo + "</div></a>";
+//            desc += "<a dataId=" + data.orderNo + " " +
+//                "subOrderNo="+data.subOrderNo+" " +
+//                "enterpriseNo="+data.enterpriseNo+" " +
+//                "dispatchNo="+data.dispatchNo+" " +
+//                "systemNo="+data.systemNo+" " +
+//                "style='color:#767A80;display:block;' " +
+//                "href='javascript:;' onclick='selTraceOrder(this)'>" +
+//                "<div  " +
+//                " style='border-bottom: 1px solid #ccc;margin: 10px'>" + data.subOrderNo + "</div></a>";
+            options+="<option value='"+data.orderNo+"-"+data.subOrderNo+"-"+data.enterpriseNo+"-"+data.dispatchNo+"-"+data.systemNo+"'>"+data.subOrderNo+"</option>";
         });
-        $.ui.popup({
-            title: "切换订单",
-            message: "<div style='height: 200px; overflow-y:scroll;'>" + desc + "</div>",
-            cancelCallback: function () {
-            },
-            cancelText: '取消',
-            cancelOnly: true,
-            cancelClass: "popup-btn"
-        });
+//        $.ui.popup({
+//            title: "切换订单",
+//            message: "<div style='height: 200px; overflow-y:scroll;'>" + desc + "</div>",
+//            cancelCallback: function () {
+//            },
+//            cancelText: '取消',
+//            cancelOnly: true,
+//            cancelClass: "popup-btn"
+//        });
+        $("#transNo_select").empty();
+        $("#transNo_select").append(options);
+        $('#transNo_select').mobiscroll('show');
     }
 
 }
 
 function selTraceOrder(elm) {
-    var orderNo = $(elm).attr('dataId');
-    var subOrderNo = $(elm).attr('subOrderNo');
-    var  dispatchNo = $(elm).attr('dispatchNo');
-    var   enterpriseNo= $(elm).attr('enterpriseNo');
-    var   systemNo= $(elm).attr('systemNo');
+//    var orderNo = $(elm).attr('dataId');
+//    var subOrderNo = $(elm).attr('subOrderNo');
+//    var  dispatchNo = $(elm).attr('dispatchNo');
+//    var   enterpriseNo= $(elm).attr('enterpriseNo');
+//    var   systemNo= $(elm).attr('systemNo');
+    var orderNo = elm.orderNo;
+    var subOrderNo = elm.subOrderNo;
+    var  dispatchNo = elm.dispatchNo;
+    var   enterpriseNo= elm.enterpriseNo;
+    var   systemNo= elm.systemNo;
     $("#traceOrderSelNoDelivery").html(subOrderNo);
     var currentTask =  JSON.parse(localStorage.getItem("currenttask"));
     queryTraceDesc(enterpriseNo, systemNo, dispatchNo, currentTask.sendNo, currentTask.deliveryNo);
+    //$('#transNo_select').mobiscroll('hide');
 }

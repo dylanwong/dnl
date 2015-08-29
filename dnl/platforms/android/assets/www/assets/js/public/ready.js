@@ -402,83 +402,113 @@ $.ui.ready(function(){
 
     });
 
+var taskTaskList=jQuery('#transNo_select').mobiscroll().select({
+    theme: "android-ics light",     // Specify theme like: theme: 'ios' or omit setting to use default
+    mode: "mixed",       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
+    display: "bottom", // Specify display mode like: display: 'bottom' or omit setting to use default
+    lang: "zh"      ,  // Specify language like: lang: 'pl' or omit setting to use default
+    onBeforeShow: function (html, inst) {
+    },
+    onShow: function () {
+
+    },
+    onClose: function () {
+
+    },
+    onCancel: function () {
+
+    },
+    onSelect: function (v, inst) {
+        console.log(inst.values);
+        var valuesArray=inst.values[0].split("-");
+        var elem={
+            orderNo:valuesArray[0],
+            subOrderNo:valuesArray[1],
+            enterpriseNo:valuesArray[2],
+            dispatchNo:valuesArray[3],
+            systemNo:valuesArray[4]
+        };
+        selTraceOrder(elem);
+
+    }
+});
 
 
 
-   /* mainScroller = $("#driverboard").scroller(); //Fetch the scroller from cache
-    //Since this is a App Framework UI scroller, we could also do
-    // mainScroller=$.ui.scrollingDivs['webslider'];
-    mainScroller.addInfinite();
-    mainScroller.addPullToRefresh();
-    mainScroller.runCB=true;
-    $.bind(mainScroller, 'scrollend', function () {
-        console.log("scroll end");
-    });
+    /* mainScroller = $("#driverboard").scroller(); //Fetch the scroller from cache
+     //Since this is a App Framework UI scroller, we could also do
+     // mainScroller=$.ui.scrollingDivs['webslider'];
+     mainScroller.addInfinite();
+     mainScroller.addPullToRefresh();
+     mainScroller.runCB=true;
+     $.bind(mainScroller, 'scrollend', function () {
+         console.log("scroll end");
+     });
 
-    $.bind(mainScroller, 'scrollstart', function () {
-        console.log("scroll start");
-    });
-    $.bind(mainScroller,"scroll",function(position){
+     $.bind(mainScroller, 'scrollstart', function () {
+         console.log("scroll start");
+     });
+     $.bind(mainScroller,"scroll",function(position){
 
-    })
-    $.bind(mainScroller, "refresh-trigger", function () {
-        console.log("Refresh trigger");
-    });
-    var hideClose;
-    $.bind(mainScroller, "refresh-release", function () {
-        var that = this;
-        if(!visitor){
-            getTodoPullToRefresh(that);
-        }else{
-            setTimeout(function () {
-                that.hideRefresh();
-                getRequestFromTaskInfinite();
-            }, 1000);
+     })
+     $.bind(mainScroller, "refresh-trigger", function () {
+         console.log("Refresh trigger");
+     });
+     var hideClose;
+     $.bind(mainScroller, "refresh-release", function () {
+         var that = this;
+         if(!visitor){
+             getTodoPullToRefresh(that);
+         }else{
+             setTimeout(function () {
+                 that.hideRefresh();
+                 getRequestFromTaskInfinite();
+             }, 1000);
 
 
-        }
+         }
 
-        return false; //tells it to not auto-cancel the refresh
-    });
+         return false; //tells it to not auto-cancel the refresh
+     });
 
-    $.bind(mainScroller, "refresh-cancel", function () {
-        //requestFlag=false;
-        //clearTimeout(hideClose);
-        //console.log("cancelled");
-    });
-    mainScroller.enable();
+     $.bind(mainScroller, "refresh-cancel", function () {
+         //requestFlag=false;
+         //clearTimeout(hideClose);
+         //console.log("cancelled");
+     });
+     mainScroller.enable();
 
-    $.bind(mainScroller, "infinite-scroll", function () {
-        var self = this;
-        if(!visitor){
-        if($("#nullOrderHome").length) {
-            self.clearInfinite();
-        }else{
-            if($("#infinite").length == 0){
-                $(this.el).append("<div id='infinite' style='margin-top:10px;width:100%;" +
-                    "height:40px;font-size: 20px;text-align: center'>获取订单中 ...</div>");
-            }
+     $.bind(mainScroller, "infinite-scroll", function () {
+         var self = this;
+         if(!visitor){
+         if($("#nullOrderHome").length) {
+             self.clearInfinite();
+         }else{
+             if($("#infinite").length == 0){
+                 $(this.el).append("<div id='infinite' style='margin-top:10px;width:100%;" +
+                     "height:40px;font-size: 20px;text-align: center'>获取订单中 ...</div>");
+             }
 
-            $.bind(mainScroller, "infinite-scroll-end", function () {
-                $.unbind(mainScroller, "infinite-scroll-end");
+             $.bind(mainScroller, "infinite-scroll-end", function () {
+                 $.unbind(mainScroller, "infinite-scroll-end");
 
-                if (ajaxFlag) {
-                    ajaxFlag = false
-                    getRequestFromTaskInfinite(self)
+                 if (ajaxFlag) {
+                     ajaxFlag = false
+                     getRequestFromTaskInfinite(self)
 
-                }
-            });
-        }
-        }else{
-            if($("#nullOrderHome").length > 0){
-                $("#nullOrderHome").html("<p style='text-align: center;text-color:orange;'>游客只能查看当前订单,请登录查看全部..</p>");
-            }else{
-                $("<div id='nullOrderHome' class='nullOrder'><p style='text-align: center;text-color:orange;'>游客只能查看当前订单,请登录查看全部..</p></div>").appendTo("#orderList");
-            }
-            $(self.el).find("#infinite").remove();
-            self.clearInfinite();
-        }
-    });*/
+                 }
+             });
+         }
+         }else{
+             if($("#nullOrderHome").length > 0){
+                 $("#nullOrderHome").html("<p style='text-align: center;text-color:orange;'>游客只能查看当前订单,请登录查看全部..</p>");
+             }else{
+                 $("<div id='nullOrderHome' class='nullOrder'><p style='text-align: center;text-color:orange;'>游客只能查看当前订单,请登录查看全部..</p></div>").appendTo("#orderList");
+             }
+             $(self.el).find("#infinite").remove();
+             self.clearInfinite();
+         }
+     });*/
 
 
    
