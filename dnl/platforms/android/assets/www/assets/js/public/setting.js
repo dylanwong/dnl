@@ -31,7 +31,11 @@ var baseUrl = "http://192.168.16.87:8080/daonala_mobile/";
 
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
+<<<<<<< HEAD
 //var baseUrl = "http://localhost:8080/daonala_mobile/";
+=======
+var baseUrl = "http://192.168.16.98/daonala_mobile/";
+>>>>>>> c42e4d7894391604921ca47ca1cfcf3eb4833153
 
 
 
