@@ -122,6 +122,8 @@ function updateOrderlistPanel(data,flag){
                 if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
                     $("#orderlistTitle").html("任务列表");
                     result = template('taskListTempOfOrderPage',data);
+
+
                 }else{
                     $("#orderlistTitle").html("订单列表");
                     result = template('orderListTemp',data);
@@ -132,7 +134,10 @@ function updateOrderlistPanel(data,flag){
                 if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
                     $.ui.loadContent("#orderlist", false, false, "slide");
                     $.ui.showMask("我们正在拼命的加载数据...");
-
+                    $('#operateguideBackBtn').unbind().bind('click',function(){
+                        // $.ui.loadContent("#driverboard", false, false, "slide");
+                        driverboard_panel();
+                    });
                     $("#orderlistTitle").html("任务列表");
                     result = template('taskListTempOfOrderPage',data);
                 }else{
@@ -371,6 +376,11 @@ function searchOrderFromIndex(type,count){
     $('#orderlist_ul').empty();
     $.ui.blockUI(.3);
     $.ui.showMask("获取查询的订单..");
+    if(type==9){
+        driverLastPage = 1;
+    }else if(type == 10){
+        driverLastPage = 2;
+    }
     lastPage='home2';
     var user = JSON.parse(localStorage.getItem(USER_SESSION));
     getAjax(searchOrderFromIndexUrl,{'start': '1', 'length':'10','type':type,'enterpriseno':user.obj.logisticNo,

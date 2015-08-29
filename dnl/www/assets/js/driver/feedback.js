@@ -3,6 +3,8 @@
  */
 /**提取货物确认**/
 function deliveryorder() {
+    $.ui.blockUI(.3);
+    $.ui.showMask('正在提货中...');
     if ($("#deliveroperater").val() == '' || $("#deliveroperater") == undefined) {
         errorPopup('请输入交接人');
     }else if($("#deliverremarks").val() == '' || $("#deliverremarks") == undefined){
@@ -59,7 +61,8 @@ function deliveryorder() {
 
 /**反馈确认**/
 function confirmfolloworder(){
-
+    $.ui.blockUI(.3);
+    $.ui.showMask('正在反馈中...');
     if($("#followoperater").val()==''||$("#followoperater")==undefined){
         errorPopup('请输入操作人');
     }else if($("#followremarks").val() == '' || $("#followremarks") == undefined){
@@ -116,6 +119,8 @@ function confirmfolloworder(){
 
 /**交接货物确认**/
 function confirmhandoverorder(){
+    $.ui.blockUI(.3);
+    $.ui.showMask('正在交接中...');
     if($("#handoveroperater").val()==''||$("#handoveroperater")==undefined){
         errorPopup('请输入交接人');
     }else if($("#handoverremarks").val() == '' || $("#handoverremarks") == undefined){
@@ -170,7 +175,8 @@ function confirmdiffsignorder(){
     }
 }
 function confirmdiffsignorder2(){
-
+    $.ui.blockUI(.3);
+    $.ui.showMask('正在签收中...');
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
@@ -215,6 +221,8 @@ function confirmdiffsignorder2(){
 
 /**签收确认**/
 function confirmsignorder(){
+    $.ui.blockUI(.3);
+    $.ui.showMask('正在签收中...');
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
@@ -252,7 +260,7 @@ function confirmsignorder(){
             longitude:longitude
         };
 
-//        getAjax(url,option,'addorderstatus_result_succ(data)');
+        getAjax(url,option,'addorderstatus_result_succ(data)');
 //        var signQtyurl = baseUrl+"driver/signQty.action";
 //        var goodslist = localStorage.getItem("signQtyItem");
 //
@@ -269,6 +277,8 @@ function confirmsignorder(){
 
 /**补录确认**/
 function addInfororder(){
+    $.ui.blockUI(.3);
+    $.ui.showMask('正在补录中...');
     if($("#addInfooperater").val()==''||$("#addInfooperater")==undefined){
         errorPopup('请输入补录人');
     }else if($("#addInforemarks").val() == '' || $("#addInforemarks") == undefined){
@@ -425,6 +435,8 @@ function addorderstatus_result_succ(data){
     }
     driverboard_panel();
     clearthispage();
+    $.ui.unblockUI;
+    $.ui.hideMask();
 }
 
 function clearthispage(){

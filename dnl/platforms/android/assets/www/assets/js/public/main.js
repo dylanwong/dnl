@@ -235,12 +235,22 @@ function initlocationMapHeader(){
         "class='btn btn-default tabMapY'  >" +
         "收货地</button></div></div>" +
         "<div style='clear:both;width:10%'></div>");
-//    $('#locationMapBackbtn').bind('click',function(){
-//        $.ui.loadContent("#driverboard_panel", false, false, "slide");
-//    });
-    $('#locationMapBackbtn').unbind().bind('click',function(){
-        $.ui.loadContent("#driverboard", false, false, "slide");
-    });
+    if(driverLastPage == 0){
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            $.ui.loadContent("#driverboard", false, false, "slide");
+        });
+    }else if(driverLastPage == 1){
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+            searchOrderFromIndex(9,3);
+        });
+    }else if(driverLastPage == 2){
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+            searchOrderFromIndex(10,3);
+        });
+    }
+
 }
 
 /*订单查询*/

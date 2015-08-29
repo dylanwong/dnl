@@ -70,7 +70,7 @@ function queryTraceDescSucc(datas) {
             var imgContent = '';
             for(var l = 0 ; l <data.files.length ; l++){
 
-               imgContent = '<div style="float:left;width:30%;"><a target="_blank" ' +
+               imgContent += '<div style="float:left;width:30%;"><a target="_blank" ' +
                     'href="'+data.files[l].filePath+'" class="swipebox img'+data.dispatchNo+'" >'+
                     '<img name="realImg" style="margin:5px 0px;width:80px;height:70px;"  '+
                     ' src="'+data.files[l].filePath+'" '+
@@ -163,7 +163,7 @@ function changeTraceOrder() {
         });
         $.ui.popup({
             title: "切换订单",
-            message: "<div style='height: 200px; overflow: scroll;'>" + desc + "</div>",
+            message: "<div style='height: 200px; overflow-y:scroll;'>" + desc + "</div>",
             cancelCallback: function () {
             },
             cancelText: '取消',

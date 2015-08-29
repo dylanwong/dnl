@@ -14,6 +14,10 @@ function toLocationMapPanel(fromAdr,endAdr,sendNo,licensePlate,custphone,license
     $('#o_sendNo').text(sendNo);
     $('#o_licensePlate').text(licensePlate);
     localStorage.removeItem('currenttaskorder');
+    $('#operateguideBackBtn').unbind().bind('click',function(){
+        // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+        toLocationMapPanel(fromAdr,endAdr,sendNo,licensePlate,custphone,licensePlate,enterpriseno,deliveryNo);
+    });
     $("#location_map_content").height(2*($("#locationMapPanel").height()-$('#header').height())/3);//2*($("#locationMapPanel").height()
    // -$('#header').height())/3
     $("#location_map_content").width($("#locationMapPanel").width());
@@ -38,9 +42,7 @@ function queryAllOrders_result_succ(data){
     try{
     showAllOrderLocationList(data);
     if(data.isSucc && (data.obj !=null && data.obj !='')){
-        $('#operateguideBackBtn').unbind().bind('click',function(){
-            $.ui.loadContent("#locationMapPanel", false, false, "slide");
-        });
+
         $.ui.loadContent("#locationMapPanel", false, false, "slide");
         driver_map = new BMap.Map("location_map_content");
         localStorage.setItem('currenttaskorder',JSON.stringify(data) );
@@ -53,7 +55,7 @@ function queryAllOrders_result_succ(data){
 
             data_info.push([data.obj[k].ownerlatitude,data.obj[k].ownerlongtitude,
                 "联系人 ："+data.obj[k].ownerContacts
-            +"<a  href='tel:'"+data.obj[k].ownerPhone+"''>"
+            +"<a  href='tel:"+data.obj[k].ownerPhone+"'>"
             +"<i class='icon-local-phone fs24'></i></a>"
             +"<br/>发货地址:"+data.obj[k].ownerAddr]);
 
@@ -61,7 +63,7 @@ function queryAllOrders_result_succ(data){
         for (var k= 0 ; k<mapdata_length; k++) {
             data_info.push([data.obj[k].custlatitude,data.obj[k].custlongtitude,
                     "联系人 ："+data.obj[k].custContacts
-                    +"<a  href='tel:'"+data.obj[k].custPhone+"''>"
+                    +"<a  href='tel:"+data.obj[k].custPhone+"'>"
                     +"<i class='icon-local-phone fs24'></i></a>"
                     +"<br/>收货地址"+data.obj[k].custAddr]);
         }
@@ -111,10 +113,26 @@ function queryAllOrders_result_succ(data){
 
     }else{
         $.ui.loadContent("#operateguide", false, false, "slide");
-        $('#operateguideBackBtn').unbind().bind('click',function(){
-           // $.ui.loadContent("#driverboard", false, false, "slide");
-            driverboard_panel();
-        });
+
+        if(driverLastPage == 0){
+            $('#operateguideBackBtn').unbind().bind('click',function(){
+                $.ui.loadContent("#driverboard", false, false, "slide");
+            });
+        }else if(driverLastPage == 1){
+            $('#operateguideBackBtn').unbind().bind('click',function(){
+                // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+                searchOrderFromIndex(9,3);
+            });
+        }else if(driverLastPage == 2){
+            $('#operateguideBackBtn').unbind().bind('click',function(){
+                // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+                searchOrderFromIndex(10,3);
+            });
+        }
+//        $('#operateguideBackBtn').unbind().bind('click',function(){
+//           // $.ui.loadContent("#driverboard", false, false, "slide");
+//            driverboard_panel();
+//        });
     }
 
     $.ui.unblockUI();
@@ -152,10 +170,10 @@ function openInfo(Contacts,Phone,Addr,lng,lat,type,markerNum){
     //marker.setZIndex(zIndex:index);
 
     var content = "联系人 ："+Contacts
-        +"<a  href='tel:'"+Phone+"''>"
+        +"<a  href='tel:"+Phone+"'>"
         +"<i class='icon-local-phone fs24'></i></a>"
         +"<br/>"+titleContent+":"+Addr;
-
+    console.info(content);
    // addClickHandler(content,marker);
     var infoWindow = new BMap.InfoWindow(content,opts);  // 创建信息窗口对象
     driver_map.openInfoWindow(infoWindow,point); //开启信息窗口

@@ -140,6 +140,8 @@ function updateTaskPanel(data, flag) {
         if (data.obj.recordsTotal >= 1 ){
                 var result = template('taskListTemp',data);
                 $("#tasklist_ul").append(result);
+            driverLastPage = 0;
+
         }else{
             //$("#tasklist_ul").append("查询无任务");
                 errorPopup('查无任务');

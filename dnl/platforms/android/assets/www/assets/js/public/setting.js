@@ -27,11 +27,11 @@ var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
 //var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-var baseUrl = "http://192.168.16.114:8080/daonala_mobile/";
+//var baseUrl = "http://192.168.16.114:8080/daonala_mobile/";
 
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
 //var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
-//var baseUrl = "http://localhost:8080/daonala_mobile/";
+var baseUrl = "http://localhost:8080/daonala_mobile/";
 
 
 
@@ -90,6 +90,7 @@ var lOCATIONID='currentlocation';
 var taskTabStatus = 0;
 var imgLocation='';//反馈图片所在页面 0提取页面1跟踪页面2交接页面
 var lastPage='';//上以页面PageId   做路由用
+var driverLastPage='';
 var scrollFlag =0; //回到最上面
 // 全局变量已经在原生里面就赋值好了———— EX:【window.OSInfo={os:'iOS',push:'xxxx'}】
 var swiper;
