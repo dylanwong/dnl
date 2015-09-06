@@ -29,7 +29,7 @@ var smsManageUrl = "http://120.24.218.170/daonala_manage//uploadFiles/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
 //var baseUrl = "http://192.168.16.87:8080/daonala_mobile/";
 
-//var baseUrl = "http://192.168.16.98/daonala_mobile/";
+//var baseUrl = "http://192.168.16.77:8080/daonala_mobile/";
 var baseUrl = "http://120.24.218.170/daonala_mobile/";
 
 //var baseUrl = "http://localhost:8080/daonala_mobile/";
@@ -82,7 +82,7 @@ var ISSELROLE = "2";
 
 // 用来判断是否展示启动引导页
 // 变量为数字
-var currentVersion='1.0';
+var currentVersion='1.4';
 var iOSInHouse=true;
 
 var ajaxFlag=true;
@@ -118,7 +118,7 @@ function onDeviceReadySettingEvents() {
    // init_home_ad();
     init_homepage();
     navigator.splashscreen.hide();
-    androidQueryInstallId();
+        androidQueryInstallId();
     var Navigation = cordova.require('com.lovedudu.cordova.Navigation');
     Navigation.route(function (message) {
         alert(message);
@@ -162,7 +162,7 @@ function init_homepage(){
         $('#addOrderPanel').empty();
         $('#addOrderPanel').append('<div style="width:80px;'+
             'height:80px;border-radius:80px;background-color:#01cd88;">'+
-            '<a href="tel:4001110005" >'+
+            '<a href="tel:075586717286" >'+
             '<i class="iconfont icon-kefu "  style="color:#fff;font-size:56px;line-height:80px">'+
             '</i></a></div>'+
             '<div  id="addOrderPanelText" style="color:#4d4d4d;font-size:18px;width:100px;padding-top: 10px;">'+

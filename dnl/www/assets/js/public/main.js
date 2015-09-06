@@ -92,9 +92,13 @@ function login_panel()
     //$('#userNameMine').text(user.obj.userName);
     $.ui.loadContent("#login", false, false, "slide");
 }
-
+//跳转到申请加入界面
 function register_panel()
 {
+    $("#register_enterpriseName").val('');
+    $("#register_linkName").val('');
+    $("#register_phone").val('');
+    $("#messageCode").val('');
     $.ui.loadContent("#register", false, false, "slide");
 }
 
@@ -109,7 +113,7 @@ function updatePassword_panel(){
     $('#newPwd').val('');
     $.ui.loadContent("#updtPwd", false, false, "slide");
 }
-
+//跳转到反馈页面
 function feedback_panel()
 {
     $.ui.loadContent("#feedback", false, false, "slide");
@@ -122,11 +126,15 @@ function findPwd_panel(){
 function about_panel(){
     $.ui.loadContent("#about", false, false, "slide");
 }
+//跳转到设置界面
 function setup(){
     initSetup();
     $.ui.loadContent("#setup", false, false, "slide");
 }
-
+////跳转到申请加入界面
+//function register_panel(){
+//    $.ui.loadContent('#register',false,false, "slide");
+//}
 function myorders_panel(){
     $.ui.loadContent("#myorders", false, false, "slide");
 }
@@ -716,7 +724,7 @@ function initHomeFooter(userType){
         $('#addOrderPanel').empty();
         $('#addOrderPanel').append('<div style="width:80px;'+
             'height:80px;border-radius:80px;background-color:#01cd88;">'+
-            '<a href="tel:4001110005" >'+
+            '<a href="tel:075586717286" >'+
             '<i class="iconfont icon-kefu "  style="color:#fff;font-size:56px;line-height:80px">'+
             '</i></a></div>'+
             '<div  id="addOrderPanelText" style="color:#4d4d4d;font-size:18px;width:100px;padding-top: 10px;">'+
@@ -796,10 +804,10 @@ function idinfo_panel(flag)
     }
 }
 
-function register_panel()
-{
-    $.ui.loadContent("#register", false, false, "slide");
-}
+//function register_panel()
+//{
+//    $.ui.loadContent("#register", false, false, "slide");
+//}
 
 function addorder_panel(){
     //queryOwnerInfo();

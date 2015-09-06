@@ -108,7 +108,7 @@ function initTraceInfo2(){
     $('#transNo_d').html(data.transNo);
     $('#ownerNo_d').html(data.subOrderNo);
     $('#custNo_d').html(data.custOrderNo);
-    $('#orderDate_d').html(data.orderDate);
+    $('#orderDate_d').html(data.rgstDate);
     queryDeliverordertraceList(data.enterpriseNo,data.systemNo,data.orderNo,data.dispatchNo);
 
 //    $('#topdeliverNo_d').html('运输单号:'+data.topsendNo);
