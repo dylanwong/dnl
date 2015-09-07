@@ -108,7 +108,7 @@ function initTraceInfo2(){
     $('#transNo_d').html(data.transNo);
     $('#ownerNo_d').html(data.subOrderNo);
     $('#custNo_d').html(data.custOrderNo);
-    $('#orderDate_d').html(data.orderDate);
+    $('#orderDate_d').html(data.rgstDate);
     queryDeliverordertraceList(data.enterpriseNo,data.systemNo,data.orderNo,data.dispatchNo);
 
 //    $('#topdeliverNo_d').html('运输单号:'+data.topsendNo);
@@ -557,7 +557,7 @@ function updateEvalute(datas){
             '  <p id="evaluteName"></p><p style="color:#06ABD4" id="reviewsDemo"></p>'+
             ' <div><div class="overflowHidden"><p class="fl width30" align="right">商品完好度：</p>'+
             ' <p class="fl" id="reviewsItem1"></p></div><div class="overflowHidden">'+
-            ' <p class="fl width30" align="right" >回单及时性：</p>'+
+            ' <p class="fl width30" align="right" >送货速度：</p>'+
             '     <p class="fl" id="reviewsItem2"></p> </div>'+
             ' <div class="overflowHidden"><p class="fl width30" align="right">送货人态度：</p>'+
             ' <p class="fl"  id="reviewsItem3"></p></div></div>'+

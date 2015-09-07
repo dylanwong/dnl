@@ -6,61 +6,32 @@ var selPhoneElementId;//选中的手机号元素
 var selGetCodeElementId;//选中的获取验证码元素
 
 function register() {
-
-    var phone = $("#phone").val();
+  //  register_enterpriseName
+   // register_linkName
+  //  register_phone
+    var epName = $("#register_enterpriseName").val();
+    var linkName = $("#register_linkName").val();
+    var phone = $("#register_phone").val();
     var messageCode = $("#messageCode").val();
-    var password = $("#password").val();
+    //var password = $("#password").val();
     //var invitePopularizeCode = $("#popularizeCode").val();
-    var  roleType = $("#role").val();
-    if(roleType=='物流商'){
-        roleType='0';
-    }else if(roleType=='货主'){
-        roleType='1';
-    }else if(roleType=='货主客户'){
-        roleType='2';
-    }else if(roleType=='司机'){
-        roleType='3';
-    }else{
-        errorPopup('请填写正确的角色!');
-    }
-    if(phone.trim()=='' || messageCode.trim()=='' || password.trim()=='')
+
+    if(phone.trim()=='' || messageCode.trim()=='' )
     {
         errorPopup('请填写完全输入项!');
-    }else if(password.trim().length<6 || password.trim().length>15)
+    } else
     {
-        errorPopup('请填写合法密码(6-15英文数字)!');
-    }else
-    {
-        if(checkMobile('phone'))
+        if(checkMobile('register_phone'))
         {
-            var data = "?phone="+phone+"&pwd="+password+"&checkNum="+messageCode+
-                "&roleType="+roleType;
+            var data = "?phone="+phone+"&epName="+epName+"&checkNum="+messageCode+
+                "&linkName="+linkName;
+
             $.jsonP({
-                url: baseUrl+"account/save_user.action"+data,
+                url: baseUrl+"account/register.action"+data,
                 success: function (data) {
                     if(data.isSucc)
                     {
-                     errorPopup("恭喜，注册成功!");
-                     register_forword(2,phone,password);
-                        /*af.ui.popup({
-                        $.ui.popup({
-                            title: "温馨提示",
-                            message: "<h3 align='center'>注册成功</h3>" +
-                                "<p align='center'>您已经注册成功，还可以完善资料和车辆信息，" +
-                                "以便获得更加匹配的优质货源，" +
-                                "赶快去搜索货源吧!</p>",
-                            cancelText: "以后再说",
-                            cancelClass: 'popup-btn',
-                            cancelCallback: function () {
-                                register_forword(0,phone,password);
-                            },
-                            doneText: "更多设置",
-                            doneClass: 'popup-btn',
-                            doneCallback: function () {
-                                register_forword(1,phone,password);
-                            }
-                        });*/
-                        loginStatus = 2;
+                        errorPopup("您好，欢迎加入到哪啊，我们会尽快与您联系!");
                         login_panel();
                     }else
                     {
@@ -83,47 +54,7 @@ function register_forword(flag,workerNo,pwd)
         'login_succ_forregister(data)','login_fari_forregister()');
 }
 
-function login_succ_forregister(data)
-{
-    var filter = {"workerNo":data.obj.workerNo,"start":"1"}
-    setCacheData("myFilter",mergeJson(JSON.parse(localStorage.getItem("myFilter")),filter,true),true);
-    setCacheData("locationFilter",mergeJson(JSON.parse(localStorage.getItem("locationFilter")),filter,true),true);
-    isLogin = true;
-    setCacheData('user',data,1);
-    loginStatus = 2;
-    visitor=false;
-    getNewMainList();
 
-    clear_register_form();
-
-    if(register_flag==0)
-    {
-        $("#username").val($("#phone").val());
-        $("#pwd").val($("#password").val());
-        af.ui.loadContent("#main", false, false, "slide");
-    }
-    else if(register_flag==1){
-        home_panel();
-        //$.ui.loadContent("#main", false, false, "slide");
-    }/*else
-     {
-     if(ISSELROLE == 1){
-     clear_carinfo_form();
-     $.ui.loadContent("#carinfo", false, false, "slide");
-     }
-     else
-     {
-     address_panel();
-     }
-     }*/else
-    {
-        home_panel();
-         //$.ui.loadContent("#main", false, false, "slide");
-    }
-}
-function login_fari_forregister()
-{
-}
 
 /**
  * 验证手机号是否存在
@@ -202,8 +133,8 @@ function send_msg(elementId,elementId2,flag) {
     selGetCodeElementId = elementId2;
 
     if (checkMobile(selPhoneElementId))
-    {
-       verify_phone(selPhoneElementId, "send(selPhoneElementId,selGetCodeElementId)",flag);
+    {verify_phone
+       (selPhoneElementId, "send(selPhoneElementId,selGetCodeElementId)",flag);
     }
 }
 

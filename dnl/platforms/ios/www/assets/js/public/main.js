@@ -18,6 +18,8 @@ include("assets/js/order/orderdetail.js");
 include("assets/js/order/linkData.js");
 include("assets/js/driver/feedback.js");
 include("assets/js/driver/operateguide.js");
+include("assets/js/driver/orderLocationMap.js");
+include("assets/js/public/navigation.js");
 include("assets/js/public/filetooms.js");
 include("assets/js/public/tools.js");
 //include("assets/js/.js");
@@ -29,6 +31,7 @@ include("assets/js/public/iscroll.js");
 include("assets/js/setup/share.js");
 include("assets/js/setup/map.js");
 include("assets/js/order/addressScroll.js");
+include("assets/js/driver/trace.js");
 function mainPanleUnLoad(){
     console.log("mainPanleUnLoad")
 }
@@ -89,9 +92,13 @@ function login_panel()
     //$('#userNameMine').text(user.obj.userName);
     $.ui.loadContent("#login", false, false, "slide");
 }
-
+//跳转到申请加入界面
 function register_panel()
 {
+    $("#register_enterpriseName").val('');
+    $("#register_linkName").val('');
+    $("#register_phone").val('');
+    $("#messageCode").val('');
     $.ui.loadContent("#register", false, false, "slide");
 }
 
@@ -106,7 +113,7 @@ function updatePassword_panel(){
     $('#newPwd').val('');
     $.ui.loadContent("#updtPwd", false, false, "slide");
 }
-
+//跳转到反馈页面
 function feedback_panel()
 {
     $.ui.loadContent("#feedback", false, false, "slide");
@@ -119,11 +126,15 @@ function findPwd_panel(){
 function about_panel(){
     $.ui.loadContent("#about", false, false, "slide");
 }
+//跳转到设置界面
 function setup(){
     initSetup();
     $.ui.loadContent("#setup", false, false, "slide");
 }
-
+////跳转到申请加入界面
+//function register_panel(){
+//    $.ui.loadContent('#register',false,false, "slide");
+//}
 function myorders_panel(){
     $.ui.loadContent("#myorders", false, false, "slide");
 }
@@ -198,11 +209,11 @@ function driverboard_panel(){
     }else
     {
         $.ui.loadContent("#driverboard", false, false, "slide");
-        $("#taskHeader").html("<div style='float:left;width:15%;cursor:pointer;'>" +
-            "<a onclick='home_panel()'>" +
-            "<img src='assets/img/back.png' />" +
-            "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'>首页</b></a></div>" +
-            "<div style='float:left;width:75%;text-align:center;margin:5px auto;' " +
+        $("#taskHeader").html("<div style='float:left;'>" +
+            "<a onclick='home_panel()' class='headerBack'  >" +
+            "<img src='assets/img/backPage.png' height='32' />" +
+            "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'></b></a></div>" +
+            "<div style='float:left;width:100%;text-align:center;margin:5px auto;' " +
             " ><div class='btn-group' role='group'><button" +
             " style='width:70px;' onclick='toggleTaskTabs(this)' status='0' type='button' " +
             "class='btn btn-default tabTaskN'>当前</button>" +
@@ -215,6 +226,47 @@ function driverboard_panel(){
     }
 }
 
+function initlocationMapHeader(){
+
+   /* <a  class="headerBack"  onclick="backorderMaindetail();" >
+        <img src="assets/img/backPage.png" height="32" />
+    </a>*/
+    $("#locationMapHeader").html("<div style='float:left;width:15%;cursor:pointer;'>" +
+        "<a id='locationMapBackbtn' class='headerBack'>" +
+        "<img src='assets/img/backPage.png' height='32'/>" +
+        "<b style='margin-left:0px;position:relative;top:4px;font-size:12px;color:#FFFFFF;'></b></a></div>" +
+        "<div style='float:left;width:100%;text-align:center;margin:5px auto;' " +
+        " ><div class='btn-group' role='group'><button" +
+        " style='width:70px;' onclick='toggleMapTabs(this)' status='0' type='button' " +
+        "class='btn btn-default tabMapN'>发货地</button>" +
+        " <button style='width:70px;' onclick='toggleMapTabs(this)' status='1'  type='button' " +
+        "class='btn btn-default tabMapY'  >" +
+        "收货地</button></div></div>" +
+        "<div style='clear:both;width:10%'></div>");
+    if(driverLastPage == 0){
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            driverboard_panel();
+          //  $.ui.loadContent("#driverboard", false, false, "slide");
+        });
+    }else if(driverLastPage == 1){
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+            searchOrderFromIndex(9,3);
+        });
+    }else if(driverLastPage == 2){
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            // $.ui.loadContent("#locationMapPanel", false, false, "slide");
+            searchOrderFromIndex(10,3);
+        });
+    }else {
+        $('#locationMapBackbtn').unbind().bind('click',function(){
+            driverboard_panel();
+            //$.ui.loadContent("#driverboard", false, false, "slide");
+        });
+    }
+    console.info('driverLastPage :'+driverLastPage);
+
+}
 
 /*订单查询*/
 function searchorder_panel(){
@@ -672,7 +724,7 @@ function initHomeFooter(userType){
         $('#addOrderPanel').empty();
         $('#addOrderPanel').append('<div style="width:80px;'+
             'height:80px;border-radius:80px;background-color:#01cd88;">'+
-            '<a href="tel:4001110005" >'+
+            '<a href="tel:075586717286" >'+
             '<i class="iconfont icon-kefu "  style="color:#fff;font-size:56px;line-height:80px">'+
             '</i></a></div>'+
             '<div  id="addOrderPanelText" style="color:#4d4d4d;font-size:18px;width:100px;padding-top: 10px;">'+
@@ -699,7 +751,7 @@ function initHomeFooter(userType){
 
 }
 
-function trace_panel(elm)
+function trace_panel_of_driver(elm)
 {
     $.ui.loadContent("#trace", false, false, "slide");
     if(elm!=undefined)
@@ -752,10 +804,10 @@ function idinfo_panel(flag)
     }
 }
 
-function register_panel()
-{
-    $.ui.loadContent("#register", false, false, "slide");
-}
+//function register_panel()
+//{
+//    $.ui.loadContent("#register", false, false, "slide");
+//}
 
 function addorder_panel(){
     //queryOwnerInfo();

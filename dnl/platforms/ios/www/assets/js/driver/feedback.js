@@ -3,11 +3,14 @@
  */
 /**提取货物确认**/
 function deliveryorder() {
+
     if ($("#deliveroperater").val() == '' || $("#deliveroperater") == undefined) {
         errorPopup('请输入交接人');
     }else if($("#deliverremarks").val() == '' || $("#deliverremarks") == undefined){
         errorPopup('请输入备注');
     }else {
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在提货中...');
             var chk_value = [];
             $("img[name=picture]").each(function () {
                 var newfileName = $(this).attr("fileName");
@@ -66,7 +69,8 @@ function confirmfolloworder(){
         errorPopup('请输入备注');
     }else {
 //operator,  enterpriseno, consignno, ordernos,imgurls, status, location, remarks, type
-
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在反馈中...');
         var substatus='40';
         if ($('#followstatus').val() == '异常反馈') {
 //        <option value="在途异常">在途异常</option>
@@ -116,11 +120,14 @@ function confirmfolloworder(){
 
 /**交接货物确认**/
 function confirmhandoverorder(){
+
     if($("#handoveroperater").val()==''||$("#handoveroperater")==undefined){
         errorPopup('请输入交接人');
     }else if($("#handoverremarks").val() == '' || $("#handoverremarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在交接中...');
     var chk_value = [];
     $("img[name=picture]").each(function() {
         var newfileName=$(this).attr("fileName");
@@ -157,6 +164,7 @@ function confirmhandoverorder(){
     }
 }
 function confirmdiffsignorder(){
+    localStorage.removeItem($(this).attr('signQtyItem'));
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
@@ -165,17 +173,18 @@ function confirmdiffsignorder(){
         querygoodlist();
 //    $('#signBtn').attr('disabled',"true");
 //    $('#signBtn').removeAttr("disabled");
-        $('#diffsignBtn').unbind('click').bind('click',function(){
-            confirmdiffsignorder2();
-        });
+
     }
 }
 function confirmdiffsignorder2(){
+
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在签收中...');
         var chk_value = [];
         $("img[name=picture]").each(function() {
             var newfileName=$(this).attr("fileName");
@@ -209,26 +218,20 @@ function confirmdiffsignorder2(){
         };
 
         getAjax(url,option,'addorderstatus_result_succ(data)');
-        var signQtyurl = baseUrl+"driver/signQty.action";
-        var goodslist = localStorage.getItem("signQtyItem");
 
-        if (JSON.parse(goodslist).length>0 ){
-            var qtyOptions = {
-                goodslist:goodslist
-            };
-            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
-        }
-        localStorage.removeItem("chocieorders");
     }
 }
 
 /**签收确认**/
 function confirmsignorder(){
+
     if($("#signoperater").val()==''||$("#signoperater")==undefined){
         errorPopup('请输入签收人');
     }else if($("#signremarks").val() == '' || $("#signremarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在签收中...');
         var chk_value = [];
         $("img[name=picture]").each(function() {
             var newfileName=$(this).attr("fileName");
@@ -261,7 +264,7 @@ function confirmsignorder(){
             longitude:longitude
         };
 
-//        getAjax(url,option,'addorderstatus_result_succ(data)');
+        getAjax(url,option,'addorderstatus_result_succ(data)');
 //        var signQtyurl = baseUrl+"driver/signQty.action";
 //        var goodslist = localStorage.getItem("signQtyItem");
 //
@@ -278,11 +281,14 @@ function confirmsignorder(){
 
 /**补录确认**/
 function addInfororder(){
+
     if($("#addInfooperater").val()==''||$("#addInfooperater")==undefined){
         errorPopup('请输入补录人');
     }else if($("#addInforemarks").val() == '' || $("#addInforemarks") == undefined){
         errorPopup('请输入备注');
     }else{
+        $.ui.blockUI(.3);
+        $.ui.showMask('正在补录中...');
         var chk_value = [];
         $("img[name=picture]").each(function() {
             var newfileName=$(this).attr("fileName");
@@ -332,28 +338,34 @@ function addInfororder(){
 //< parseInt( $(elm).parent().next().attr('signqtybak'))
 function minusValue(elm) {
     try{
-    if ( parseFloat( $(elm).parent().next().val() ) > 0 ) {
-        $(elm).parent().next().attr('value', parseFloat( $(elm).parent().next().val() )-1) ;
+    if ( parseFloat( $(elm).parent().next().val() ) >= 1 ) {
+      //  $(elm).parent().next().val( parseFloat( $(elm).parent().next().val()).toFixed(1)-1) ;
+        $(elm).parent().next().val(
+            parseFloat(parseFloat($(elm).parent().next().val()).toFixed(1)
+                -parseFloat(1).toFixed(1) ).toFixed(1)
+        );
     } else {
-        $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
+        $(elm).parent().next().val( $(elm).parent().next().attr('signqtybak') );
     }
     $(elm).parent().parent().parent().parent().parent().find('#diffQty').text(
-        $(elm).parent().next().attr('value')-$(elm).parent().next().attr('signqtybak'));
+        parseFloat( $(elm).parent().next().val()
+            -$(elm).parent().next().attr('signqtybak') ).toFixed(1) );
 
     }catch(e){
-        $(elm).parent().next().attr('value', $(elm).parent().next().attr('signqtybak') );
+        $(elm).parent().next().val( $(elm).parent().next().attr('signqtybak') );
     }
 
 }
 function plusValue(elm) {
     try{
         if ( parseFloat( $(elm).parent().prev().val() ) >= 0 ) {
-            $(elm).parent().prev().attr('value',parseFloat($(elm).parent().prev().val()) + 1);
+            //$(elm).parent().prev().attr('value',parseFloat($(elm).parent().prev().val()) + 1);
+            $(elm).parent().prev().val(parseFloat($(elm).parent().prev().val()) + 1);
         } else {
-            $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+            $(elm).parent().prev().val(parseFloat($(elm).parent().prev().attr('signqtybak') ) );
         }
 
-        var diff = $(elm).parent().prev().attr('value')-$(elm).parent().prev().attr('signqtybak');
+        var diff = $(elm).parent().prev().val()-$(elm).parent().prev().attr('signqtybak');
         if( diff == 0){
             $(elm).parent().parent().parent().parent().parent().find('#diffQty').removeClass('redClass');
         }else{
@@ -361,7 +373,7 @@ function plusValue(elm) {
             $(elm).parent().parent().parent().parent().parent().find('#diffQty').text(diff);
         }
     }catch(e){
-        $(elm).parent().prev().attr('value', $(elm).parent().prev().attr('signqtybak') );
+        $(elm).parent().prev().val( $(elm).parent().prev().attr('signqtybak') );
     }
 }
 function saveGoodQty(){
@@ -406,6 +418,9 @@ function saveGoodQty(){
         ;
     }else{
         $.ui.loadContent('#signorders', false, false, 'slide');
+        $('#diffsignBtn').unbind().bind('click',function(){
+            confirmdiffsignorder2();
+        });
     }
 }
 function saveGoodQty_result_succ(data){
@@ -414,13 +429,25 @@ function saveGoodQty_result_succ(data){
 
 function addorderstatus_result_succ(data){
     localStorage.removeItem("chocieorders");
-    if(data.isSuc)
+    if(data.isSucc){
+        var signQtyurl = baseUrl+"driver/signQty.action";
+        var goodslist = localStorage.getItem("signQtyItem");
+        if (goodslist!=null && JSON.parse(goodslist).length>0 ){
+            var qtyOptions = {
+                goodslist:goodslist
+            };
+            getAjax(signQtyurl,qtyOptions,'saveGoodQty_result_succ(data)');
+        }
+        localStorage.removeItem("chocieorders");
         errorPopup(data.msg);
+    }
     else{
         errorPopup(data.msg);
     }
     driverboard_panel();
     clearthispage();
+    $.ui.unblockUI;
+    $.ui.hideMask();
 }
 
 function clearthispage(){
@@ -471,7 +498,7 @@ function queryDetailList(){
         if(data != null){
 
         }else{
-            localStorage.setItem($(this).attr('dispatchNo'),JSON.stringify(goodslist ));
+            localStorage.setItem(dispatchNo,JSON.stringify(goodslist ));
         }
     }
 
@@ -482,8 +509,8 @@ function queryDetailList(){
     $('#signorderlist').empty();
    if(datas.length>1){
    $(datas).each(function (index,data) {
-       detail = '<li href="#" onclick="querygoodlist(this);"  '
-           +'enterpriseno="'+data.enterpriseNo+'" dispatchno="'+data.dispatchNo+'"  class="f2" style="margin-top:4px;">'+
+       detail = '<li href="#" onclick="querygoodlist2(this);"  '
+           +'enterpriseno="'+data.enterpriseNo+'" orderNo="'+data.subOrderNo+'" dispatchno="'+data.dispatchNo+'"  class="f2" style="margin-top:4px;">'+
            '<div class="f2" style="height: 100px;margin-top:14px;">'+
            '<div class="" style="float:left;width: 90%;margin-top:14px;">'+
            '<div ><div style="float:left;width:90%;margin-top:14px;">'+
@@ -507,7 +534,7 @@ function queryDetailList(){
        $(datas).each(function (index,data) {
            detail_list += '<li href="#" onclick="querygoodlist2(this);" '
                +' enterpriseno="'+data.enterpriseNo+'" dispatchno="'+data.dispatchNo+'" '+
-               ' orderNo="'+data.orderNo+'" class="f2" style="margin-top:4px;">'+
+               ' orderNo="'+data.subOrderNo+'" class="f2" style="margin-top:4px;">'+
                '<div class="f2" style="height: 100px;margin-top:14px;">'+
                '<div class="" style="float:left;width: 90%;margin-top:14px;">'+
                '<div ><div style="float:left;width:90%;margin-top:14px;">'+
@@ -618,12 +645,15 @@ function updategoodlistPanel(datas){
 function getGoodItemAche(dispatchNo){
     var data = JSON.parse(localStorage.getItem(dispatchNo));
     if(data != null){
-        for ( var i = 0,len = data.length;i<len ;i++){
+
             $("input[id=signText]").each(function() {
-                $(this).attr('articleNo') == data.articleNo;
-                $(this).val(data.signQty);
+                for ( var i = 0,len = data.length;i<len ;i++){
+                    if( $(this).attr('articleNo') == data[i].articleNo ){
+                        $(this).val(data[i].signQty);
+                    }
+                }
             });
-        }
+
        // $(input[id='signText'])
     }
 }

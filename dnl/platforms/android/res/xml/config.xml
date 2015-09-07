@@ -33,11 +33,6 @@
     <feature name="Navigation">
         <param name="android-package" value="com.lovedudu.cordova.Navigation" />
     </feature>
-    <feature name="CheckUpdatePlugin" >
-        <param
-                name="android-package"
-                value="com.sealinkin.dnl.CheckUpdatePlugin" />
-    </feature>
     <name>到哪啦
     </name>
     <description>

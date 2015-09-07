@@ -473,6 +473,18 @@ a:focus,input:focus{
     color:#FFFFFF;
 }
 
+.tabMapY
+{
+    background-color:#06ABD4;
+    color: #FFFFFF
+}
+.tabMapN
+{
+    background-color:#06ABD4;/*#ef8305*/;
+    color:#FFFFFF;
+}
+
+
 .circle {
     border-radius: 50%;
     width: 10px;
@@ -604,13 +616,30 @@ li {list-style-type:none;}
 }
 .selectTotalDay{background-color: #06ABD4;/*#ef8305*/;color:#fff;font-size:18px;}
 .tabTaskY
+ {
+     width:30%;
+     background-color:#06ABD4;
+     color:#FFFFFF;
+     font-size:18px;
+ }
+.tabTaskN
+{
+    width:30%;
+
+
+    background-color:#FFFFFF;
+    color: #06ABD4;
+    font-size:18px;
+}
+
+.tabMapY
 {
     width:30%;
     background-color:#06ABD4;
     color:#FFFFFF;
     font-size:18px;
 }
-.tabTaskN
+.tabMapN
 {
     width:30%;
 

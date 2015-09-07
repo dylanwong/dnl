@@ -21,16 +21,22 @@ var searchFlag = 0;//0     1为首页查询条件
 
 
 //var queryOrderList=baseUrl+"order/query_deliverorderlistfordirver.action";
-var omsUrl="http://192.168.16.98:8080/fileserver/struts_uploadReturnUrl.action";
+var omsUrl="http://120.24.218.170:8080/fileserver/struts_uploadReturnUrl.action";
 
-var smsManageUrl = "http://192.168.16.98/daonala_manage//uploadFiles/";
+var smsManageUrl = "http://120.24.218.170/daonala_manage//uploadFiles/";
 //var smsManageUrl = "http://www.gongsuda.com:8070/sms_manage/uploadFiles/";
 //var smsManageUrl = "http://app.gongsuda.com:8051/smsfile/";
 //var baseUrl = "http://www.gongsuda.com:8070/oms_mobile/";
-//var baseUrl = "http://192.168.16.114:8080/daonala_mobile/";
+//var baseUrl = "http://192.168.16.87:8080/daonala_mobile/";
+
+//var baseUrl = "http://192.168.16.77:8080/daonala_mobile/";
+var baseUrl = "http://120.24.218.170/daonala_mobile/";
+
+//var baseUrl = "http://localhost:8080/daonala_mobile/";
+
 //var baseUrl = "http://192.168.16.98/daonala_mobile/";
-//var baseUrl = "http://gsdoms.gongsuda.com:8888/oms_mobile/";
-var baseUrl = "http://localhost:8080/daonala_mobile/";
+
+
 
 
 var omsManageUrl = "";
@@ -63,6 +69,8 @@ var queryAdList = baseUrl + "base/query_ad_Version.action";
 var choiceOwnerAddrUrl = baseUrl + "order/queryOwnerAddr.action";
 var choiceCustAddrUrl = baseUrl + "order/queryCustAddr.action";
 
+var queryTraceOrderList =  baseUrl + "order/query_order_list_of_delivery.action";
+var queryTraceDescList =  baseUrl + "order/query_delivery_trace_list.action";
 //event target ID
 var ETID = null;
 //选中的任务ID
@@ -74,7 +82,7 @@ var ISSELROLE = "2";
 
 // 用来判断是否展示启动引导页
 // 变量为数字
-var currentVersion='1.0';
+var currentVersion='1.4';
 var iOSInHouse=true;
 
 var ajaxFlag=true;
@@ -86,6 +94,7 @@ var lOCATIONID='currentlocation';
 var taskTabStatus = 0;
 var imgLocation='';//反馈图片所在页面 0提取页面1跟踪页面2交接页面
 var lastPage='';//上以页面PageId   做路由用
+var driverLastPage='';
 var scrollFlag =0; //回到最上面
 // 全局变量已经在原生里面就赋值好了———— EX:【window.OSInfo={os:'iOS',push:'xxxx'}】
 var swiper;
@@ -109,7 +118,13 @@ function onDeviceReadySettingEvents() {
    // init_home_ad();
     init_homepage();
     navigator.splashscreen.hide();
-    androidQueryInstallId();
+        androidQueryInstallId();
+    var Navigation = cordova.require('com.lovedudu.cordova.Navigation');
+    Navigation.route(function (message) {
+        alert(message);
+    }, function (message) {
+        alert(message);
+    });
 
   //  toTestPage();
 }
@@ -125,6 +140,7 @@ function toTestPage(){
 }
 
 function init_homepage(){
+
     var user =  localStorage.getItem(USER_SESSION);
     user = JSON.parse(user);
     if(user==null)
@@ -146,7 +162,7 @@ function init_homepage(){
         $('#addOrderPanel').empty();
         $('#addOrderPanel').append('<div style="width:80px;'+
             'height:80px;border-radius:80px;background-color:#01cd88;">'+
-            '<a href="tel:4001110005" >'+
+            '<a href="tel:075586717286" >'+
             '<i class="iconfont icon-kefu "  style="color:#fff;font-size:56px;line-height:80px">'+
             '</i></a></div>'+
             '<div  id="addOrderPanelText" style="color:#4d4d4d;font-size:18px;width:100px;padding-top: 10px;">'+

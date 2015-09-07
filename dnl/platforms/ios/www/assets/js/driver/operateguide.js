@@ -73,12 +73,9 @@ function biddingaddInfoorder(enterpriseno,deliveryNo){
     $('#optguideHeader').bind('click',function(){
         $.ui.loadContent("#driverboard", false, false, "slide");
     });
-
-
    // var data = JSON.parse(localStorage.getItem("currenttask"));
-
     $("#nextstup").attr("onclick","nextstup(4);");
-    getAjax(taskDeatilqueryUrl,{'enterpriseNo':enterpriseno,'deliveryNo':deliveryNo}
+    getAjax(taskDeatilqueryUrl,{'enterpriseno':enterpriseno,'deliveryNo':deliveryNo}
         , "setHistoryTaskCache(data)", "errorPopup('网络请求超时,请检查网络后再尝试..')");
 }
 function setHistoryTaskCache(data){
@@ -175,7 +172,7 @@ function querysignchioceorderlist(){
 function queryallchioceorderlist(data){
     $.ui.unblockUI();
     $.ui.showMask("我们正在拼命的加载数据...");
-    var url = baseUrl+"order/query_orderbytraceorder.action";
+    var traceorderurl = baseUrl+"order/query_orderbytraceorder.action";
     //var data = JSON.parse(localStorage.getItem("currenttask"));
     var option = {
         enterpriseNo:data.enterpriseNo,
@@ -185,7 +182,7 @@ function queryallchioceorderlist(data){
         status:'',
         type:'4'   //补录订单
     };
-    getAjax(url,option,'queryorders_result_succ(data,4)');
+    getAjax(traceorderurl,option,'queryorders_result_succ(data,4)');
 }
 function queryorders_result_succ(data,type){
 
@@ -315,10 +312,13 @@ function nextstup(nexttype){
 
                 }
                 ordernos.push(orderno);
+                localStorage.removeItem($(this).attr('dispatchNo'));
+                localStorage.removeItem($(this).attr('signQtyItem'));
                 //suborderno='"+obj[i].suborderno+"' transno='"+obj[i].transno+"'
             }
         );
         localStorage.setItem("chocieorders",JSON.stringify(ordernos ));
+        localStorage.removeItem("signQty");
         var data = JSON.parse(localStorage.getItem("currenttask"));
         if(nexttype=='0'){
             $.ui.loadContent("#deliverorders", false, false, "slide");
@@ -355,6 +355,9 @@ function nextstup(nexttype){
             lOCATIONID = 'currentlocation';
             getCurrentPositionAddress();
             imgLocation='3';
+            $('#diffsignBtn').unbind().bind('click',function(){
+                confirmdiffsignorder();
+            });
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }else if(nexttype=='4'){
             $.ui.loadContent("#addInfo", false, false, "slide");
@@ -362,10 +365,8 @@ function nextstup(nexttype){
             $("#addInfocustcity").text(data.endAdr);
             $("#addInfoconsignno").text(data.sendNo);
             imgLocation='4';
-            $('#diffsignBtn').unbind('click').bind('click',function(){
-                confirmdiffsignorder();
-            });
-            localStorage.removeItem("signQty");
+
+
             //$("#handoverarticlename").text(localStorage.getItem("articlename"));
         }
         else{
