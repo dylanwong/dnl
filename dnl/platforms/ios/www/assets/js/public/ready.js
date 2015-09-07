@@ -20,21 +20,6 @@ $(document).ready(function(){
         $("#afui").addClass("overlayStatusbar");
     }
 
-
-//    if(localStorage.getItem(USER_SESSION)){
-//        setCacheData("myFilter",mergeJson(JSON.parse(localStorage.getItem("myFilter")),{'start':'1'},true),true);
-//        getAjax(queryMyOrderList,JSON.parse(localStorage.getItem("myFilter")),"setCacheData('myList',data,false)");
-//    }else{
-//        var myOption= {
-//            'queryDate':'',
-//            'queryType':'2',
-//            'start':'1',
-//            'length':'10',
-//            "userNo":""
-//        }
-//        localStorage.setItem("myFilter",JSON.stringify(myOption))
-//    }
-
     //queryOrderList
     var localStorageVersion= parseFloat(localStorage.getItem("localStorageVersion"));
 
@@ -402,208 +387,38 @@ $.ui.ready(function(){
 
     });
 
+var taskTaskList=jQuery('#transNo_select').mobiscroll().select({
+    theme: "android-ics light",     // Specify theme like: theme: 'ios' or omit setting to use default
+    mode: "mixed",       // Specify scroller mode like: mode: 'mixed' or omit setting to use default
+    display: "bottom", // Specify display mode like: display: 'bottom' or omit setting to use default
+    lang: "zh"      ,  // Specify language like: lang: 'pl' or omit setting to use default
+    onBeforeShow: function (html, inst) {
+    },
+    onShow: function () {
+
+    },
+    onClose: function () {
+
+    },
+    onCancel: function () {
+
+    },
+    onSelect: function (v, inst) {
+        console.log(inst.values);
+        var valuesArray=inst.values[0].split("-");
+        var elem={
+            orderNo:valuesArray[0],
+            subOrderNo:valuesArray[1],
+            enterpriseNo:valuesArray[2],
+            dispatchNo:valuesArray[3],
+            systemNo:valuesArray[4]
+        };
+        selTraceOrder(elem);
+
+    }
+});
 
 
-
-   /* mainScroller = $("#driverboard").scroller(); //Fetch the scroller from cache
-    //Since this is a App Framework UI scroller, we could also do
-    // mainScroller=$.ui.scrollingDivs['webslider'];
-    mainScroller.addInfinite();
-    mainScroller.addPullToRefresh();
-    mainScroller.runCB=true;
-    $.bind(mainScroller, 'scrollend', function () {
-        console.log("scroll end");
-    });
-
-    $.bind(mainScroller, 'scrollstart', function () {
-        console.log("scroll start");
-    });
-    $.bind(mainScroller,"scroll",function(position){
-
-    })
-    $.bind(mainScroller, "refresh-trigger", function () {
-        console.log("Refresh trigger");
-    });
-    var hideClose;
-    $.bind(mainScroller, "refresh-release", function () {
-        var that = this;
-        if(!visitor){
-            getTodoPullToRefresh(that);
-        }else{
-            setTimeout(function () {
-                that.hideRefresh();
-                getRequestFromTaskInfinite();
-            }, 1000);
-
-
-        }
-
-        return false; //tells it to not auto-cancel the refresh
-    });
-
-    $.bind(mainScroller, "refresh-cancel", function () {
-        //requestFlag=false;
-        //clearTimeout(hideClose);
-        //console.log("cancelled");
-    });
-    mainScroller.enable();
-
-    $.bind(mainScroller, "infinite-scroll", function () {
-        var self = this;
-        if(!visitor){
-        if($("#nullOrderHome").length) {
-            self.clearInfinite();
-        }else{
-            if($("#infinite").length == 0){
-                $(this.el).append("<div id='infinite' style='margin-top:10px;width:100%;" +
-                    "height:40px;font-size: 20px;text-align: center'>获取订单中 ...</div>");
-            }
-
-            $.bind(mainScroller, "infinite-scroll-end", function () {
-                $.unbind(mainScroller, "infinite-scroll-end");
-
-                if (ajaxFlag) {
-                    ajaxFlag = false
-                    getRequestFromTaskInfinite(self)
-
-                }
-            });
-        }
-        }else{
-            if($("#nullOrderHome").length > 0){
-                $("#nullOrderHome").html("<p style='text-align: center;text-color:orange;'>游客只能查看当前订单,请登录查看全部..</p>");
-            }else{
-                $("<div id='nullOrderHome' class='nullOrder'><p style='text-align: center;text-color:orange;'>游客只能查看当前订单,请登录查看全部..</p></div>").appendTo("#orderList");
-            }
-            $(self.el).find("#infinite").remove();
-            self.clearInfinite();
-        }
-    });*/
-
-
-   
-  
-/*
-
-    custorderlistScroller = $("#custboard").scroller(); //Fetch the scroller from cache
-    custorderlistScroller.addInfinite();
-    custorderlistScroller.addPullToRefresh();
-    custorderlistScroller.runCB=true;
-    $.bind(custorderlistScroller, 'scrollend', function () {
-        console.log("scroll end");
-    });
-
-    $.bind(custorderlistScroller, 'scrollstart', function () {
-        console.log("scroll start");
-    });
-    $.bind(custorderlistScroller,"scroll",function(position){
-
-    })
-    $.bind(custorderlistScroller, "refresh-trigger", function () {
-        console.log("Refresh trigger");
-    });
-    var hideClose;
-    $.bind(custorderlistScroller, "refresh-release", function () {
-//        var that = this;
-//        getCustOrderPullToRefresh(that);
-//        return false; //tells it to not auto-cancel the refresh
-        var that = this;
-        if(!visitor){
-            getCustOrderPullToRefresh(that);
-        }else{
-            setTimeout(function () {
-                that.hideRefresh();
-                getRequestFromCustOrderinite();
-            }, 1000);
-
-
-        }
-
-        return false;
-    });
-
-    $.bind(custorderlistScroller, "refresh-cancel", function () {
-    });
-    custorderlistScroller.enable();
-
-    $.bind(custorderlistScroller, "infinite-scroll", function () {
-        var self = this;
-        if($("#nullTodoSelf").length) {
-            self.clearInfinite();
-        }else{
-            console.log("infinite triggered");
-
-            if($("#infinite").length == 0)
-            {
-                $(this.el).append("<div id='infinite' style='margin-top:10px;width:100%;" +
-                    "height:40px;font-size: 20px;text-align: center'>获取订单中 ...</div>");
-            }
-
-            $.bind(custorderlistScroller, "infinite-scroll-end", function () {
-                $.unbind(custorderlistScroller, "infinite-scroll-end");
-
-                if (ajaxFlag) {
-                    ajaxFlag = false
-                    getRequestFromCustOrderinite(self)
-                }
-            });
-        }
-    });
-
-*/
-
-//    orderlistScroller = $("#orderlist").scroller(); //Fetch the scroller from cache
-//    orderlistScroller.addInfinite();
-//    orderlistScroller.addPullToRefresh();
-//    orderlistScroller.runCB=true;
-//    $.bind(orderlistScroller, 'scrollend', function () {
-//        console.log("scroll end");
-//    });
-//
-//    $.bind(orderlistScroller, 'scrollstart', function () {
-//        console.log("scroll start");
-//    });
-//    $.bind(orderlistScroller,"scroll",function(position){
-//
-//    })
-//    $.bind(orderlistScroller, "refresh-trigger", function () {
-//        console.log("Refresh trigger");
-//    });
-//    var hideClose;
-//    $.bind(orderlistScroller, "refresh-release", function () {
-//        var that = this;
-//        getOrderListPullToRefresh(that);
-//        return false; //tells it to not auto-cancel the refresh
-//    });
-//
-//    $.bind(orderlistScroller, "refresh-cancel", function () {
-//    });
-//    orderlistScroller.enable();
-//
-//    $.bind(orderlistScroller, "infinite-scroll", function () {
-//        var self = this;
-//        if($("#nullOrderListSelf").length) {
-//            self.clearInfinite();
-//        }else{
-//            console.log("infinite triggered");
-//
-//            if($("#infinite").length == 0)
-//            {
-//                $(this.el).append("<div id='infinite' style='margin-top:10px;width:100%;" +
-//                    "height:40px;font-size: 20px;text-align: center'>获取订单中 ...</div>");
-//            }
-//
-//            $.bind(orderlistScroller, "infinite-scroll-end", function () {
-//                $.unbind(orderlistScroller, "infinite-scroll-end");
-//
-//                if (ajaxFlag) {
-//                    ajaxFlag = false
-//                    getRequestFromOrderListinite(self)
-//                }
-//            });
-//        }
-//    });
-//
 
 
     $("#selfOrder").css("overflow", "auto");
@@ -981,33 +796,39 @@ function checkVersion() {
 
 //flag 1：后台发起获取版本
 function iosUpdatePlugin(flag) {
+    var os = $.os.android ? 'android' : 'ios';
     $.ajax({
         type: "GET",
         url: queryVersion,
         timeout: 8000, //超时8秒
         data: {
             version: currentVersion,
-            os: "ios"
+            os: os
         },
         dataType: "jsonp",
         success: function (data) {
             if (data.isSucc) {
                 $.ui.hideMask();
-                $.ui.popup({
-                    title: "温馨提示",
-                    message: "您的应用版本过低,立即更新吗?",
-                    cancelText: "稍后",
-                    cancelClass: 'popup-btn',
-                    cancelCallback: function () {},
-                    doneText: "是的",
-                    doneClass: 'popup-btn',
-                    doneCallback: function () {
-                        $.ui.unblockUI();
-                        //ios更新URL
-                        updateApp(data.obj.versionUrl);
-                    },
-                    cancelOnly: false
-                });
+                if($.os.android){
+                    androidUpdatePlugin();
+                }else {
+                    $.ui.popup({
+                        title: "温馨提示",
+                        message: "您的应用版本过低,立即更新吗?",
+                        cancelText: "稍后",
+                        cancelClass: 'popup-btn',
+                        cancelCallback: function () {
+                        },
+                        doneText: "是的",
+                        doneClass: 'popup-btn',
+                        doneCallback: function () {
+                            $.ui.unblockUI();
+                            //ios更新URL
+                            updateApp(data.obj.versionUrl);
+                        },
+                        cancelOnly: false
+                    });
+                }
             } else {
                 if(flag!=undefined && flag == 1)
                 {
@@ -1109,16 +930,23 @@ function myLocationOnSuccess(position)
 }
 
 
-//function init_dom()
-//{
-//    var height = $("#mine2").height();
-//    $("#mine2Content").css('height',height);
-//
-//    $("#home-content-panel").css('height',$("#home").height());
-//    $("#home-module").height($("#home").height()-$("#ad").height());
-//
-//}
-
+//msg内容 msgType类型
+function pushMsg(message, method) {
+    $.ui.popup({
+        title: "您有一条新消息",
+        message: message,
+        cancelText: "忽略",
+        cancelCallback: function () {
+        },
+        cancelClass: "popup-btn",
+        doneText: "立即查看",
+        doneClass: "popup-btn",
+        doneCallback: function () {
+            eval(method);
+        },
+        cancelOnly: false
+    });
+}
 
 
 

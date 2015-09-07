@@ -577,6 +577,21 @@ data-defer:加载一个html进来
      data-footer="addInfofooter">
 </div>
 
+<div class="panel p0 no-scroll"
+     title="" id="locationMapPanel" data-defer="assets/panel/driver/locationMap.html"
+     data-load=""
+     data-unload=""
+     data-header="locationMapHeader"
+     data-footer="locationfooter">
+</div>
+
+<div class="panel p0"
+     title="物流跟踪" id="trace" data-defer="assets/panel/driver/trace.html"
+     data-header=""
+     data-load=""
+     data-unload=""
+     data-footer="none">
+</div>
 
 
 
@@ -695,6 +710,14 @@ data-defer:加载一个html进来
     <h1 id="taskTitle" class="">任务列表</h1>
     <div></div>
 </header>
+
+<header id="locationMapHeader">
+    <a class="headerBack"  onclick="driverboard_panel();" >
+
+    </a>
+    <h1 id="locationMaptitle" class=""></h1>
+    <div></div>
+</header>
 <header id="tracegobackHeader">
     <a  class="headerBack"  onclick="backorderMaindetail();" >
         <img src="assets/img/backPage.png" height="32" />
@@ -724,7 +747,7 @@ data-defer:加载一个html进来
     <div></div>
 </header>
 <header id="operateguideHeader">
-    <a class="headerBack"   onclick="driverboard_panel();" >
+    <a class="headerBack"  id="operateguideBackBtn"  >
         <img src="assets/img/backPage.png" height="32" />
     </a>
     <h1 id="operateguideTitle" class="">任务操作</h1>
@@ -951,7 +974,7 @@ data-defer:加载一个html进来
     <button role="button"
             style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
             onclick="saveGoodQty();"
-            class="btn  btn-block">保存</button>
+            class="btn  btn-block">确认签收</button>
 </footer>
 
 <footer align="center" id="addInfofooter" style="  padding-left: 15%;background: white;">
@@ -993,12 +1016,18 @@ data-defer:加载一个html进来
     <div class="fl"  style="width:45%;">
     <button role="button" id="diffsignBtn"
             style="width:90%;background:#06ABD4;font-size:large;color:#fff"
-            onclick="confirmdiffsignorder();"
+
             class="btn  ">差异签收</button>
     </div>
     </div>
 </footer>
 
+<footer align="center" id="locationfooter" style="  padding-left: 15%;background: white;">
+    <button role="button"
+            style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
+            onclick="toOperatePanel()"
+            class="btn  btn-block">反馈</button>
+</footer>
 <footer align="center" id="chocieordersfooter" style="  padding-left: 15%;background: white;">
     <button role="button"
             style="width:80%;background:#06ABD4;font-size:x-large;color:#fff"
@@ -1092,6 +1121,8 @@ data-defer:加载一个html进来
     <select id="signremark_select" data-role="none">
         <option value="正常签收">正常签收</option>
         <option value="异常签收">异常签收</option>
+    </select>
+    <select id="transNo_select" data-role="none">
     </select>
 
 

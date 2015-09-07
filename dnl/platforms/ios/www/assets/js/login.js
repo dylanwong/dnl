@@ -75,7 +75,7 @@ function save_login_succ(data)
 
         $('#user_img').attr('src','assets/img/person.png');
         $('#userAlias').text(data.obj.userName+" 用户");
-        $('#userNameMine').text(data.obj.userName);
+        $('#userNameMine').text(data.obj.userCName);
 
         init_homepage();
         home_panel();

@@ -107,7 +107,7 @@ function updateOrderlistPanel(data,flag){
                 $("#orderlistHeaderId").attr('onclick',"$.ui.loadContent('#home2', false, false, 'slide')");
             }
             setRounteListCache();
-            if (data.obj.data.length > 1) {
+            if (data.obj.data.length > 0) {
             //   $("#orderdetailBackId").attr('onclick',"$.ui.loadContent('#orderlist', false, false, 'slide')");
             //  $("#orderlistHeaderId").attr('onclick',"$.ui.loadContent('#search', false, false, 'slide')");
 
@@ -119,10 +119,11 @@ function updateOrderlistPanel(data,flag){
 //            }
             //for (var k in data.obj.data) {
             $.ui.showMask("我们正在拼命的加载数据...");
-                var result ='';
                 if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
                     $("#orderlistTitle").html("任务列表");
-                    result = template('taskListTemp',data);
+                    result = template('taskListTempOfOrderPage',data);
+
+
                 }else{
                     $("#orderlistTitle").html("订单列表");
                     result = template('orderListTemp',data);
@@ -130,16 +131,27 @@ function updateOrderlistPanel(data,flag){
 
 
         } else if (data.obj.recordsTotal == 1) {
-            setCacheData("currentorder", data.obj[0], 1);
-            if( loginStatus==0 || loginStatus== '0' ){
-                setCacheData("currentorder",data.obj.data[0] ,1);
-               // JSON.stringify(data.obj.data[k])
-                traceSingleInfo();
-            }else{
-                //$("#orderdetailBackId").attr('onclick',"$.ui.loadContent('#orderlist', false, false, 'slide')");
-                setCacheData("currentorder",data.obj.data[0] ,1);
-                traceSingleInfo33();
-            }
+                if(oldmyFilter.type=='9'||oldmyFilter.type=='10'){
+                    $.ui.loadContent("#orderlist", false, false, "slide");
+                    $.ui.showMask("我们正在拼命的加载数据...");
+                    $('#operateguideBackBtn').unbind().bind('click',function(){
+                        // $.ui.loadContent("#driverboard", false, false, "slide");
+                        driverboard_panel();
+                    });
+                    $("#orderlistTitle").html("任务列表");
+                    result = template('taskListTempOfOrderPage',data);
+                }else{
+                    setCacheData("currentorder", data.obj[0], 1);
+                    if( loginStatus==0 || loginStatus== '0' ){
+                        setCacheData("currentorder",data.obj.data[0] ,1);
+                        // JSON.stringify(data.obj.data[k])
+                        traceSingleInfo();
+                    }else{
+                        //$("#orderdetailBackId").attr('onclick',"$.ui.loadContent('#orderlist', false, false, 'slide')");
+                        setCacheData("currentorder",data.obj.data[0] ,1);
+                        traceSingleInfo33();
+                    }
+                }
         } else {
             //result = nullTrace;
         }
@@ -364,6 +376,11 @@ function searchOrderFromIndex(type,count){
     $('#orderlist_ul').empty();
     $.ui.blockUI(.3);
     $.ui.showMask("获取查询的订单..");
+    if(type==9){
+        driverLastPage = 1;
+    }else if(type == 10){
+        driverLastPage = 2;
+    }
     lastPage='home2';
     var user = JSON.parse(localStorage.getItem(USER_SESSION));
     getAjax(searchOrderFromIndexUrl,{'start': '1', 'length':'10','type':type,'enterpriseno':user.obj.logisticNo,
