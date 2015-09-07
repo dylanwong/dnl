@@ -40,7 +40,6 @@
     <feature name="Capture">
         <param name="ios-package" value="CDVCapture" />
     </feature>
-
     <name>到哪啦
     </name>
     <description>
@@ -58,9 +57,7 @@
     <access launch-external="yes" origin="market:*" />
     <preference name="SplashScreen" value="screen" />
     <preference name="wechatappid" value="wx698db989e73cb314" />
-
     <feature name="Navigation">
         <param name="ios-package" value="Navigation" />
     </feature>
-
 </widget>

@@ -12,9 +12,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.sealinkin.dnl.Cons;
-import com.sealinkin.dnl.CordovaApp;
-
 public class Navigation extends CordovaPlugin {
 
     @SuppressLint("NewApi")
@@ -52,38 +49,7 @@ public class Navigation extends CordovaPlugin {
                      e.printStackTrace();
                 }
             return true;
-        }else if (action.equals("route")) {
-                 	if(Cons.IS_OPEN)
-                 	{
-                 		webView.post(new Runnable() {
-                     	    @Override
-                     	    public void run() {
-                     	    	CordovaApp ca = (CordovaApp)cordova.getActivity();
-                     	    	String method = Cons.TRIGGER_FUNC;
-                     	    	String message = Cons.MESSAGE;
-                     	    	String parameter = Cons.PARAMETER;
-                         		String parameters = "";
-
-
-                         		for (String i : parameter.split(","))
-                         		{
-                         			parameters +="'"+i+"',";
-                 				}
-                         		parameters= parameters.substring(0, parameters.length()-1);
-                         		parameters = method +"(" +parameters +")";
-
-
-                         		ca.method(message);
-                     	    	ca.loadUrl("javascript:"+parameters+"");
-                     	    	Cons.IS_OPEN = false;
-
-                         		//ca.loadUrl("javascript:todo_panel()");
-                     	    }
-                 		});
-                 	}
-                     return true;
-                 }
-
+        }
         return false;
     }
     

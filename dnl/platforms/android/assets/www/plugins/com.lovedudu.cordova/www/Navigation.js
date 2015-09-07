@@ -4,11 +4,7 @@ cordova.define("com.lovedudu.cordova.Navigation", function(require, exports, mod
 var Navigation = {
 	do:function(key, successCallback, errorCallback) {
     	exec(successCallback, errorCallback, 'Navigation', 'do', [key])
-	},
-    route:function(successCallback, errorCallback) {
-        exec(successCallback, errorCallback, 'Navigation', 'route', [])
-    }
-
+	}
 };
 
 module.exports= Navigation;

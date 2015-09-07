@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>A2F97777-CE8D-4957-92EB-AA4621481B7C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>到哪啦</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>32637CFF7D9C8BEF3CE9EA47A77E95C937EB77FC</key>
+		<string>https://github.com/dylanwong/dnl.git</string>
+		<key>D94F12BDFB836202285B1677B39879D4D67CFA5B</key>
+		<string>https://github.com/shosky/sms_mobile.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>dnl/platforms/ios/到哪啦.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>32637CFF7D9C8BEF3CE9EA47A77E95C937EB77FC</key>
+		<string>../../../../..</string>
+		<key>D94F12BDFB836202285B1677B39879D4D67CFA5B</key>
+		<string>../../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/dylanwong/dnl.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>32637CFF7D9C8BEF3CE9EA47A77E95C937EB77FC</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D94F12BDFB836202285B1677B39879D4D67CFA5B</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>32637CFF7D9C8BEF3CE9EA47A77E95C937EB77FC</string>
+			<key>IDESourceControlWCCName</key>
+			<string>dnl</string>
+		</dict>
+	</array>
+</dict>
+</plist>
