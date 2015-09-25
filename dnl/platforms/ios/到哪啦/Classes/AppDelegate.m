@@ -19,7 +19,7 @@
 
 //
 //  AppDelegate.m
-//  dnl
+//  HuoYuanTong
 //
 //  Created by ___FULLUSERNAME___ on ___DATE___.
 //  Copyright ___ORGANIZATIONNAME___ ___YEAR___. All rights reserved.
@@ -29,10 +29,18 @@
 #import "MainViewController.h"
 
 #import <Cordova/CDVPlugin.h>
+#import <AVOSCloud/AVOSCloud.h>
+
+
+#define AVOSCloudAppID @"yoE26vl5jJIc1WK9ETtCxMSA"
+#define AVOSCloudAppKey @"9k2q14mAEMeoQbWp94GHKpxu "
+
 
 @implementation AppDelegate
 
 @synthesize window, viewController;
+
+//@synthesize IS_OPEN,TRIGGER_FUNC,PARAMETER,MESSAGE;
 
 - (id)init
 {
@@ -63,7 +71,28 @@
  */
 - (BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions
 {
+
+    //设置AVOSCloud
+    [AVOSCloud setApplicationId:AVOSCloudAppID
+                      clientKey:AVOSCloudAppKey];
+    
+    //统计应用启动情况
+    [AVAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    if ([UIApplication instancesRespondToSelector:@selector(registerUserNotificationSettings:)]){    UIUserNotificationType type = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:type categories:nil];    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];}
+    
+    
     CGRect screenBounds = [[UIScreen mainScreen] bounds];
+    
+    // Extract the notification data
+    NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+
+    // Create a pointer to the Photo object
+    // AppDelegate *delegate=(AppDelegate*)[[UIApplicationsharedApplication]delegate];
+    //delegate.MESSAGE = [notificationPayload objectForKey:@"alert"];
+    //delegate.TRIGGER_FUNC = [notificationPayload objectForKey:@"method"];
+    //delegate.PARAMETER = [notificationPayload objectForKey:@"parameter"];
+    //delegate.IS_OPEN = YES;
 
 #if __has_feature(objc_arc)
         self.window = [[UIWindow alloc] initWithFrame:screenBounds];
@@ -84,24 +113,51 @@
 
     // NOTE: To customize the view's frame size (which defaults to full screen), override
     // [self.viewController viewWillAppear:] in your view controller.
-
+    
+    if([[[UIDevice currentDevice] systemVersion] floatValue]<8){
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
+                                                    | UIUserNotificationTypeBadge
+                                                    | UIUserNotificationTypeSound
+                                                                                     categories:nil];
+            [application registerUserNotificationSettings:settings];
+            [application registerForRemoteNotifications];
+    }else{
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
+                                                | UIUserNotificationTypeBadge
+                                                | UIUserNotificationTypeSound
+                                                                                 categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    }
+    
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
 
     return YES;
 }
 
+// 推送消息来的时候APP已经运行了。
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+    
+    //NSDictionary *notificationPayload = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey];
+    //NSString *msgType = [notificationPayload objectForKey:@"msgType"];
+
+    NSString *javascript = [NSString stringWithFormat:@"pushMsg('%@','%@')",
+    [[userInfo objectForKey:@"aps"] objectForKey:@"alert"],[userInfo objectForKey:@"method"]];
+    [self.viewController.webView stringByEvaluatingJavaScriptFromString:javascript];
+}
+
 // this happens while we are running ( in the background, or from within our own app )
-// only valid if dnl-Info.plist specifies a protocol to handle
+// only valid if HuoYuanTong-Info.plist specifies a protocol to handle
 - (BOOL)application:(UIApplication*)application openURL:(NSURL*)url sourceApplication:(NSString*)sourceApplication annotation:(id)annotation
 {
     if (!url) {
         return NO;
     }
 
-    // calls into javascript global function 'handleOpenURL'
-    NSString* jsString = [NSString stringWithFormat:@"handleOpenURL(\"%@\");", url];
-    [self.viewController.webView stringByEvaluatingJavaScriptFromString:jsString];
+    [self.viewController processOpenUrl:url];
 
     // all plugins will get the notification, and their handlers will be called
     [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:url]];
@@ -116,21 +172,36 @@
     // re-post ( broadcast )
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVLocalNotification object:notification];
 }
-
-- (void)                                application:(UIApplication *)application
-   didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+//APP每次唤起
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    application.applicationIconBadgeNumber = 0;
+    [self.viewController.webView stringByEvaluatingJavaScriptFromString:@"getLocation()"];
+}
+//给JS 全局变量 传递token
+//
+- (void)                                 application:(UIApplication*)application
+    didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
+    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+    
     // re-post ( broadcast )
     NSString* token = [[[[deviceToken description]
-                         stringByReplacingOccurrencesOfString: @"<" withString: @""]
-                        stringByReplacingOccurrencesOfString: @">" withString: @""]
-                       stringByReplacingOccurrencesOfString: @" " withString: @""];
-
+        stringByReplacingOccurrencesOfString:@"<" withString:@""]
+        stringByReplacingOccurrencesOfString:@">" withString:@""]
+        stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSString *javascript = [NSString stringWithFormat:@"window.OSInfo ={os:'iOS',push:'%@'}",token];
+    [self.viewController.webView stringByEvaluatingJavaScriptFromString:javascript];
+//    UIAlertView* alert = [[UIAlertView alloc]initWithTitle:token message:nil delegate:nil
+//                                         cancelButtonTitle:nil otherButtonTitles:nil];
+//    [alert show];
+//    
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotification object:token];
 }
 
-- (void)                                 application:(UIApplication *)application
-    didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+- (void)                                 application:(UIApplication*)application
+    didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
 {
     // re-post ( broadcast )
     [[NSNotificationCenter defaultCenter] postNotificationName:CDVRemoteNotificationError object:error];
