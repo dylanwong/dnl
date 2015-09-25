@@ -27,6 +27,8 @@ function login()
                 currentAddr = locationObj.provinceName+"-"+locationObj.cityName;
             }
 
+            alert($.os.ios)
+            alert(window.OSInfo.push)
             var appId = '';
             if ($.os.ios) {
               //  os='ios';
